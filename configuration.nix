@@ -56,6 +56,7 @@
     pkgs.spotify
     pkgs.playerctl
     pkgs.activate-linux
+    pkgs.java
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes"];
