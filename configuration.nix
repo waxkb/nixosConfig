@@ -2,15 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-
-let
-  # Import unstable nixpkgs alongside stable
-  unstable = import <nixos-unstable> {
-    config.allowUnfree = true;
-  };
-  zen-browser = builtins.getFlake "github:0xc000022070/zen-browser-flake";
-in
+{ config, pkgs, zen-browser, ... }:
 {
   imports = [
     ./hardware-configuration.nix
@@ -27,7 +19,6 @@ in
     pkgs.pavucontrol
     pkgs.stow
     pkgs.tree
-    pkgs.firefox
     pkgs.curl
     pkgs.wget
     pkgs.cmake
@@ -40,8 +31,6 @@ in
     pkgs.swww
     pkgs.waypaper
     pkgs.clipse
-    pkgs.alacritty
-    pkgs.chromium
     pkgs.gcc
     pkgs.yazi
     pkgs.matugen
@@ -62,7 +51,11 @@ in
     pkgs.xdg-desktop-portal-gtk
     pkgs.dms-shell
     pkgs.quickshell
-    zen-browser.packages.x86_64-linux.default
+    pkgs.cava
+    zen-browser.packages.${pkgs.system}.default
+    pkgs.spotify
+    pkgs.playerctl
+    pkgs.activate-linux
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes"];
@@ -103,13 +96,27 @@ in
   nvidiaSettings = true;
   };
 
-services.displayManager.dms-greeter = {
-  enable = true;
-  compositor = {
-    name = "hyprland"; # Required. Can be also "hyprland" or "sway"
+  programs.dms-shell = {
+    enable = true;
+    systemd = {
+      enable = true;
+      restartIfChanged = false;
+    };
+    enableSystemMonitoring = true;     # System monitoring widgets (dgop)
+    enableClipboard = true;            # Clipboard history manager
+    enableVPN = true;                  # VPN management widget
+    enableDynamicTheming = true;       # Wallpaper-based theming (matugen)
+    enableAudioWavelength = true;      # Audio visualizer (cava)
+    enableCalendarEvents = true;       # Calendar integration (khal)
   };
-  configHome = "/home/max";
-};
+
+  services.displayManager.dms-greeter = {
+    enable = true;
+    compositor = {
+      name = "hyprland"; # Required. Can be also "hyprland" or "sway"
+    };
+    configHome = "/home/max";
+  };
 
   system.stateVersion = "25.11";
 
