@@ -31,13 +31,11 @@ in
     pkgs.wget
     pkgs.cmake
     pkgs.unzip
-    pkgs.wl-clipboard
     pkgs.zsh
     pkgs.oh-my-posh
     pkgs.neovim
     pkgs.obs-studio
     pkgs.obsidian
-    pkgs.cliphist
     pkgs.swww
     pkgs.waypaper
     pkgs.clipse
@@ -64,6 +62,8 @@ in
     pkgs.dms-shell
     pkgs.quickshell
   ];
+
+  nix.settings.experimental-features = [ "nix-command" "flakes"];
 
   fonts.packages = [
     pkgs.nerd-fonts.jetbrains-mono
