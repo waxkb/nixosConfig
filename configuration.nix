@@ -9,6 +9,7 @@ let
   unstable = import <nixos-unstable> {
     config.allowUnfree = true;
   };
+  zen-browser = builtins.getFlake "github:0xc000022070/zen-browser-flake";
 in
 {
   imports = [
@@ -61,6 +62,7 @@ in
     pkgs.xdg-desktop-portal-gtk
     pkgs.dms-shell
     pkgs.quickshell
+    zen-browser.packages.x86_64-linux.default
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes"];
