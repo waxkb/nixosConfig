@@ -1,133 +1,184 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, zen-browser, ... }:
+{ config, pkgs, zen-browser, minecraft-plymouth-theme, ... }:
+
+let
+  # Build the Minecraft Plymouth theme package
+  plymouthPkg = minecraft-plymouth-theme.packages.${pkgs.system}.default;
+  system = pkgs.system;
+in
 {
   imports = [
     ./hardware-configuration.nix
   ];
 
-  environment.systemPackages = [
-    pkgs.btop
-    pkgs.fastfetch
-    pkgs.fd
-    pkgs.fzf
-    pkgs.git
-    pkgs.iwd
-    pkgs.mpv
-    pkgs.pavucontrol
-    pkgs.stow
-    pkgs.tree
-    pkgs.curl
-    pkgs.wget
-    pkgs.cmake
-    pkgs.unzip
-    pkgs.zsh
-    pkgs.oh-my-posh
-    pkgs.neovim
-    pkgs.obs-studio
-    pkgs.obsidian
-    pkgs.swww
-    pkgs.waypaper
-    pkgs.clipse
-    pkgs.gcc
-    pkgs.yazi
-    pkgs.matugen
-    pkgs.pango
-    pkgs.cairo
-    pkgs.freetype
-    pkgs.harfbuzz
-    pkgs.kitty
-    pkgs.mesa
-    pkgs.vulkan-tools
-    pkgs.vulkan-loader
-    pkgs.libva
-    pkgs.pipewire
-    pkgs.wireplumber
-    pkgs.hyprland
-    pkgs.xdg-desktop-portal
-    pkgs.xdg-desktop-portal-hyprland
-    pkgs.xdg-desktop-portal-gtk
-    pkgs.dms-shell
-    pkgs.quickshell
-    pkgs.cava
-    zen-browser.packages.${pkgs.system}.default
-    pkgs.spotify
-    pkgs.playerctl
-    pkgs.activate-linux
-    pkgs.java
+  environment.systemPackages = with pkgs; [
+    # ── CLI utils ───────────────────────────────────────
+    btop
+    curl
+    fastfetch
+    fd
+    fzf
+    git
+    stow
+    tree
+    unzip
+    wget
+    yazi
+    wev
+
+    # ── The one and only ───────────────────────────────
+    neovim
+
+    # ── Shell & terminal ───────────────────────────────
+    kitty
+    zsh
+    oh-my-posh
+
+    # ── Languages & compilers ──────────────────────────
+    cmake
+    gcc
+
+    # ── Media & graphics ───────────────────────────────
+    cairo
+    freetype
+    harfbuzz
+    imagemagick
+    mpv
+    obs-studio
+    pango
+
+    # ── Audio ──────────────────────────────────────────
+    cava
+    pavucontrol
+    pipewire
+    playerctl
+    wireplumber
+
+    # ── Compositors ────────────────
+    hyprland
+    niri
+
+    # ── Wallpaper ──────────────────────────────────────
+    swww
+    waypaper
+
+    # ── Portals ────────────────────────────────────────
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-hyprland
+
+    # ── Welcome to the rice fields ─────────────────────
+    dms-shell
+    matugen
+    quickshell
+
+    # ── GPU stuff ──────────────────────────────────────
+    libva
+    mesa
+    vulkan-loader
+    vulkan-tools
+
+    # ── Utils ──────────────────────────────────────────
+    clipse
+    efibootmgr
+    iwd
+
+    # ── Applications ───────────────────────────────────
+    spotify
+    obsidian
+    zen-browser.packages.${system}.default
+
+    # ── Funzies ────────────────────────────────────────
+    activate-linux
+    plymouth
+
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes"];
 
-  fonts.packages = [
-    pkgs.nerd-fonts.jetbrains-mono
-  ];
+  programs.dms-shell = {
+    enable = true;
+    systemd.enable = true;
+    systemd.restartIfChanged = false;
+    enableSystemMonitoring = true;
+    enableClipboard = true;
+    enableVPN = true;
+    enableDynamicTheming = true;
+    enableAudioWavelength = true;
+    enableCalendarEvents = true;
+  };
+
+  services.displayManager.dms-greeter = {
+    enable = true;
+    compositor.name = "hyprland";
+    configHome = "/home/max";
+  };
+
+programs.niri.enable = true;
+
+  services.xserver.enable = false;
+
+  boot.plymouth = {
+    enable = true;
+    theme = "mc";
+    themePackages = [ plymouthPkg ];
+    font = "${plymouthPkg}/share/fonts/OTF/Minecraft.otf";
+  };
+
+# Probably don't need to edit these
+
+  system.stateVersion = "25.11";
+
+  boot.loader.systemd-boot.enable = false;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.device = "nodev";
+  boot.loader.grub.useOSProber = true;
+  boot.loader.grub.minegrub-theme.enable = true;
+
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   programs.zsh.enable = true;
+
   users.users.max = {
-  shell = pkgs.zsh;
+    isNormalUser = true;
+    description = "max";
+    shell = pkgs.zsh;
+    extraGroups = [ "networkmanager" "wheel" ];
+    packages = [];
   };
 
   xdg.portal.enable = true;
-
-  services.xserver.enable = false;
 
   hardware.graphics.enable = true;
 
   programs.hyprland.enable = true;
 
   environment.sessionVariables = {
-  WLR_NO_HARDWARE_CURSORS = "1";
-  LIBVA_DRIVER_NAME = "nvidia";
-  GBM_BACKEND = "nvidia-drm";
-  __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-  XDG_SESSION_TYPE = "wayland";
-  NIXOS_OZONE_WL = "1";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    LIBVA_DRIVER_NAME = "nvidia";
+    GBM_BACKEND = "nvidia-drm";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    XDG_SESSION_TYPE = "wayland";
+    NIXOS_OZONE_WL = "1";
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
-  modesetting.enable = true;
-  powerManagement.enable = false;
-  powerManagement.finegrained = false;
-  open = false;
-  nvidiaSettings = true;
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = false;
+    nvidiaSettings = true;
   };
 
-  programs.dms-shell = {
-    enable = true;
-    systemd = {
-      enable = true;
-      restartIfChanged = false;
-    };
-    enableSystemMonitoring = true;     # System monitoring widgets (dgop)
-    enableClipboard = true;            # Clipboard history manager
-    enableVPN = true;                  # VPN management widget
-    enableDynamicTheming = true;       # Wallpaper-based theming (matugen)
-    enableAudioWavelength = true;      # Audio visualizer (cava)
-    enableCalendarEvents = true;       # Calendar integration (khal)
-  };
-
-  services.displayManager.dms-greeter = {
-    enable = true;
-    compositor = {
-      name = "hyprland"; # Required. Can be also "hyprland" or "sway"
-    };
-    configHome = "/home/max";
-  };
-
-  system.stateVersion = "25.11";
-
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono plymouthPkg ];
 
   boot.kernelParams = [
-  "nvidia-drm.modeset=1"
-  "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
-  "nvidia.NVreg_TemporaryFilePath=/var/tmp"
+    "nvidia-drm.modeset=1"
+    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+    "nvidia.NVreg_TemporaryFilePath=/var/tmp"
   ];
 
   networking.hostName = "nixos";
@@ -153,15 +204,5 @@
     variant = "";
   };
 
-  users.users.max = {
-    isNormalUser = true;
-    description = "max";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = [];
-  };
-
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
 }
-
