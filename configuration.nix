@@ -1,5 +1,5 @@
 
-{ config, pkgs, zen-browser, minecraft-plymouth-theme, ... }:
+{ config, pkgs, zen-browser, minecraft-plymouth-theme, matugen, ... }:
 
 let
   # Build the Minecraft Plymouth theme package
@@ -69,8 +69,26 @@ in
 
     # ── Welcome to the rice fields ─────────────────────
     dms-shell
-    matugen
     quickshell
+    (let
+      matugenFixed = pkgs.writeShellScriptBin "matugen" ''
+        #!/usr/bin/env bash
+
+        args=()
+        for arg in "$@"; do
+          case "$arg" in
+            file://*)
+              args+=("$(printf '%s\n' "$arg" | sed 's|^file://||')")
+              ;;
+            *)
+              args+=("$arg")
+              ;;
+          esac
+        done
+
+        exec ${pkgs.matugen}/bin/matugen "''${args[@]}"
+      '';
+    in matugenFixed)
 
     # ── GPU stuff ──────────────────────────────────────
     libva
@@ -84,7 +102,6 @@ in
     iwd
 
     # ── Applications ───────────────────────────────────
-    spotify
     obsidian
     zen-browser.packages.${system}.default
 

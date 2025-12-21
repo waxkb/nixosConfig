@@ -11,9 +11,13 @@
 
     minegrub-theme.url = "github:Lxtharia/minegrub-theme";
     minecraft-plymouth-theme.url = "github:nikp123/minecraft-plymouth-theme";
+
+    matugen = {
+        url = "github:/InioX/Matugen";
+      };
   };
 
-  outputs = { self, nixpkgs, zen-browser, minegrub-theme, minecraft-plymouth-theme, ... }:
+  outputs = { self, nixpkgs, zen-browser, minegrub-theme, minecraft-plymouth-theme, matugen, ... }:
   let
     system = "x86_64-linux";
   in
@@ -29,6 +33,7 @@
       specialArgs = {
         zen-browser = zen-browser;
         minecraft-plymouth-theme = minecraft-plymouth-theme;
+        matugen = matugen;
       };
     };
   };
