@@ -1,75 +1,64 @@
 
-{ config, pkgs, zen-browser, minecraft-plymouth-theme, matugen, ... }:
+{ config, pkgs, zen-browser, minecraft-plymouth-theme, matugen, spicetify-nix, ... }:
 
 let
   # Build the Minecraft Plymouth theme package
+  spicePkgs = spicetify-nix.legacyPackages.${pkgs.stdenv.system};
   plymouthPkg = minecraft-plymouth-theme.packages.${pkgs.system}.default;
   system = pkgs.system;
 in
 {
   imports = [
     ./hardware-configuration.nix
+    spicetify-nix.nixosModules.spicetify
   ];
 
   environment.systemPackages = with pkgs; [
-    # ── CLI utils ───────────────────────────────────────
+    activate-linux
     btop
+    cairo
+    cava
+    cmake
     curl
+    efibootmgr
     fastfetch
     fd
-    fzf
-    git
-    stow
-    tree
-    unzip
-    wget
-    yazi
-    wev
-
-    # ── The one and only ───────────────────────────────
-    neovim
-
-    # ── Shell & terminal ───────────────────────────────
-    kitty
-    zsh
-    oh-my-posh
-
-    # ── Languages & compilers ──────────────────────────
-    cmake
-    gcc
-
-    # ── Media & graphics ───────────────────────────────
-    cairo
     freetype
+    fzf
+    gcc
+    git
     harfbuzz
+    iwd
     imagemagick
+    kitty
+    libva
+    mesa
     mpv
+    neovim
+    niri
     obs-studio
+    obsidian
+    oh-my-posh
     pango
-
-    # ── Audio ──────────────────────────────────────────
-    cava
     pavucontrol
     pipewire
     playerctl
-    wireplumber
-
-    # ── Compositors ────────────────
-    hyprland
-    niri
-
-    # ── Wallpaper ──────────────────────────────────────
-    swww
+    plymouth
+    stow
+    tree
+    unzip
+    vulkan-loader
+    vulkan-tools
     waypaper
-
-    # ── Portals ────────────────────────────────────────
+    wev
+    wget
+    wireplumber
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     xdg-desktop-portal-hyprland
-
-    # ── Welcome to the rice fields ─────────────────────
-    dms-shell
-    quickshell
+    yazi
+    zen-browser.packages.${system}.default
+    zsh
     (let
       matugenFixed = pkgs.writeShellScriptBin "matugen" ''
         #!/usr/bin/env bash
@@ -89,27 +78,26 @@ in
         exec ${pkgs.matugen}/bin/matugen "''${args[@]}"
       '';
     in matugenFixed)
-
-    # ── GPU stuff ──────────────────────────────────────
-    libva
-    mesa
-    vulkan-loader
-    vulkan-tools
-
-    # ── Utils ──────────────────────────────────────────
+    hyprland
+    dms-shell
+    quickshell
+    mako
     clipse
-    efibootmgr
-    iwd
+    swww
 
-    # ── Applications ───────────────────────────────────
-    obsidian
-    zen-browser.packages.${system}.default
-
-    # ── Funzies ────────────────────────────────────────
-    activate-linux
-    plymouth
 
   ];
+
+  programs.spicetify = {
+    enable = true;
+    enabledExtensions = with spicePkgs.extensions; [
+      adblockify
+      hidePodcasts
+      shuffle # shuffle+ (special characters are sanitized out of extension names)
+    ];
+    theme = spicePkgs.themes.text;
+    colorScheme = "CatppuccinMocha";
+  };
 
 
   programs.dms-shell = {

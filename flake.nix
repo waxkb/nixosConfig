@@ -14,10 +14,12 @@
 
     matugen = {
         url = "github:/InioX/Matugen";
-      };
+    };
+
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
-  outputs = { self, nixpkgs, zen-browser, minegrub-theme, minecraft-plymouth-theme, matugen, ... }:
+  outputs = { self, nixpkgs, zen-browser, minegrub-theme, minecraft-plymouth-theme, matugen, spicetify-nix, ... }:
   let
     system = "x86_64-linux";
   in
@@ -34,6 +36,7 @@
         zen-browser = zen-browser;
         minecraft-plymouth-theme = minecraft-plymouth-theme;
         matugen = matugen;
+        spicetify-nix = spicetify-nix;
       };
     };
   };
