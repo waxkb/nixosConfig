@@ -20,6 +20,7 @@ in
     cava
     cmake
     curl
+    discord-canary
     efibootmgr
     fastfetch
     fd
@@ -47,6 +48,7 @@ in
     stow
     tree
     unzip
+    vesktop
     vulkan-loader
     vulkan-tools
     waypaper
@@ -84,8 +86,12 @@ in
     mako
     clipse
     swww
-
-
+    hyprlock
+    hyprpolkitagent
+    hyprpicker
+    hyprsunset
+    libnotify
+    openrgb-with-all-plugins
   ];
 
   programs.spicetify = {
@@ -97,25 +103,6 @@ in
     ];
     theme = spicePkgs.themes.text;
     colorScheme = "CatppuccinMocha";
-  };
-
-
-  programs.dms-shell = {
-    enable = true;
-    systemd.enable = true;
-    systemd.restartIfChanged = false;
-    enableSystemMonitoring = true;
-    enableClipboard = true;
-    enableVPN = true;
-    enableDynamicTheming = true;
-    enableAudioWavelength = true;
-    enableCalendarEvents = true;
-  };
-
-  services.displayManager.dms-greeter = {
-    enable = true;
-    compositor.name = "hyprland";
-    configHome = "/home/max";
   };
 
 programs.niri.enable = true;
