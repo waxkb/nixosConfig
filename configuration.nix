@@ -18,6 +18,7 @@ in
     btop
     cairo
     cava
+    clipse
     cmake
     curl
     discord-canary
@@ -29,10 +30,16 @@ in
     gcc
     git
     harfbuzz
+    hyprlock
+    hyprpicker
+    hyprpolkitagent
+    hyprsunset
     iwd
     imagemagick
     kitty
+    libnotify
     libva
+    mako
     mesa
     mpv
     neovim
@@ -40,14 +47,17 @@ in
     obs-studio
     obsidian
     oh-my-posh
+    openrgb-with-all-plugins
     pango
     pavucontrol
     pipewire
     playerctl
     plymouth
     stow
+    swww
     tree
     unzip
+    vicinae
     vesktop
     vulkan-loader
     vulkan-tools
@@ -57,7 +67,6 @@ in
     wireplumber
     xdg-desktop-portal
     xdg-desktop-portal-gtk
-    xdg-desktop-portal-hyprland
     yazi
     zen-browser.packages.${system}.default
     zsh
@@ -80,18 +89,6 @@ in
         exec ${pkgs.matugen}/bin/matugen "''${args[@]}"
       '';
     in matugenFixed)
-    hyprland
-    dms-shell
-    quickshell
-    mako
-    clipse
-    swww
-    hyprlock
-    hyprpolkitagent
-    hyprpicker
-    hyprsunset
-    libnotify
-    openrgb-with-all-plugins
   ];
 
   programs.spicetify = {
@@ -105,9 +102,10 @@ in
     colorScheme = "CatppuccinMocha";
   };
 
-programs.niri.enable = true;
+  programs.niri.enable = true;
 
   services.xserver.enable = false;
+  services.xserver.displayManager.sddm.enable = false;
 
   boot.plymouth = {
     enable = true;
@@ -143,8 +141,6 @@ programs.niri.enable = true;
   xdg.portal.enable = true;
 
   hardware.graphics.enable = true;
-
-  programs.hyprland.enable = true;
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
