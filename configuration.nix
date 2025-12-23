@@ -104,15 +104,25 @@ in
 
   programs.niri.enable = true;
 
-  services.xserver.enable = false;
-  services.xserver.displayManager.sddm.enable = false;
+  services.xserver.enable = true;
 
-  boot.plymouth = {
+  services.displayManager.defaultSession = "niri";
+
+  services.displayManager.sddm = {
     enable = true;
-    theme = "mc";
-    themePackages = [ plymouthPkg ];
-    font = "${plymouthPkg}/share/fonts/OTF/Minecraft.otf";
+    wayland.enable = false;
   };
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  systemd.services."getty@tty1".enable = false;
+
+  #boot.plymouth = {
+  #  enable = true;
+  #  theme = "mc";
+  #  themePackages = [ plymouthPkg ];
+  #  font = "${plymouthPkg}/share/fonts/OTF/Minecraft.otf";
+  #};
 
 # Probably don't need to edit these
 
@@ -124,7 +134,6 @@ in
   boot.loader.grub.device = "nodev";
   boot.loader.grub.useOSProber = true;
   boot.loader.grub.minegrub-theme.enable = true;
-
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -138,20 +147,19 @@ in
     packages = [];
   };
 
-  xdg.portal.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 
   hardware.graphics.enable = true;
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
-    LIBVA_DRIVER_NAME = "nvidia";
     GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    XDG_SESSION_TYPE = "wayland";
     NIXOS_OZONE_WL = "1";
   };
-
-  services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -165,8 +173,10 @@ in
 
   boot.kernelParams = [
     "nvidia-drm.modeset=1"
+    "nvidia-drm.fbdev=1"
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
+    "amdgpu.enable=0"
   ];
 
   networking.hostName = "nixos";
