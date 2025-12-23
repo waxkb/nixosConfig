@@ -17,9 +17,15 @@
     };
 
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+
+    #minesddm = {
+    #  url = "github:Davi-S/sddm-theme-minesddm";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
+
   };
 
-  outputs = { self, nixpkgs, zen-browser, minegrub-theme, minecraft-plymouth-theme, matugen, spicetify-nix, ... }:
+  outputs = { self, nixpkgs, zen-browser, minegrub-theme, minecraft-plymouth-theme, matugen, spicetify-nix, /*minesddm,*/ ... }:
   let
     system = "x86_64-linux";
   in
@@ -30,6 +36,7 @@
       modules = [
         ./configuration.nix
         minegrub-theme.nixosModules.default
+        #minesddm.nixosModules.default
       ];
 
       specialArgs = {
@@ -37,6 +44,7 @@
         minecraft-plymouth-theme = minecraft-plymouth-theme;
         matugen = matugen;
         spicetify-nix = spicetify-nix;
+        #minesddm = minesddm;
       };
     };
   };

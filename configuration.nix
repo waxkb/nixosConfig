@@ -1,5 +1,5 @@
 
-{ config, pkgs, zen-browser, minecraft-plymouth-theme, matugen, spicetify-nix, ... }:
+{ config, pkgs, zen-browser, minecraft-plymouth-theme, matugen, spicetify-nix, /*minesddm,*/ ... }:
 
 let
   # Build the Minecraft Plymouth theme package
@@ -41,6 +41,7 @@ in
     libva
     mako
     mesa
+    #minesddm.packages.${pkgs.system}.default
     mpv
     neovim
     niri
@@ -70,6 +71,8 @@ in
     yazi
     zen-browser.packages.${system}.default
     zsh
+    #libsForQt5.*
+    #kdePackages.*
     (let
       matugenFixed = pkgs.writeShellScriptBin "matugen" ''
         #!/usr/bin/env bash
@@ -111,18 +114,26 @@ in
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = false;
+    #theme = "minesddm";
+    #extraPackages = with pkgs; [
+    #  minesddm.packages.${pkgs.system}.default
+    #  qt5.qtquickcontrols2            # Qt QuickControls
+    #  qt5.qtgraphicaleffects          # GraphicalEffects
+    #  qt5.qtwayland                   # Qt Wayland support
+    #  # optionally add layer-shell-qt if needed, see next section
+    #];
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
   systemd.services."getty@tty1".enable = false;
 
-  #boot.plymouth = {
-  #  enable = true;
-  #  theme = "mc";
-  #  themePackages = [ plymouthPkg ];
-  #  font = "${plymouthPkg}/share/fonts/OTF/Minecraft.otf";
-  #};
+  boot.plymouth = {
+    enable = true;
+    theme = "mc";
+    themePackages = [ plymouthPkg ];
+    font = "${plymouthPkg}/share/fonts/OTF/Minecraft.otf";
+  };
 
 # Probably don't need to edit these
 
