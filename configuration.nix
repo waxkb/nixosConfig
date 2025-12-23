@@ -1,5 +1,5 @@
 
-{ config, pkgs, zen-browser, minecraft-plymouth-theme, matugen, spicetify-nix, /*minesddm,*/ ... }:
+{ config, pkgs, zen-browser, minecraft-plymouth-theme, matugen, spicetify-nix, minesddm, ... }:
 
 let
   # Build the Minecraft Plymouth theme package
@@ -27,13 +27,13 @@ in
     fd
     freetype
     fzf
+    gammastep
     gcc
     git
     harfbuzz
     hyprlock
     hyprpicker
     hyprpolkitagent
-    hyprsunset
     iwd
     imagemagick
     kitty
@@ -41,7 +41,7 @@ in
     libva
     mako
     mesa
-    #minesddm.packages.${pkgs.system}.default
+    minesddm.packages.${pkgs.system}.default
     mpv
     neovim
     niri
@@ -71,8 +71,9 @@ in
     yazi
     zen-browser.packages.${system}.default
     zsh
-    #libsForQt5.*
-    #kdePackages.*
+    qt5.qtbase
+    qt5.qtquickcontrols2
+    qt5.qtgraphicaleffects
     (let
       matugenFixed = pkgs.writeShellScriptBin "matugen" ''
         #!/usr/bin/env bash
@@ -114,14 +115,7 @@ in
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = false;
-    #theme = "minesddm";
-    #extraPackages = with pkgs; [
-    #  minesddm.packages.${pkgs.system}.default
-    #  qt5.qtquickcontrols2            # Qt QuickControls
-    #  qt5.qtgraphicaleffects          # GraphicalEffects
-    #  qt5.qtwayland                   # Qt Wayland support
-    #  # optionally add layer-shell-qt if needed, see next section
-    #];
+    theme = "minesddm";
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
