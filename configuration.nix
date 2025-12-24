@@ -17,7 +17,6 @@ in
     activate-linux
     btop
     cairo
-    cava
     clipse
     cmake
     curl
@@ -34,9 +33,10 @@ in
     hyprlock
     hyprpicker
     hyprpolkitagent
-    iwd
     imagemagick
+    iwd
     kitty
+    lazygit
     libnotify
     libva
     mako
@@ -47,8 +47,6 @@ in
     niri
     obs-studio
     obsidian
-    #oh-my-zsh
-    openrgb-with-all-plugins
     pango
     pavucontrol
     pipewire
@@ -59,8 +57,8 @@ in
     swww
     tree
     unzip
-    vicinae
     vesktop
+    vicinae
     vulkan-loader
     vulkan-tools
     waypaper
@@ -72,9 +70,6 @@ in
     yazi
     zen-browser.packages.${system}.default
     zsh
-    qt5.qtbase
-    qt5.qtquickcontrols2
-    qt5.qtgraphicaleffects
     (let
       matugenFixed = pkgs.writeShellScriptBin "matugen" ''
         #!/usr/bin/env bash
