@@ -47,13 +47,14 @@ in
     niri
     obs-studio
     obsidian
-    oh-my-posh
+    #oh-my-zsh
     openrgb-with-all-plugins
     pango
     pavucontrol
     pipewire
     playerctl
     plymouth
+    starship
     stow
     swww
     tree
@@ -94,6 +95,14 @@ in
       '';
     in matugenFixed)
   ];
+
+  programs.zsh = {
+    enable = true;
+    #ohMyZsh = {
+    #  enable = true;
+    #  theme = "";
+    #};
+  };
 
   programs.spicetify = {
     enable = true;
@@ -142,7 +151,6 @@ in
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  programs.zsh.enable = true;
 
   users.users.max = {
     isNormalUser = true;
