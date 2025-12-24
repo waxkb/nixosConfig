@@ -61,7 +61,6 @@ in
     vicinae
     vulkan-loader
     vulkan-tools
-    waypaper
     wev
     wget
     wireplumber
