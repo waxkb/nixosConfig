@@ -1,10 +1,8 @@
-
 { config, pkgs, zen-browser, minecraft-plymouth-theme, matugen, spicetify-nix, minesddm, ... }:
 
 let
-  # Build the Minecraft Plymouth theme package
-  spicePkgs = spicetify-nix.legacyPackages.${pkgs.stdenv.system};
   plymouthPkg = minecraft-plymouth-theme.packages.${pkgs.system}.default;
+  spicePkgs = spicetify-nix.legacyPackages.${pkgs.stdenv.system};
   system = pkgs.system;
 in
 {
@@ -17,6 +15,7 @@ in
     activate-linux
     btop
     cairo
+    cava
     clipse
     cmake
     curl
@@ -28,6 +27,7 @@ in
     fzf
     gammastep
     gcc
+    gdu
     git
     harfbuzz
     hyprlock
@@ -39,6 +39,7 @@ in
     lazygit
     libnotify
     libva
+    lsof
     mako
     mesa
     minesddm.packages.${pkgs.system}.default
@@ -67,6 +68,7 @@ in
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     yazi
+    yt-dlp
     zen-browser.packages.${system}.default
     zsh
     (let
@@ -90,12 +92,11 @@ in
     in matugenFixed)
   ];
 
-  programs.zsh = {
+  boot.plymouth = {
     enable = true;
-    #ohMyZsh = {
-    #  enable = true;
-    #  theme = "";
-    #};
+    theme = "mc";
+    themePackages = [ plymouthPkg ];
+    font = "${plymouthPkg}/share/fonts/OTF/Minecraft.otf";
   };
 
   programs.spicetify = {
@@ -107,6 +108,14 @@ in
     ];
     theme = spicePkgs.themes.text;
     colorScheme = "CatppuccinMocha";
+  };
+
+  programs.zsh = {
+    enable = true;
+    #ohMyZsh = {
+    #  enable = true;
+    #  theme = "";
+    #};
   };
 
   programs.niri.enable = true;
@@ -125,12 +134,6 @@ in
 
   systemd.services."getty@tty1".enable = false;
 
-  boot.plymouth = {
-    enable = true;
-    theme = "mc";
-    themePackages = [ plymouthPkg ];
-    font = "${plymouthPkg}/share/fonts/OTF/Minecraft.otf";
-  };
 
 # Probably don't need to edit these
 
@@ -142,6 +145,7 @@ in
   boot.loader.grub.device = "nodev";
   boot.loader.grub.useOSProber = true;
   boot.loader.grub.minegrub-theme.enable = true;
+  boot.loader.grub.gfxmodeEfi = "2560x1440";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -184,6 +188,7 @@ in
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
     "amdgpu.enable=0"
+    "video=efifb"
   ];
 
   networking.hostName = "nixos";
