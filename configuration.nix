@@ -27,6 +27,7 @@ in
     gcc
     gdu
     git
+    gita
     harfbuzz
     hyprlock
     hyprpicker
