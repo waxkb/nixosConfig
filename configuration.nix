@@ -1,14 +1,13 @@
-{ config, pkgs, zen-browser, minecraft-plymouth-theme, matugen, spicetify-nix, minesddm, ... }:
+{ config, pkgs, zen-browser, minecraft-plymouth-theme, matugen, silentSDDM, ... }:
 
 let
   plymouthPkg = minecraft-plymouth-theme.packages.${pkgs.system}.default;
-  spicePkgs = spicetify-nix.legacyPackages.${pkgs.stdenv.system};
   system = pkgs.system;
 in
 {
   imports = [
     ./hardware-configuration.nix
-    spicetify-nix.nixosModules.spicetify
+    silentSDDM.nixosModules.default
   ];
 
   environment.systemPackages = with pkgs; [
@@ -42,7 +41,6 @@ in
     lsof
     mako
     mesa
-    minesddm.packages.${pkgs.system}.default
     mpv
     neovim
     niri
@@ -52,7 +50,6 @@ in
     pavucontrol
     pipewire
     playerctl
-    plymouth
     starship
     stow
     swww
@@ -92,23 +89,10 @@ in
     in matugenFixed)
   ];
 
-  boot.plymouth = {
-    enable = true;
-    theme = "mc";
-    themePackages = [ plymouthPkg ];
-    font = "${plymouthPkg}/share/fonts/OTF/Minecraft.otf";
-  };
-
-  programs.spicetify = {
-    enable = true;
-    enabledExtensions = with spicePkgs.extensions; [
-      adblockify
-      hidePodcasts
-      shuffle # shuffle+ (special characters are sanitized out of extension names)
-    ];
-    theme = spicePkgs.themes.text;
-    colorScheme = "CatppuccinMocha";
-  };
+  programs.silentSDDM = {
+      enable = true;
+      theme = "catppuccin-mocha";
+    };
 
   programs.zsh = {
     enable = true;
@@ -127,7 +111,6 @@ in
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = false;
-    theme = "minesddm";
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -188,7 +171,6 @@ in
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
     "amdgpu.enable=0"
-    "video=efifb"
   ];
 
   networking.hostName = "nixos";

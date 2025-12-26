@@ -16,16 +16,14 @@
         url = "github:/InioX/Matugen";
     };
 
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-
-    minesddm = {
-      url = "github:Davi-S/sddm-theme-minesddm";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    silentSDDM = {
+        url = "github:uiriansan/SilentSDDM";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
 
   };
 
-  outputs = { self, nixpkgs, zen-browser, minegrub-theme, minecraft-plymouth-theme, matugen, spicetify-nix, minesddm, ... }:
+  outputs = { self, nixpkgs, zen-browser, minegrub-theme, minecraft-plymouth-theme, matugen, silentSDDM, ... }:
   let
     system = "x86_64-linux";
   in
@@ -42,8 +40,7 @@
         zen-browser = zen-browser;
         minecraft-plymouth-theme = minecraft-plymouth-theme;
         matugen = matugen;
-        spicetify-nix = spicetify-nix;
-        minesddm = minesddm;
+        silentSDDM = silentSDDM;
       };
     };
   };
