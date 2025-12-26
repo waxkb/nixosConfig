@@ -9,21 +9,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    minegrub-theme.url = "github:Lxtharia/minegrub-theme";
-    minecraft-plymouth-theme.url = "github:nikp123/minecraft-plymouth-theme";
-
     matugen = {
         url = "github:/InioX/Matugen";
     };
 
     silentSDDM = {
-        url = "github:uiriansan/SilentSDDM";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
+      url = "github:uiriansan/SilentSDDM";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    grubshin.url = "github:max-ishere/grubshin-bootpact";
 
   };
 
-  outputs = { self, nixpkgs, zen-browser, minegrub-theme, minecraft-plymouth-theme, matugen, silentSDDM, ... }:
+  outputs = { self, nixpkgs, zen-browser, matugen, silentSDDM, grubshin, ... }:
   let
     system = "x86_64-linux";
   in
@@ -33,14 +32,13 @@
 
       modules = [
         ./configuration.nix
-        minegrub-theme.nixosModules.default
       ];
 
       specialArgs = {
         zen-browser = zen-browser;
-        minecraft-plymouth-theme = minecraft-plymouth-theme;
         matugen = matugen;
         silentSDDM = silentSDDM;
+        grubshin = grubshin;
       };
     };
   };

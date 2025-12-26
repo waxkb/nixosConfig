@@ -1,7 +1,6 @@
-{ config, pkgs, zen-browser, minecraft-plymouth-theme, matugen, silentSDDM, ... }:
+{ config, pkgs, zen-browser, matugen, silentSDDM, grubshin, ... }:
 
 let
-  plymouthPkg = minecraft-plymouth-theme.packages.${pkgs.system}.default;
   system = pkgs.system;
 in
 {
@@ -48,7 +47,6 @@ in
     obsidian
     pango
     pavucontrol
-    pipewire
     playerctl
     starship
     stow
@@ -61,7 +59,6 @@ in
     vulkan-tools
     wev
     wget
-    wireplumber
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     yazi
@@ -89,9 +86,20 @@ in
     in matugenFixed)
   ];
 
+  security.rtkit.enable = true;
+
+  services.pipewire = {
+    enable = true;
+    audio.enable = true;
+    pulse.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    wireplumber.enable = true;
+  };
+
   programs.silentSDDM = {
       enable = true;
-      theme = "catppuccin-mocha";
+      theme = "silvia";
     };
 
   programs.zsh = {
@@ -123,15 +131,23 @@ in
   system.stateVersion = "25.11";
 
   boot.loader.systemd-boot.enable = false;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.device = "nodev";
-  boot.loader.grub.useOSProber = true;
-  boot.loader.grub.minegrub-theme.enable = true;
-  boot.loader.grub.gfxmodeEfi = "2560x1440";
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  boot.loader.grub = {
+    enable = true;
+    efiSupport = true;
+    device = "nodev";
+    useOSProber = true;
+    gfxmodeEfi = "2560x1440";
+  };
 
+
+  boot.loader.grub.theme = let
+    colorscheme = "night";
+    layout = "teleport";
+    resolution = "1920x1080";
+  in grubshin.theme.${colorscheme}.layout.${layout}.${resolution};
+
+nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   users.users.max = {
     isNormalUser = true;
@@ -163,7 +179,7 @@ in
     nvidiaSettings = true;
   };
 
-  fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono plymouthPkg ];
+  fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
 
   boot.kernelParams = [
     "nvidia-drm.modeset=1"
