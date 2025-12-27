@@ -21,6 +21,7 @@ in
     efibootmgr
     fastfetch
     fd
+    ffmpeg
     freetype
     fzf
     gammastep
@@ -36,11 +37,14 @@ in
     iwd
     kitty
     lazygit
+    lazyjournal
     libnotify
     libva
     lsof
     mako
     mesa
+    mpd
+    mpc
     mpv
     neovim
     niri
@@ -49,6 +53,11 @@ in
     pango
     pavucontrol
     playerctl
+    poppler
+    python312
+    python312Packages.mutagen
+    rmpc
+    rustup
     starship
     stow
     swww
@@ -58,12 +67,15 @@ in
     vicinae
     vulkan-loader
     vulkan-tools
+    waybar
     wev
     wget
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     yazi
     yt-dlp
+    zathura
+    zathuraPkgs.zathura_pdf_poppler
     zen-browser.packages.${system}.default
     zsh
     (let
@@ -86,6 +98,11 @@ in
       '';
     in matugenFixed)
   ];
+
+  services.mpd = {
+    enable = false;
+    musicDirectory = "/home/max/songs";
+  };
 
   security.rtkit.enable = true;
 
