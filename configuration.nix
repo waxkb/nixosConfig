@@ -40,7 +40,6 @@ in
     jq
     kitty
     lazygit
-    lazyjournal
     libnotify
     libva
     lsof
@@ -62,7 +61,6 @@ in
     starship
     stow
     swww
-    tree
     unzip
     vesktop
     vicinae
