@@ -35,6 +35,7 @@ in
     hyprpolkitagent
     imagemagick
     iwd
+    jq
     kitty
     lazygit
     lazyjournal
@@ -54,9 +55,6 @@ in
     pavucontrol
     playerctl
     poppler
-    python312
-    python312Packages.mutagen
-    rmpc
     rustup
     starship
     stow
