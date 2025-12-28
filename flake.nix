@@ -1,5 +1,5 @@
 {
-  description = "NixOS flake with MineGRUB + Minecraft Plymouth theme";
+  description = "saldkjf";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -20,9 +20,10 @@
 
     grubshin.url = "github:max-ishere/grubshin-bootpact";
 
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
-  outputs = { self, nixpkgs, zen-browser, matugen, silentSDDM, grubshin, ... }:
+  outputs = { self, nixpkgs, zen-browser, matugen, silentSDDM, grubshin, spicetify-nix, ... }:
   let
     system = "x86_64-linux";
   in
@@ -39,6 +40,7 @@
         matugen = matugen;
         silentSDDM = silentSDDM;
         grubshin = grubshin;
+        spicetify-nix = spicetify-nix;
       };
     };
   };

@@ -1,12 +1,14 @@
-{ config, pkgs, zen-browser, matugen, silentSDDM, grubshin, ... }:
+{ config, pkgs, zen-browser, matugen, silentSDDM, grubshin, spicetify-nix, ... }:
 
 let
   system = pkgs.system;
+  spicePkgs = spicetify-nix.legacyPackages.${pkgs.stdenv.system};
 in
 {
   imports = [
     ./hardware-configuration.nix
     silentSDDM.nixosModules.default
+    spicetify-nix.nixosModules.spicetify
   ];
 
   environment.systemPackages = with pkgs; [
@@ -44,8 +46,6 @@ in
     lsof
     mako
     mesa
-    mpd
-    mpc
     mpv
     neovim
     niri
@@ -97,9 +97,15 @@ in
     in matugenFixed)
   ];
 
-  services.mpd = {
-    enable = false;
-    musicDirectory = "/home/max/songs";
+  programs.spicetify = {
+    enable = true;
+    enabledExtensions = with spicePkgs.extensions; [
+      adblockify
+      hidePodcasts
+      shuffle # shuffle+ (special characters are sanitized out of extension names)
+    ];
+    theme = spicePkgs.themes.text;
+    colorScheme = "CatppuccinMocha";
   };
 
   security.rtkit.enable = true;
