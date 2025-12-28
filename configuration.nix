@@ -51,8 +51,11 @@ in
     niri
     obs-studio
     obsidian
+    openssl
     pango
+    patchelf
     pavucontrol
+    pkg-config
     playerctl
     poppler
     rustup

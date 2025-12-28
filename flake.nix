@@ -26,6 +26,10 @@
   outputs = { self, nixpkgs, zen-browser, matugen, silentSDDM, grubshin, spicetify-nix, ... }:
   let
     system = "x86_64-linux";
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
   in
   {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
@@ -42,6 +46,14 @@
         grubshin = grubshin;
         spicetify-nix = spicetify-nix;
       };
+    };
+    devShells.${system}.default = pkgs.mkShell {
+      buildInputs = [
+        pkgs.cargo
+        pkgs.rustc
+        pkgs.openssl
+        pkgs.pkg-config
+      ];
     };
   };
 }
