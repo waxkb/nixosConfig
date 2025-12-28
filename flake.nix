@@ -53,6 +53,12 @@
         pkgs.rustc
         pkgs.openssl
         pkgs.pkg-config
+        pkgs.pipewire
+        pkgs.clang
+        pkgs.gcc
+        pkgs.llvmPackages.libclang
+        pkgs.rustPlatform.bindgenHook
+        pkgs.alsa-lib
       ];
     };
   };
