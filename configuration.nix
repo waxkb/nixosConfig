@@ -43,7 +43,6 @@ in
     libnotify
     libva
     lsof
-    mako
     mesa
     mpv
     neovim
@@ -60,6 +59,7 @@ in
     rustup
     starship
     stow
+    swaynotificationcenter
     swww
     unzip
     vesktop
@@ -69,6 +69,7 @@ in
     waybar
     wev
     wget
+    wlogout
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     yazi
