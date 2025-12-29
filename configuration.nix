@@ -16,17 +16,18 @@ in
     btop
     cairo
     cava
-    clipse
+    #clipse
     cmake
     curl
     discord-canary
+    dms-shell
     efibootmgr
     fastfetch
     fd
     ffmpeg
     freetype
     fzf
-    gammastep
+    #gammastep
     gcc
     gdu
     git
@@ -34,7 +35,7 @@ in
     harfbuzz
     hyprlock
     hyprpicker
-    hyprpolkitagent
+    #hyprpolkitagent
     imagemagick
     iwd
     jq
@@ -59,14 +60,14 @@ in
     rustup
     starship
     stow
-    swaynotificationcenter
+    #swaynotificationcenter
     swww
     unzip
     vesktop
     vicinae
     vulkan-loader
     vulkan-tools
-    waybar
+    #waybar
     wev
     wget
     wlogout
@@ -98,6 +99,18 @@ in
       '';
     in matugenFixed)
   ];
+  
+  programs.dms-shell = {
+    enable = true;
+    systemd.enable = true;
+    systemd.restartIfChanged = false;
+    enableSystemMonitoring = true;
+    enableClipboard = true;
+    enableVPN = true;
+    enableDynamicTheming = true;
+    enableAudioWavelength = true;
+    enableCalendarEvents = true;
+  };
 
   programs.spicetify = {
     enable = true;
