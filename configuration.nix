@@ -136,7 +136,7 @@ in
 
   programs.silentSDDM = {
       enable = true;
-      theme = "silvia";
+      theme = "catppuccin-mocha";
     };
 
   programs.zsh = {
