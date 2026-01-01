@@ -14,7 +14,6 @@ in
   environment.systemPackages = with pkgs; [
     activate-linux
     btop
-    cairo
     cava
     #clipse
     cmake
@@ -25,14 +24,12 @@ in
     fastfetch
     fd
     ffmpeg
-    freetype
     fzf
     #gammastep
     gcc
     gdu
     git
     gita
-    harfbuzz
     hyprlock
     hyprpicker
     #hyprpolkitagent
@@ -42,9 +39,7 @@ in
     kitty
     lazygit
     libnotify
-    libva
     lsof
-    mesa
     mpv
     neovim
     niri
