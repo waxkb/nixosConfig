@@ -15,7 +15,6 @@ in
     activate-linux
     btop
     cava
-    #clipse
     cmake
     curl
     discord-canary
@@ -25,51 +24,38 @@ in
     fd
     ffmpeg
     fzf
-    #gammastep
     gcc
     gdu
     git
     gita
     hyprlock
     hyprpicker
-    #hyprpolkitagent
     imagemagick
     iwd
     jq
     kitty
-    lazygit
     libnotify
-    lsof
     mpv
     neovim
     niri
     obs-studio
-    obsidian
-    openssl
-    pango
-    patchelf
     pavucontrol
     pkg-config
     playerctl
-    poppler
     rustup
     starship
     stow
-    #swaynotificationcenter
     swww
     unzip
     vesktop
     vicinae
     vulkan-loader
     vulkan-tools
-    #waybar
     wev
     wget
-    wlogout
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     yazi
-    yt-dlp
     zathura
     zathuraPkgs.zathura_pdf_poppler
     zen-browser.packages.${system}.default
