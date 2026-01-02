@@ -42,19 +42,14 @@ in
     pavucontrol
     pkg-config
     playerctl
-    rustup
     starship
     stow
     swww
     unzip
     vesktop
     vicinae
-    vulkan-loader
-    vulkan-tools
     wev
     wget
-    xdg-desktop-portal
-    xdg-desktop-portal-gtk
     yazi
     zathura
     zathuraPkgs.zathura_pdf_poppler

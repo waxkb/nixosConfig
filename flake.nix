@@ -49,16 +49,6 @@
     };
     devShells.${system}.default = pkgs.mkShell {
       buildInputs = [
-        pkgs.cargo
-        pkgs.rustc
-        pkgs.openssl
-        pkgs.pkg-config
-        pkgs.pipewire
-        pkgs.clang
-        pkgs.gcc
-        pkgs.llvmPackages.libclang
-        pkgs.rustPlatform.bindgenHook
-        pkgs.alsa-lib
       ];
     };
   };
