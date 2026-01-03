@@ -39,6 +39,7 @@ in
     neovim
     niri
     obs-studio
+    obsidian
     pavucontrol
     pkg-config
     playerctl

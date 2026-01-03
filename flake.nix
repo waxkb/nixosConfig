@@ -10,7 +10,7 @@
     };
 
     matugen = {
-        url = "github:/InioX/Matugen";
+      url = "github:InioX/Matugen";
     };
 
     silentSDDM = {
@@ -21,9 +21,23 @@
     grubshin.url = "github:max-ishere/grubshin-bootpact";
 
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, zen-browser, matugen, silentSDDM, grubshin, spicetify-nix, ... }:
+  outputs = inputs@{
+    self,
+    nixpkgs,
+    zen-browser,
+    matugen,
+    silentSDDM,
+    grubshin,
+    spicetify-nix,
+    ...
+  }:
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -37,9 +51,11 @@
 
       modules = [
         ./configuration.nix
+        ./noctalia.nix
       ];
 
       specialArgs = {
+        inherit inputs;  # ← REQUIRED for noctalia.nix
         zen-browser = zen-browser;
         matugen = matugen;
         silentSDDM = silentSDDM;
@@ -47,9 +63,9 @@
         spicetify-nix = spicetify-nix;
       };
     };
+
     devShells.${system}.default = pkgs.mkShell {
-      buildInputs = [
-      ];
+      buildInputs = [ ];
     };
   };
 }
