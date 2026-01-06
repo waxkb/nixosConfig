@@ -26,6 +26,12 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs = inputs@{
@@ -36,6 +42,7 @@
     silentSDDM,
     grubshin,
     spicetify-nix,
+    dms,
     ...
   }:
   let
@@ -61,6 +68,7 @@
         silentSDDM = silentSDDM;
         grubshin = grubshin;
         spicetify-nix = spicetify-nix;
+        dms = dms;
       };
     };
 

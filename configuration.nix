@@ -1,4 +1,4 @@
-{ config, pkgs, zen-browser, matugen, silentSDDM, grubshin, spicetify-nix, ... }:
+{ config, pkgs, zen-browser, matugen, silentSDDM, grubshin, spicetify-nix, dms, ... }:
 
 let
   system = pkgs.system;
@@ -9,6 +9,7 @@ in
     ./hardware-configuration.nix
     silentSDDM.nixosModules.default
     spicetify-nix.nixosModules.spicetify
+    dms.nixosModules.dankMaterialShell
   ];
 
   environment.systemPackages = with pkgs; [
@@ -18,7 +19,6 @@ in
     cmake
     curl
     discord-canary
-    dms-shell
     efibootmgr
     fastfetch
     fd
@@ -43,9 +43,12 @@ in
     pavucontrol
     pkg-config
     playerctl
+    python315
+    quickshell
     starship
     stow
     swww
+    systemd-manager-tui
     unzip
     vesktop
     vicinae
@@ -76,17 +79,12 @@ in
       '';
     in matugenFixed)
   ];
-  
-  programs.dms-shell = {
+
+  programs.dankMaterialShell = {
     enable = true;
-    systemd.enable = true;
-    systemd.restartIfChanged = false;
-    enableSystemMonitoring = true;
-    enableClipboard = true;
-    enableVPN = true;
-    enableDynamicTheming = true;
-    enableAudioWavelength = true;
-    enableCalendarEvents = true;
+    systemd = {
+        enable = true;
+      };
   };
 
   programs.spicetify = {
@@ -96,8 +94,8 @@ in
       hidePodcasts
       shuffle # shuffle+ (special characters are sanitized out of extension names)
     ];
-    theme = spicePkgs.themes.text;
-    colorScheme = "CatppuccinMocha";
+    theme = spicePkgs.themes.catppuccin;
+    colorScheme = "mocha";
   };
 
   security.rtkit.enable = true;
