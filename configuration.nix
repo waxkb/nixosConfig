@@ -32,6 +32,7 @@ in
     hyprpicker
     imagemagick
     iwd
+    jdk
     jq
     kitty
     libnotify
@@ -43,8 +44,10 @@ in
     pavucontrol
     pkg-config
     playerctl
+    pulseaudio
     python315
     quickshell
+    rofi
     starship
     stow
     swww
@@ -52,8 +55,10 @@ in
     unzip
     vesktop
     vicinae
+    virtualbox
     wev
     wget
+    xwayland-satellite
     yazi
     zathura
     zathuraPkgs.zathura_pdf_poppler
@@ -79,6 +84,24 @@ in
       '';
     in matugenFixed)
   ];
+
+
+  programs.obs-studio = {
+    enable = true;
+    package = (pkgs.obs-studio.override {
+      cudaSupport = true;
+    });
+    plugins = with pkgs.obs-studio-plugins; [
+      obs-pipewire-audio-capture
+    ];
+  };
+
+  virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.guest.enable = true;
+  virtualisation.virtualbox.guest.dragAndDrop = true;
+  virtualisation.virtualbox.host.enableHardening = false;
+  virtualisation.virtualbox.host.enableExtensionPack = true;
+  users.extraGroups.vboxusers.members = [ "max" ];
 
   programs.dankMaterialShell = {
     enable = true;
@@ -200,6 +223,13 @@ nix.settings.experimental-features = [ "nix-command" "flakes" ];
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
     "amdgpu.enable=0"
   ];
+
+  boot.initrd.availableKernelModules = [
+      "nvidia_drm" "nvidia_modeset" "nvidia" "nvidia_uvm"
+  ];
+
+
+  nixpkgs.config.cudaSupport = true;
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
