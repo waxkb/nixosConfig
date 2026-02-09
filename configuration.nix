@@ -52,6 +52,7 @@ in
     stow
     swww
     systemd-manager-tui
+    texliveBasic
     unzip
     vesktop
     vicinae
@@ -107,6 +108,7 @@ in
     enable = true;
     systemd = {
         enable = true;
+        restartIfChanged = true;
       };
   };
 
