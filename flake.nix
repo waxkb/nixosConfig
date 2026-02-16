@@ -52,6 +52,16 @@
       inherit system;
       config.allowUnfree = true;
     };
+
+    quickshell-wrapped = pkgs.writeShellScriptBin "quickshell" ''
+        export QML2_IMPORT_PATH="${pkgs.kdePackages.kirigami}/lib/qt-6/qml:${pkgs.kdePackages.kirigami-addons}/lib/qt-6/qml:${pkgs.kdePackages.qt5compat}/lib/qt-6/qml:${pkgs.kdePackages.qtdeclarative}/lib/qt-6/qml"
+        export QT_PLUGIN_PATH="${pkgs.kdePackages.qtwayland}/lib/qt-6/plugins"
+        export QT_QPA_PLATFORM="wayland"
+        
+        # Execute the real quickshell from the flake with all passed arguments
+        exec ${inputs.quickshell.packages.${system}.default}/bin/quickshell "$@"
+      '';
+
   in
   {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
@@ -69,7 +79,7 @@
         grubshin = grubshin;
         spicetify-nix = spicetify-nix;
         dms = dms;
-        quickshell = quickshell;
+        quickshell = quickshell-wrapped;
       };
     };
 

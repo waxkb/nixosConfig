@@ -12,7 +12,7 @@ in
     dms.nixosModules.dankMaterialShell
   ];
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [quickshell] ++ (with pkgs; [
     activate-linux
     btop
     cava
@@ -36,6 +36,9 @@ in
     iwd
     jdk
     jq
+    kdePackages.kirigami
+    kdePackages.kirigami-addons
+    libsForQt5.kirigami2
     kitty
     libnotify
     mpv
@@ -48,7 +51,8 @@ in
     playerctl
     pulseaudio
     python315
-    quickshell.packages.${system}.default
+    qt6.qt5compat
+    qt6.qtmultimedia
     rofi
     slurp
     starship
@@ -88,7 +92,7 @@ in
         exec ${pkgs.matugen}/bin/matugen "''${args[@]}"
       '';
     in matugenFixed)
-  ];
+  ]);
 
   programs.hyprland.enable = true;
 
