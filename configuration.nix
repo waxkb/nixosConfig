@@ -100,21 +100,21 @@ in
 
   programs.dankMaterialShell = {
     enable = true;
-    #systemd = {
-    #    enable = true;
-    #    restartIfChanged = true;
-    #  };
+    systemd = {
+        enable = true;
+        restartIfChanged = true;
+      };
   };
 
-  systemd.user.services.dms = {
-    description = "Dank Material Shell";
-    wantedBy = [ "graphical-session.target" ];
+  #systemd.user.services.dms = {
+  #  description = "Dank Material Shell";
+  #  wantedBy = [ "graphical-session.target" ];
 
-    serviceConfig = {
-      ExecStart = "/run/current-system/sw/bin/dms";
-      Restart = "on-failure";
-    };
-  };
+  #  serviceConfig = {
+  #    ExecStart = "/run/current-system/sw/bin/dms";
+  #    Restart = "on-failure";
+  #  };
+  #};
 
   programs.spicetify = {
     enable = true;
