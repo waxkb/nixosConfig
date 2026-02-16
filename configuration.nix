@@ -52,11 +52,11 @@ in
     stow
     swww
     systemd-manager-tui
-    texliveBasic
+    texliveFull
     unzip
     vesktop
     vicinae
-    virtualbox
+    vscode
     wev
     wget
     xwayland-satellite
@@ -86,6 +86,7 @@ in
     in matugenFixed)
   ];
 
+  programs.hyprland.enable = true;
 
   programs.obs-studio = {
     enable = true;
@@ -97,19 +98,22 @@ in
     ];
   };
 
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.guest.enable = true;
-  virtualisation.virtualbox.guest.dragAndDrop = true;
-  virtualisation.virtualbox.host.enableHardening = false;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
-  users.extraGroups.vboxusers.members = [ "max" ];
-
   programs.dankMaterialShell = {
     enable = true;
-    systemd = {
-        enable = true;
-        restartIfChanged = true;
-      };
+    #systemd = {
+    #    enable = true;
+    #    restartIfChanged = true;
+    #  };
+  };
+
+  systemd.user.services.dms = {
+    description = "Dank Material Shell";
+    wantedBy = [ "graphical-session.target" ];
+
+    serviceConfig = {
+      ExecStart = "/run/current-system/sw/bin/dms";
+      Restart = "on-failure";
+    };
   };
 
   programs.spicetify = {
@@ -151,7 +155,7 @@ in
 
   services.xserver.enable = true;
 
-  services.displayManager.defaultSession = "niri";
+  #services.displayManager.defaultSession = "niri";
 
   services.displayManager.sddm = {
     enable = true;
@@ -167,24 +171,26 @@ in
 
   system.stateVersion = "25.11";
 
-  boot.loader.systemd-boot.enable = false;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.timeout = 0;
 
   boot.loader.grub = {
-    enable = true;
-    efiSupport = true;
-    device = "nodev";
-    useOSProber = true;
-    gfxmodeEfi = "2560x1440";
+    enable = false;
+    #efiSupport = true;
+    #device = "nodev";
+    #useOSProber = true;
+    #gfxmodeEfi = "2560x1440";
   };
 
 
-  boot.loader.grub.theme = let
-    colorscheme = "night";
-    layout = "teleport";
-    resolution = "1920x1080";
-  in grubshin.theme.${colorscheme}.layout.${layout}.${resolution};
+  #boot.loader.grub.theme = let
+  #  colorscheme = "night";
+  #  layout = "teleport";
+  #  resolution = "1920x1080";
+  #in grubshin.theme.${colorscheme}.layout.${layout}.${resolution};
 
-nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   users.users.max = {
     isNormalUser = true;
