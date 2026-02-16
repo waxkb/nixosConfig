@@ -1,4 +1,4 @@
-{ config, pkgs, zen-browser, matugen, silentSDDM, grubshin, spicetify-nix, dms, ... }:
+{ config, pkgs, zen-browser, matugen, silentSDDM, grubshin, spicetify-nix, dms, quickshell, ... }:
 
 let
   system = pkgs.system;
@@ -16,6 +16,7 @@ in
     activate-linux
     btop
     cava
+    cliphist
     cmake
     curl
     discord-canary
@@ -28,6 +29,7 @@ in
     gdu
     git
     gita
+    grim
     hyprlock
     hyprpicker
     imagemagick
@@ -46,8 +48,9 @@ in
     playerctl
     pulseaudio
     python315
-    quickshell
+    quickshell.packages.${system}.default
     rofi
+    slurp
     starship
     stow
     swww
@@ -59,6 +62,7 @@ in
     vscode
     wev
     wget
+    wl-clipboard
     xwayland-satellite
     yazi
     zathura
@@ -174,6 +178,7 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 0;
+  boot.loader.systemd-boot.configurationLimit = 5;
 
   boot.loader.grub = {
     enable = false;

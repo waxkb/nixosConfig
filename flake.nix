@@ -27,6 +27,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    quickshell = {
+      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
   outputs = inputs@{
@@ -38,6 +43,7 @@
     grubshin,
     spicetify-nix,
     dms,
+    quickshell,
     ...
   }:
   let
@@ -63,6 +69,7 @@
         grubshin = grubshin;
         spicetify-nix = spicetify-nix;
         dms = dms;
+        quickshell = quickshell;
       };
     };
 
