@@ -38,6 +38,7 @@ in
     jq
     kdePackages.kirigami
     kdePackages.kirigami-addons
+    kdePackages.syntax-highlighting
     libsForQt5.kirigami2
     kitty
     libnotify
@@ -53,6 +54,10 @@ in
     python315
     qt6.qt5compat
     qt6.qtmultimedia
+    qt6.qtdeclarative
+    qt6.qtwayland
+    qt6.qtsvg
+    qt6.qtbase
     rofi
     slurp
     starship
@@ -60,6 +65,7 @@ in
     swww
     systemd-manager-tui
     texliveFull
+    tree
     unzip
     vesktop
     vicinae

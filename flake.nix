@@ -52,15 +52,25 @@
       inherit system;
       config.allowUnfree = true;
     };
+    
+    quickshell-custom =
+    quickshell.packages.${system}.default.overrideAttrs (old: {
+      buildInputs = (old.buildInputs or []) ++ [
+        pkgs.kdePackages.kirigami
+        pkgs.kdePackages.kirigami-addons
+        pkgs.qt6.qtdeclarative
+        pkgs.qt6.qt5compat
+        pkgs.qt6.qtsvg
+        pkgs.qt6.qtwayland
+        #pkgs.qt6.qtgraphicaleffects
+      ];
 
-    quickshell-wrapped = pkgs.writeShellScriptBin "quickshell" ''
-        export QML2_IMPORT_PATH="${pkgs.kdePackages.kirigami}/lib/qt-6/qml:${pkgs.kdePackages.kirigami-addons}/lib/qt-6/qml:${pkgs.kdePackages.qt5compat}/lib/qt-6/qml:${pkgs.kdePackages.qtdeclarative}/lib/qt-6/qml"
-        export QT_PLUGIN_PATH="${pkgs.kdePackages.qtwayland}/lib/qt-6/plugins"
-        export QT_QPA_PLATFORM="wayland"
-        
-        # Execute the real quickshell from the flake with all passed arguments
-        exec ${inputs.quickshell.packages.${system}.default}/bin/quickshell "$@"
+      nativeBuildInputs = [ pkgs.qt6.wrapQtAppsHook ];
+
+      postBuild = ''
+        wrapQtApp $out/bin/quickshell
       '';
+    });
 
   in
   {
@@ -79,12 +89,10 @@
         grubshin = grubshin;
         spicetify-nix = spicetify-nix;
         dms = dms;
-        quickshell = quickshell-wrapped;
+        quickshell = quickshell-custom;
       };
     };
 
-    devShells.${system}.default = pkgs.mkShell {
-      buildInputs = [ ];
-    };
+    packages.${system}.quickshell-custom = quickshell-custom;
   };
 }
