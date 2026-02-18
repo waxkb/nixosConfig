@@ -1,4 +1,4 @@
-{ config, pkgs, zen-browser, matugen, silentSDDM, grubshin, spicetify-nix, dms, quickshell, ... }:
+{ config, pkgs, zen-browser, matugen, silentSDDM, grubshin, spicetify-nix, dms, quickshell-custom, ... }:
 
 let
   system = pkgs.system;
@@ -12,8 +12,9 @@ in
     dms.nixosModules.dankMaterialShell
   ];
 
-  environment.systemPackages = [quickshell] ++ (with pkgs; [
+  environment.systemPackages = [quickshell-custom] ++ (with pkgs; [
     activate-linux
+    bibata-cursors
     btop
     cava
     cliphist
@@ -58,6 +59,9 @@ in
     qt6.qtwayland
     qt6.qtsvg
     qt6.qtbase
+    (pkgs.writeShellScriptBin "qsc" ''
+    exec ${quickshell-custom}/bin/quickshell "$@"
+  '')
     rofi
     slurp
     starship
@@ -79,6 +83,9 @@ in
     zathuraPkgs.zathura_pdf_poppler
     zen-browser.packages.${system}.default
     zsh
+    kdePackages.breeze-icons
+    adwaita-icon-theme
+    hicolor-icon-theme
     (let
       matugenFixed = pkgs.writeShellScriptBin "matugen" ''
         #!/usr/bin/env bash
@@ -100,6 +107,10 @@ in
     in matugenFixed)
   ]);
 
+  services.envfs.enable = true;
+
+  security.polkit.enable = true;
+
   programs.hyprland.enable = true;
 
   programs.obs-studio = {
@@ -113,7 +124,7 @@ in
   };
 
   programs.dankMaterialShell = {
-    enable = true;
+    enable = false;
     systemd = {
         enable = true;
         restartIfChanged = true;
@@ -154,7 +165,16 @@ in
 
   programs.silentSDDM = {
       enable = true;
-      theme = "catppuccin-mocha";
+      theme = "nord";
+      backgrounds = {
+          purpleKeyboards = ./wall/purpleKeyboards.jpg;
+        };
+
+      settings = {
+          "LoginScreen" = {
+              background = "purpleKeyboards.jpg";
+            };
+        };
     };
 
   programs.zsh = {
@@ -237,7 +257,7 @@ in
     nvidiaSettings = true;
   };
 
-  fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
+  fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono material-symbols ];
 
   boot.kernelParams = [
     "nvidia-drm.modeset=1"

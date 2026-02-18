@@ -89,7 +89,7 @@
         grubshin = grubshin;
         spicetify-nix = spicetify-nix;
         dms = dms;
-        quickshell = quickshell-custom;
+        quickshell-custom = quickshell-custom;
       };
     };
 
