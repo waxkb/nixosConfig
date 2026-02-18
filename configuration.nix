@@ -164,18 +164,22 @@ in
   };
 
   programs.silentSDDM = {
-      enable = true;
-      theme = "nord";
-      backgrounds = {
-          purpleKeyboards = ./wall/purpleKeyboards.jpg;
-        };
-
-      settings = {
-          "LoginScreen" = {
-              background = "purpleKeyboards.jpg";
-            };
-        };
+    enable = true;
+    theme = "default";
+    backgrounds = {
+      purpleKeyboards = ./wall/purpleKeyboards.jpg;
     };
+
+    settings = {
+      "LoginScreen" = {
+        background = "purpleKeyboards.jpg";
+      };
+      "LockScreen" = {
+        background = "purpleKeyboards.jpg";
+        blur = false;
+      };
+    };
+  };
 
   programs.zsh = {
     enable = true;
