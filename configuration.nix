@@ -124,7 +124,7 @@ in
   };
 
   programs.dankMaterialShell = {
-    enable = false;
+    enable = true;
     systemd = {
         enable = true;
         restartIfChanged = true;
