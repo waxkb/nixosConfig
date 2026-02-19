@@ -179,25 +179,32 @@ in
         use-background-color = false;
         #blur = false;
       };
-      #"LockScreen.Clock" = {
-      #  display = false;
-      #};
-      #"LockScreen.Date" = {
-      #  display = false;
-      #};
-      #"LockScreen.Message" = {
-      #  display = true;
-      #  position= "center";
-      #  text = "I can smell you";
-      #  font-family = "Playfair Display";
-      #  font-size = 100;
-      #  font-weight = 500;
-      #  display-icon= false;
-      #  color = "#eeeeee";
-      #};
+      "LockScreen.Clock" = {
+        display = false;
+      };
+      "LockScreen.Date" = {
+        display = false;
+      };
+      "LockScreen.Message" = {
+        display = true;
+        position= "center";
+        text = "λ";
+        font-family = "Playfair Display";
+        font-size = 100;
+        font-weight = 500;
+        display-icon= false;
+      };
       "LoginScreen" = {
         background = "purpleKeyboards.jpg";
         use-background-color = false;
+      };
+      "LoginScreen.LoginArea.PasswordInput" = {
+        background-color = "#321C33";
+        background-opacity = 0.1;
+      };
+      "LoginScreen.LoginArea.LoginButton" = {
+        hide-if-not-needed = true;
+        background-color = "#321C33";
       };
       "LoginScreen.MenuArea.Layout" = {
         display = false;
@@ -205,9 +212,9 @@ in
       "LoginScreen.MenuArea.Keyboard" = {
         display = false;
       };
-      #"LoginScreen.MenuArea.Power" = {
-      #  display = true;
-      #};
+      "Tooltips" = {
+        enable = false;
+      };
     };
   };
 
