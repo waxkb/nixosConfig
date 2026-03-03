@@ -18,18 +18,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    grubshin.url = "github:max-ishere/grubshin-bootpact";
+    #dms = {
+    #  url = "github:AvengeMedia/DankMaterialShell";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
 
-    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    quickshell = {
-      url = "git+https://git.outfoxxed.me/outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
+    llama-cpp = {
+      url = "github:ggml-org/llama.cpp";
+      flake = false;
     };
 
   };
@@ -40,10 +36,8 @@
     zen-browser,
     matugen,
     silentSDDM,
-    grubshin,
-    spicetify-nix,
-    dms,
-    quickshell,
+    #dms,
+    llama-cpp,
     ...
   }:
   let
@@ -52,26 +46,6 @@
       inherit system;
       config.allowUnfree = true;
     };
-    
-    quickshell-custom =
-    quickshell.packages.${system}.default.overrideAttrs (old: {
-      buildInputs = (old.buildInputs or []) ++ [
-        pkgs.kdePackages.kirigami
-        pkgs.kdePackages.kirigami-addons
-        pkgs.qt6.qtdeclarative
-        pkgs.qt6.qt5compat
-        pkgs.qt6.qtsvg
-        pkgs.qt6.qtwayland
-        #pkgs.qt6.qtgraphicaleffects
-      ];
-
-      nativeBuildInputs = [ pkgs.qt6.wrapQtAppsHook ];
-
-      postBuild = ''
-        wrapQtApp $out/bin/quickshell
-      '';
-    });
-
   in
   {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
@@ -79,6 +53,32 @@
 
       modules = [
         ./configuration.nix
+        {
+          # Overlay to replace the standard llama-cpp with your git version
+          nixpkgs.overlays = [
+            (final: prev: {
+              llama-cpp = (prev.llama-cpp.override {
+                cudaSupport = true;
+                blasSupport = false;
+              }).overrideAttrs (oldAttrs: {
+                # We use the source from our flake input
+                src = llama-cpp;
+                npmDepsHash = "sha256-FKjoZTKm0ddoVdpxzYrRUmTiuafEfbKc4UD2fz2fb8A=";
+                version = "100000";
+
+                cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+                  "-DGGML_NATIVE=ON"
+                  "-DCMAKE_CUDA_ARCHITECTURES=89"
+                ];
+
+                preConfigure = ''
+                  export NIX_ENFORCE_NO_NATIVE=0
+                  ${oldAttrs.preConfigure or ""}
+                '';
+              });
+            })
+          ];
+        }
       ];
 
       specialArgs = {
@@ -86,13 +86,8 @@
         zen-browser = zen-browser;
         matugen = matugen;
         silentSDDM = silentSDDM;
-        grubshin = grubshin;
-        spicetify-nix = spicetify-nix;
-        dms = dms;
-        quickshell-custom = quickshell-custom;
+        #dms = dms;
       };
     };
-
-    packages.${system}.quickshell-custom = quickshell-custom;
   };
 }

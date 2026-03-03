@@ -1,18 +1,16 @@
-{ config, pkgs, zen-browser, matugen, silentSDDM, grubshin, spicetify-nix, dms, quickshell-custom, ... }:
+{ config, pkgs, zen-browser, matugen, silentSDDM, ... }:
 
 let
   system = pkgs.system;
-  spicePkgs = spicetify-nix.legacyPackages.${pkgs.stdenv.system};
 in
 {
   imports = [
     ./hardware-configuration.nix
     silentSDDM.nixosModules.default
-    spicetify-nix.nixosModules.spicetify
-    dms.nixosModules.dankMaterialShell
+    #dms.nixosModules.dankMaterialShell
   ];
 
-  environment.systemPackages = [quickshell-custom] ++ (with pkgs; [
+  environment.systemPackages = with pkgs; [
     activate-linux
     bibata-cursors
     btop
@@ -43,25 +41,27 @@ in
     libsForQt5.kirigami2
     kitty
     libnotify
+    llama-cpp
     mpv
     neovim
     niri
     obs-studio
     obsidian
+    opencode
     pavucontrol
     pkg-config
     playerctl
     pulseaudio
-    python315
+    (python315.withPackages (ps: with ps; [
+      pytest
+    ]))
+    python315Packages.pytest
     qt6.qt5compat
     qt6.qtmultimedia
     qt6.qtdeclarative
     qt6.qtwayland
     qt6.qtsvg
     qt6.qtbase
-    (pkgs.writeShellScriptBin "qsc" ''
-    exec ${quickshell-custom}/bin/quickshell "$@"
-  '')
     rofi
     slurp
     starship
@@ -105,7 +105,19 @@ in
         exec ${pkgs.matugen}/bin/matugen "''${args[@]}"
       '';
     in matugenFixed)
-  ]);
+  ];
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      python313Packages = prev.python313Packages.overrideScope (pyFinal: pyPrev: {
+        khal = pyPrev.khal.overridePythonAttrs (old: {
+          doCheck = false;
+          doInstallCheck = false;
+          doDoc = false;
+        });
+      });
+    })
+  ];
 
   services.envfs.enable = true;
 
@@ -123,13 +135,15 @@ in
     ];
   };
 
-  programs.dankMaterialShell = {
-    enable = true;
-    systemd = {
-        enable = true;
-        restartIfChanged = true;
-      };
-  };
+  fonts.fontconfig.enable = true;
+
+  #programs.dms-shell = {
+  #  enable = true;
+  #  systemd = {
+  #      enable = true;
+  #      restartIfChanged = true;
+  #    };
+  #};
 
   #systemd.user.services.dms = {
   #  description = "Dank Material Shell";
@@ -140,17 +154,6 @@ in
   #    Restart = "on-failure";
   #  };
   #};
-
-  programs.spicetify = {
-    enable = true;
-    enabledExtensions = with spicePkgs.extensions; [
-      adblockify
-      hidePodcasts
-      shuffle # shuffle+ (special characters are sanitized out of extension names)
-    ];
-    theme = spicePkgs.themes.catppuccin;
-    colorScheme = "mocha";
-  };
 
   security.rtkit.enable = true;
 
@@ -216,6 +219,15 @@ in
         enable = false;
       };
     };
+  };
+
+  nix.settings = {
+    extra-sandbox-paths = [ "/var/cache/ccache" ];
+  };
+
+  programs.ccache = {
+    enable = true;
+    cacheDir = "/var/cache/ccache";
   };
 
   programs.zsh = {
