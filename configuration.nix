@@ -14,7 +14,6 @@ in
     activate-linux
     bibata-cursors
     btop
-    cava
     cliphist
     cmake
     curl
@@ -28,17 +27,12 @@ in
     gdu
     git
     gita
-    grim
     hyprlock
     hyprpicker
     imagemagick
     iwd
     jdk
     jq
-    kdePackages.kirigami
-    kdePackages.kirigami-addons
-    kdePackages.syntax-highlighting
-    libsForQt5.kirigami2
     kitty
     libnotify
     llama-cpp
@@ -46,26 +40,16 @@ in
     neovim
     niri
     obs-studio
-    obsidian
     opencode
     pavucontrol
     pkg-config
     playerctl
     pulseaudio
-    qt6.qt5compat
-    qt6.qtmultimedia
-    qt6.qtdeclarative
-    qt6.qtwayland
-    qt6.qtsvg
-    qt6.qtbase
     rofi
-    slurp
     starship
     stow
     swww
-    systemd-manager-tui
     texliveFull
-    tree
     unzip
     vesktop
     vicinae
@@ -79,9 +63,6 @@ in
     zathuraPkgs.zathura_pdf_poppler
     zen-browser.packages.${system}.default
     zsh
-    kdePackages.breeze-icons
-    adwaita-icon-theme
-    hicolor-icon-theme
     (let
       matugenFixed = pkgs.writeShellScriptBin "matugen" ''
         #!/usr/bin/env bash
