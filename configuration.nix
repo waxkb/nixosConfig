@@ -17,18 +17,6 @@ in
     nix-direnv.enable = true;
   };
 
-  nixpkgs.overlays = [
-    (final: prev: {
-      python313Packages = prev.python313Packages.overrideScope (pyFinal: pyPrev: {
-        khal = pyPrev.khal.overridePythonAttrs (old: {
-          doCheck = false;
-          doInstallCheck = false;
-          doDoc = false;
-        });
-      });
-    })
-  ];
-
   services.envfs.enable = true;
 
   security.polkit.enable = true;
@@ -53,16 +41,6 @@ in
   #      enable = true;
   #      restartIfChanged = true;
   #    };
-  #};
-
-  #systemd.user.services.dms = {
-  #  description = "Dank Material Shell";
-  #  wantedBy = [ "graphical-session.target" ];
-
-  #  serviceConfig = {
-  #    ExecStart = "/run/current-system/sw/bin/dms";
-  #    Restart = "on-failure";
-  #  };
   #};
 
   security.rtkit.enable = true;
@@ -163,9 +141,6 @@ in
 
   systemd.services."getty@tty1".enable = false;
 
-
-# Probably don't need to edit these
-
   system.stateVersion = "25.11";
 
   boot.loader.systemd-boot.enable = true;
@@ -175,18 +150,7 @@ in
 
   boot.loader.grub = {
     enable = false;
-    #efiSupport = true;
-    #device = "nodev";
-    #useOSProber = true;
-    #gfxmodeEfi = "2560x1440";
   };
-
-
-  #boot.loader.grub.theme = let
-  #  colorscheme = "night";
-  #  layout = "teleport";
-  #  resolution = "1920x1080";
-  #in grubshin.theme.${colorscheme}.layout.${layout}.${resolution};
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
