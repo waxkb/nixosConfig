@@ -52,10 +52,6 @@ in
     pkg-config
     playerctl
     pulseaudio
-    (python315.withPackages (ps: with ps; [
-      pytest
-    ]))
-    python315Packages.pytest
     qt6.qt5compat
     qt6.qtmultimedia
     qt6.qtdeclarative
@@ -106,6 +102,12 @@ in
       '';
     in matugenFixed)
   ];
+
+  programs.direnv = {
+    enable = true;
+    silent = true;
+    nix-direnv.enable = true;
+  };
 
   nixpkgs.overlays = [
     (final: prev: {
