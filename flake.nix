@@ -53,6 +53,7 @@
 
       modules = [
         ./configuration.nix
+        ./packages.nix
         {
           # Overlay to replace the standard llama-cpp with your git version
           nixpkgs.overlays = [

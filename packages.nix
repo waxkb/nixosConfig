@@ -1,39 +1,77 @@
-{ pkgs, system, zen-browser, minecraft-plymouth-theme }:
+{ pkgs, zen-browser, ... }:
 
-let
-  plymouthPkg = minecraft-plymouth-theme.packages.${system}.default;
-in
-with pkgs; [
-  # Core CLI
-  btop curl fastfetch fd fzf git stow tree unzip wget yazi zsh
+{
+  environment.systemPackages = with pkgs; [
+    activate-linux
+    bibata-cursors
+    btop
+    cliphist
+    cmake
+    curl
+    discord-canary
+    efibootmgr
+    fastfetch
+    fd
+    ffmpeg
+    fzf
+    gcc
+    gdu
+    git
+    gita
+    hyprlock
+    hyprpicker
+    imagemagick
+    iwd
+    jdk
+    jq
+    kitty
+    libnotify
+    llama-cpp
+    mpv
+    neovim
+    niri
+    obs-studio
+    opencode
+    pavucontrol
+    pkg-config
+    playerctl
+    pulseaudio
+    rofi
+    starship
+    stow
+    swww
+    texliveFull
+    unzip
+    vesktop
+    vicinae
+    vscode
+    wev
+    wget
+    wl-clipboard
+    xwayland-satellite
+    yazi
+    zathura
+    zathuraPkgs.zathura_pdf_poppler
+    zen-browser.packages.${system}.default
+    zsh
+    (let
+      matugenFixed = pkgs.writeShellScriptBin "matugen" ''
+        #!/usr/bin/env bash
 
-  # Shell / Terminal
-  kitty oh-my-posh
+        args=()
+        for arg in "$@"; do
+          case "$arg" in
+            file://*)
+              args+=("$(printf '%s\n' "$arg" | sed 's|^file://||')")
+              ;;
+            *)
+              args+=("$arg")
+              ;;
+          esac
+        done
 
-  # Editors / Dev
-  cmake gcc neovim
-
-  # Media / Graphics
-  cairo freetype harfbuzz imagemagick mpv obs-studio obsidian pango
-
-  # Audio
-  cava pavucontrol pipewire playerctl wireplumber
-
-  # Wayland / Compositors
-  hyprland niri swww waypaper
-  xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-hyprland
-
-  # UI / Shell frameworks
-  clipse dms-shell matugen quickshell
-
-  # Video / GPU / Vulkan
-  libva mesa vulkan-loader vulkan-tools
-
-  # Networking / System utils
-  activate-linux efibootmgr iwd plymouth
-
-  # Applications
-  spotify
-  zen-browser.packages.${system}.default
-  plymouthPkg
-]
+        exec ${pkgs.matugen}/bin/matugen "''${args[@]}"
+      '';
+    in matugenFixed)
+  ];
+}
