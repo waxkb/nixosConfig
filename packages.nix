@@ -30,6 +30,7 @@
     mpv
     neovim
     niri
+    noctalia-shell
     obs-studio
     opencode
     pavucontrol

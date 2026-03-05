@@ -24,11 +24,11 @@
     "llama-cpp": {
       "flake": false,
       "locked": {
-        "lastModified": 1772545800,
-        "narHash": "sha256-sZGADBO5W34qfqnTeu0/mEV0vmd3uPdE3x+LSWThERA=",
+        "lastModified": 1772665499,
+        "narHash": "sha256-xZBn613uZ5Eey0QDHFv3fgG1EbOziWswfFQSCzL1hh4=",
         "owner": "ggml-org",
         "repo": "llama.cpp",
-        "rev": "ecd99d6a9acbc436bad085783bcd5d0b9ae9e9e9",
+        "rev": "1a29907d2e67b42cd0359911c1b02315481ab107",
         "type": "github"
       },
       "original": {
@@ -74,11 +74,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1772198003,
-        "narHash": "sha256-I45esRSssFtJ8p/gLHUZ1OUaaTaVLluNkABkk6arQwE=",
+        "lastModified": 1772542754,
+        "narHash": "sha256-WGV2hy+VIeQsYXpsLjdr4GvHv5eECMISX1zKLTedhdg=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "dd9b079222d43e1943b6ebd802f04fd959dc8e61",
+        "rev": "8c809a146a140c5c8806f13399592dbcb1bb5dc4",
         "type": "github"
       },
       "original": {
@@ -140,11 +140,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772332855,
-        "narHash": "sha256-LPNnG/TXua9dSal3Ka+Rj0s34gbkJ4/AhxWBzn87j0E=",
+        "lastModified": 1772638901,
+        "narHash": "sha256-kzAyU054Mzpnzgx475MgmcjYJXxXWQWBG7LLsYtHXKw=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "04e0729057ea01c3336f4751290a20f4ec564727",
+        "rev": "75de12ddd50616a3628499ec18b648bceb88eb0d",
         "type": "github"
       },
       "original": {

@@ -27,7 +27,6 @@
       url = "github:ggml-org/llama.cpp";
       flake = false;
     };
-
   };
 
   outputs = inputs@{
