@@ -1,4 +1,4 @@
-{ pkgs, zen-browser, ... }:
+{ pkgs, zen-browser, inputs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -37,6 +37,7 @@
     pkg-config
     playerctl
     pulseaudio
+    inputs.self.packages.${pkgs.system}.default
     rofi
     starship
     stow

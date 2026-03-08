@@ -24,11 +24,11 @@
     "llama-cpp": {
       "flake": false,
       "locked": {
-        "lastModified": 1772665499,
-        "narHash": "sha256-xZBn613uZ5Eey0QDHFv3fgG1EbOziWswfFQSCzL1hh4=",
+        "lastModified": 1772869270,
+        "narHash": "sha256-gFgyHDImflGsu5mGluWhtkudb+FNx8XBGZKXSQDlHxc=",
         "owner": "ggml-org",
         "repo": "llama.cpp",
-        "rev": "1a29907d2e67b42cd0359911c1b02315481ab107",
+        "rev": "c5a778891ba0ddbd4cbb507c823f970595b1adc2",
         "type": "github"
       },
       "original": {
@@ -43,11 +43,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1771773001,
-        "narHash": "sha256-6b1p9DhnTmfHp/woOLV0rGpMi00/DkR0mWwlpWtYdmQ=",
+        "lastModified": 1772911566,
+        "narHash": "sha256-OpzHn+UxSE0Tm3gKeKPM3V9GneQAWYElocBWyCKeVrw=",
         "owner": "InioX",
         "repo": "Matugen",
-        "rev": "322cd48ca83d0fc0a983dac63054cc443db9c2d4",
+        "rev": "17424d666b6730ccca9032bd7a358ba26cb8efb1",
         "type": "github"
       },
       "original": {
@@ -74,11 +74,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1772542754,
-        "narHash": "sha256-WGV2hy+VIeQsYXpsLjdr4GvHv5eECMISX1zKLTedhdg=",
+        "lastModified": 1772773019,
+        "narHash": "sha256-E1bxHxNKfDoQUuvriG71+f+s/NT0qWkImXsYZNFFfCs=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "8c809a146a140c5c8806f13399592dbcb1bb5dc4",
+        "rev": "aca4d95fce4914b3892661bcb80b8087293536c6",
         "type": "github"
       },
       "original": {
@@ -88,11 +88,28 @@
         "type": "github"
       }
     },
+    "quickshell-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1772795720,
+        "narHash": "sha256-jAmJlxVl+dy3OgF9zn0MVmeXSmblRaDMMV1X1hzRN5g=",
+        "owner": "outfoxxed",
+        "repo": "quickshell",
+        "rev": "6bcd3d9bbf81efdd8620409b268b90310bc1374c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "outfoxxed",
+        "repo": "quickshell",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "llama-cpp": "llama-cpp",
         "matugen": "matugen",
         "nixpkgs": "nixpkgs_2",
+        "quickshell-src": "quickshell-src",
         "silentSDDM": "silentSDDM",
         "zen-browser": "zen-browser"
       }
@@ -140,11 +157,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1772638901,
-        "narHash": "sha256-kzAyU054Mzpnzgx475MgmcjYJXxXWQWBG7LLsYtHXKw=",
+        "lastModified": 1772858378,
+        "narHash": "sha256-VPRlTud1REOz0GPjq3XQNjk5GpH/xNbeadiul4gkPGA=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "75de12ddd50616a3628499ec18b648bceb88eb0d",
+        "rev": "42e1e9a1cb5b507789a51193113d56f8f1bb08d9",
         "type": "github"
       },
       "original": {

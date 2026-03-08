@@ -11,6 +11,12 @@ in
     #dms.nixosModules.dankMaterialShell
   ];
 
+  security.pam.loginLimits = [
+    { domain = "*"; item = "memlock"; value = "unlimited"; type = "soft"; }
+    { domain = "*"; item = "memlock"; value = "unlimited"; type = "hard"; }
+  ];
+
+
   programs.direnv = {
     enable = true;
     silent = true;
