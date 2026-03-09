@@ -3,6 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixpkgs-2511.url = "github:NixOS/nixpkgs/nixos-25.11";
 
@@ -43,6 +45,7 @@
     dms,
     llama-cpp,
     quickshell-src,
+    home-manager,
     ...
   }:
   let
@@ -51,7 +54,6 @@
       inherit system;
       config.allowUnfree = true;
     };
-
     pkgs25 = import inputs.nixpkgs-2511 {
       inherit system;
       config.allowUnfree = true;
@@ -63,6 +65,12 @@
       modules = [
         ./configuration.nix
         ./packages.nix
+        home-manager.nixosModules.home-manager
+        {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.max = ./home.nix;
+        }
         {
           nixpkgs.overlays = [
             (final: prev: {

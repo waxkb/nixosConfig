@@ -126,10 +126,6 @@ in
 
   programs.zsh = {
     enable = true;
-    #ohMyZsh = {
-    #  enable = true;
-    #  theme = "";
-    #};
   };
 
   programs.niri.enable = true;
