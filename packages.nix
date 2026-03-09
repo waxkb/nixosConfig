@@ -72,7 +72,7 @@
           esac
         done
 
-        exec ${pkgs.matugen}/bin/matugen "''${args[@]}"
+        exec ${pkgs.matugen}/bin/matugen --base16-backend wal --source-color-index 0 "''${args[@]}"
       '';
     in matugenFixed)
   ];

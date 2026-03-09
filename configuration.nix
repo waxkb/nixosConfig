@@ -1,4 +1,4 @@
-{ config, pkgs, zen-browser, matugen, silentSDDM, ... }:
+{ config, pkgs, zen-browser, matugen, silentSDDM, dms, ... }:
 
 let
   system = pkgs.system;
@@ -41,13 +41,13 @@ in
 
   fonts.fontconfig.enable = true;
 
-  #programs.dms-shell = {
-  #  enable = true;
-  #  systemd = {
-  #      enable = true;
-  #      restartIfChanged = true;
-  #    };
-  #};
+  programs.dms-shell = {
+    enable = true;
+    systemd = {
+        enable = true;
+        restartIfChanged = true;
+      };
+  };
 
   security.rtkit.enable = true;
 

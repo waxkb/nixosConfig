@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    nixpkgs-2511.url = "github:NixOS/nixpkgs/nixos-25.11";
+
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,6 +15,11 @@
 
     silentSDDM = {
       url = "github:uiriansan/SilentSDDM";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -33,6 +40,7 @@
     zen-browser,
     matugen,
     silentSDDM,
+    dms,
     llama-cpp,
     quickshell-src,
     ...
@@ -40,6 +48,11 @@
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+    };
+
+    pkgs25 = import inputs.nixpkgs-2511 {
       inherit system;
       config.allowUnfree = true;
     };
@@ -70,6 +83,9 @@
                 '';
               });
             })
+            (final: prev: {
+              khal = pkgs25.khal;
+            })
           ];
         }
       ];
@@ -79,6 +95,7 @@
         zen-browser = zen-browser;
         matugen = matugen;
         silentSDDM = silentSDDM;
+        dms = dms;
       };
     };
 
