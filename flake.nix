@@ -115,6 +115,7 @@
         pkgs.kdePackages.qtshadertools
         pkgs.kdePackages.qtsvg
         pkgs.kdePackages.qtimageformats
+        pkgs.kdePackages.qtmultimedia
         # Add any other specific ones here (e.g., qtsensors, qtmultimedia)
       ];
     });

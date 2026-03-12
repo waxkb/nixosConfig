@@ -33,10 +33,12 @@
     noctalia-shell
     obs-studio
     opencode
+    parallel-full
     pavucontrol
     pkg-config
     playerctl
     pulseaudio
+    python314
     inputs.self.packages.${pkgs.system}.default
     rofi
     starship
