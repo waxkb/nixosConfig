@@ -7,6 +7,7 @@
     btop
     cliphist
     cmake
+    codex
     curl
     discord-canary
     efibootmgr

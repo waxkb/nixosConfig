@@ -1,5 +1,7 @@
-import QtQuick 2.15
-import QtQuick.Window 2.15
+import QtQuick
+import QtQuick.Window
+import Qt5Compat.QtGraphicalEffects
+import SddmComponents
 
 // NieR: Automata style button
 // Usage: NierButton { text: "Label"; fontFamily: someFont.name; onClicked: ... }
