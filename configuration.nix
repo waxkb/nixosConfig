@@ -153,13 +153,18 @@ in
     theme = "nier-automata";
     extraPackages = [ 
       nier-sddm-theme 
-      pkgs.libsForQt5.qtgraphicaleffects
-      pkgs.libsForQt5.qtmultimedia
-      pkgs.libsForQt5.qtquickcontrols
-      pkgs.libsForQt5.qtquickcontrols2
-      pkgs.libsForQt5.qtsvg
+      pkgs.kdePackages.qt5compat
+      pkgs.kdePackages.qtmultimedia
+      pkgs.kdePackages.qtsvg
+      pkgs.kdePackages.qtvirtualkeyboard
     ];
   };
+
+  environment.etc."sddm.conf.d/theme.conf".text = ''
+    [Theme]
+    Current=nier-automata
+    ThemeDir=/run/current-system/sw/share/sddm/themes
+  '';
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
