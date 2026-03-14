@@ -4,10 +4,11 @@ let
   system = pkgs.system;
   nier-sddm-theme = pkgs.stdenv.mkDerivation {
     name = "nier-sddm-theme";
-    src = ./nier-automata;
+    src = ./lockscreen-themes/themes;
     installPhase = ''
-      mkdir -p $out/share/sddm/themes/nier-automata
-      cp -r ./* $out/share/sddm/themes/nier-automata
+      mkdir -p $out/share/sddm/themes
+      # Copy the specific nier folder into the output
+      cp -r ./nier-automata $out/share/sddm/themes/
     '';
   };
 in
@@ -150,6 +151,14 @@ in
     enable = true;
     wayland.enable = false;
     theme = "nier-automata";
+    extraPackages = [ 
+      nier-sddm-theme 
+      pkgs.qt5.qtgraphicaleffects
+      pkgs.qt5.qtmultimedia
+      pkgs.qt5.qtquickcontrols
+      pkgs.qt5.qtquickcontrols2
+      pkgs.qt5.qtsvg
+    ];
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
