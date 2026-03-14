@@ -5,6 +5,7 @@
     activate-linux
     bibata-cursors
     btop
+    claude-code
     cliphist
     cmake
     codex
