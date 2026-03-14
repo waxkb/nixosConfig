@@ -2,8 +2,17 @@
 
 let
   system = pkgs.system;
+  nier-sddm-theme = pkgs.stdenv.mkDerivation {
+    name = "nier-sddm-theme";
+    src = ./nier-automata;
+    installPhase = ''
+      mkdir -p $out/share/sddm/themes/nier-automata
+      cp -r ./* $out/share/sddm/themes/nier-automata
+    '';
+  };
 in
 {
+
   imports = [
     ./hardware-configuration.nix
     ./packages.nix
@@ -11,11 +20,16 @@ in
     #dms.nixosModules.dankMaterialShell
   ];
 
+  environment.systemPackages = [
+    nier-sddm-theme
+  ];
+
   security.pam.loginLimits = [
     { domain = "*"; item = "memlock"; value = "unlimited"; type = "soft"; }
     { domain = "*"; item = "memlock"; value = "unlimited"; type = "hard"; }
   ];
 
+  hardware.opengl.enable = true;
 
   programs.direnv = {
     enable = true;
@@ -61,7 +75,7 @@ in
   };
 
   programs.silentSDDM = {
-    enable = true;
+    enable = false;
     theme = "nord";
     backgrounds = {
       purpleKeyboards = ./wall/purpleKeyboards.jpg;
@@ -135,6 +149,7 @@ in
   services.displayManager.sddm = {
     enable = true;
     wayland.enable = false;
+    theme = "nier-automata";
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -185,6 +200,7 @@ in
   };
 
   fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono material-symbols google-fonts ];
+  fonts.fontDir.enable = true;
 
   boot.kernelParams = [
     "nvidia-drm.modeset=1"

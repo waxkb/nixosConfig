@@ -26,6 +26,7 @@
     jq
     kitty
     libnotify
+    libxkbcommon
     llama-cpp
     mpv
     neovim
@@ -39,12 +40,18 @@
     playerctl
     pulseaudio
     python314
+    qt5.qtgraphicaleffects
+    qt5.qtmultimedia
+    qt5.qtquickcontrols
+    qt5.qtquickcontrols2
+    qt5.qtsvg
     inputs.self.packages.${pkgs.system}.default
     rofi
     starship
     stow
     swww
     texliveFull
+    tofi
     unzip
     vesktop
     vicinae
