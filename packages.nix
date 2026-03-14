@@ -40,11 +40,11 @@
     playerctl
     pulseaudio
     python314
-    qt5.qtgraphicaleffects
-    qt5.qtmultimedia
-    qt5.qtquickcontrols
-    qt5.qtquickcontrols2
-    qt5.qtsvg
+    libsForQt5.qtgraphicaleffects
+    libsForQt5.qtmultimedia
+    libsForQt5.qtquickcontrols
+    libsForQt5.qtquickcontrols2
+    libsForQt5.qtsvg
     inputs.self.packages.${pkgs.system}.default
     rofi
     starship

@@ -153,11 +153,11 @@ in
     theme = "nier-automata";
     extraPackages = [ 
       nier-sddm-theme 
-      pkgs.qt5.qtgraphicaleffects
-      pkgs.qt5.qtmultimedia
-      pkgs.qt5.qtquickcontrols
-      pkgs.qt5.qtquickcontrols2
-      pkgs.qt5.qtsvg
+      pkgs.libsForQt5.qtgraphicaleffects
+      pkgs.libsForQt5.qtmultimedia
+      pkgs.libsForQt5.qtquickcontrols
+      pkgs.libsForQt5.qtquickcontrols2
+      pkgs.libsForQt5.qtsvg
     ];
   };
 
