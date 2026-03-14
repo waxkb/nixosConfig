@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Window
-import Qt5Compat.QtGraphicalEffects
+import Qt5Compat.GraphicalEffects
 import SddmComponents
 
 Rectangle {

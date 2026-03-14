@@ -9,6 +9,9 @@ let
       mkdir -p $out/share/sddm/themes
       # Copy the specific nier folder into the output
       cp -r ./nier-automata $out/share/sddm/themes/
+      # This creates a dummy bin folder that SDDM might look for
+      mkdir -p $out/bin
+      ln -s ${pkgs.kdePackages.sddm}/bin/sddm-greeter-qt6 $out/bin/sddm-greeter
     '';
   };
 in
