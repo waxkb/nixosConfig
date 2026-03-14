@@ -41,17 +41,11 @@ in
       pkgs.kdePackages.qtvirtualkeyboard
       pkgs.kdePackages.qtdeclarative
     ];
-    package = pkgs.runCommand "sddm-with-greeter-compat"
-    { nativeBuildInputs = [ pkgs.makeWrapper ]; }
-    ''
-      mkdir -p $out/bin
-      # symlink every binary from the real sddm package
-      for f in ${pkgs.kdePackages.sddm}/bin/*; do
-        ln -s "$f" "$out/bin/$(basename $f)"
-      done
-      # add the compat alias
-      ln -s ${pkgs.kdePackages.sddm}/bin/sddm-greeter-qt6 $out/bin/sddm-greeter
-    '';
+    package = pkgs.kdePackages.sddm.overrideAttrs (old: {
+      postInstall = (old.postInstall or "") + ''
+        ln -s $out/bin/sddm-greeter-qt6 $out/bin/sddm-greeter
+      '';
+    });
   };
 
   services.displayManager.sddm.settings = {
