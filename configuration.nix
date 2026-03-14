@@ -52,7 +52,8 @@ in
     General ={
       DisplayServer = "x11";
       InputMethod = "";
-      #GreeterCommand = "${pkgs.kdePackages.sddm}/bin/sddm-greeter-qt6";
+      GreeterCommand = "${pkgs.kdePackages.sddm}/bin/sddm-greeter-qt6";
+      GreeterBinary = "${pkgs.kdePackages.sddm}/bin/sddm-greeter-qt6";
     };
     Theme = {
       ThemeDir = "/run/current-system/sw/share/sddm/themes";
