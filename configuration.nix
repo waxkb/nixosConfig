@@ -1,4 +1,4 @@
-{ config, pkgs, zen-browser, matugen, silentSDDM, dms, ... }:
+{ config, pkgs, zen-browser, matugen, dms, ... }:
 
 let
   system = pkgs.system;
@@ -17,13 +17,34 @@ in
   imports = [
     ./hardware-configuration.nix
     ./packages.nix
-    silentSDDM.nixosModules.default
+    #silentSDDM.nixosModules.default
     #dms.nixosModules.dankMaterialShell
   ];
 
   environment.systemPackages = [
     nier-sddm-theme
   ];
+
+  services.displayManager.sddm = {
+    enable = true;
+    theme = "suckMyD";
+    extraPackages = [ 
+      nier-sddm-theme 
+      pkgs.kdePackages.qt5compat
+      pkgs.kdePackages.qtshadertools
+      pkgs.kdePackages.qtsvg
+      pkgs.kdePackages.qtmultimedia
+      pkgs.kdePackages.qtvirtualkeyboard
+      pkgs.kdePackages.qtdeclarative
+    ];
+  };
+
+  services.displayManager.sddm.settings = {
+    Theme = {
+      ThemeDir = "/run/current-system/sw/share/sddm/themes";
+      Current = "nier-automata";
+    };
+  };
 
   security.pam.loginLimits = [
     { domain = "*"; item = "memlock"; value = "unlimited"; type = "soft"; }
@@ -75,60 +96,60 @@ in
     wireplumber.enable = true;
   };
 
-  programs.silentSDDM = {
-    enable = false;
-    theme = "nord";
-    backgrounds = {
-      purpleKeyboards = ./wall/purpleKeyboards.jpg;
-    };
-    profileIcons = {
-      max = ./wall/xkcdLocalViewing.jpg;
-    };
+  #programs.silentSDDM = {
+  #  enable = false;
+  #  theme = "nord";
+  #  backgrounds = {
+  #    purpleKeyboards = ./wall/purpleKeyboards.jpg;
+  #  };
+  #  profileIcons = {
+  #    max = ./wall/xkcdLocalViewing.jpg;
+  #  };
 
-    settings = {
-      "LockScreen" = {
-        background = "purpleKeyboards.jpg";
-        use-background-color = false;
-        #blur = false;
-      };
-      "LockScreen.Clock" = {
-        display = false;
-      };
-      "LockScreen.Date" = {
-        display = false;
-      };
-      "LockScreen.Message" = {
-        display = true;
-        position= "center";
-        text = "λ";
-        font-family = "Playfair Display";
-        font-size = 100;
-        font-weight = 500;
-        display-icon= false;
-      };
-      "LoginScreen" = {
-        background = "purpleKeyboards.jpg";
-        use-background-color = false;
-      };
-      "LoginScreen.LoginArea.PasswordInput" = {
-        background-color = "#321C33";
-        background-opacity = 0.1;
-      };
-      "LoginScreen.LoginArea.LoginButton" = {
-        hide-if-not-needed = true;
-        background-color = "#321C33";
-      };
-      "LoginScreen.MenuArea.Layout" = {
-        display = false;
-      };
-      "LoginScreen.MenuArea.Keyboard" = {
-        display = false;
-      };
-      "Tooltips" = {
-        enable = false;
-      };
-    };
-  };
+  #  settings = {
+  #    "LockScreen" = {
+  #      background = "purpleKeyboards.jpg";
+  #      use-background-color = false;
+  #      #blur = false;
+  #    };
+  #    "LockScreen.Clock" = {
+  #      display = false;
+  #    };
+  #    "LockScreen.Date" = {
+  #      display = false;
+  #    };
+  #    "LockScreen.Message" = {
+  #      display = true;
+  #      position= "center";
+  #      text = "λ";
+  #      font-family = "Playfair Display";
+  #      font-size = 100;
+  #      font-weight = 500;
+  #      display-icon= false;
+  #    };
+  #    "LoginScreen" = {
+  #      background = "purpleKeyboards.jpg";
+  #      use-background-color = false;
+  #    };
+  #    "LoginScreen.LoginArea.PasswordInput" = {
+  #      background-color = "#321C33";
+  #      background-opacity = 0.1;
+  #    };
+  #    "LoginScreen.LoginArea.LoginButton" = {
+  #      hide-if-not-needed = true;
+  #      background-color = "#321C33";
+  #    };
+  #    "LoginScreen.MenuArea.Layout" = {
+  #      display = false;
+  #    };
+  #    "LoginScreen.MenuArea.Keyboard" = {
+  #      display = false;
+  #    };
+  #    "Tooltips" = {
+  #      enable = false;
+  #    };
+  #  };
+  #};
 
   nix.settings = {
     extra-sandbox-paths = [ "/var/cache/ccache" ];
@@ -147,26 +168,12 @@ in
 
   services.xserver.enable = true;
 
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = false;
-    theme = "nier-automata";
-    extraPackages = [ 
-      nier-sddm-theme 
-      pkgs.kdePackages.qt5compat
-      pkgs.kdePackages.qtshadertools
-      pkgs.kdePackages.qtsvg
-      pkgs.kdePackages.qtmultimedia
-      pkgs.kdePackages.qtvirtualkeyboard
-      pkgs.kdePackages.qtdeclarative
-    ];
-  };
 
-  environment.etc."sddm.conf.d/theme.conf".text = ''
-    [Theme]
-    Current=nier-automata
-    ThemeDir=/run/current-system/sw/share/sddm/themes
-  '';
+  #environment.etc."sddm.conf.d/theme.conf".text = ''
+  #  [Theme]
+  #  Current=nier-automata
+  #  ThemeDir=/run/current-system/sw/share/sddm/themes
+  #'';
 
   services.xserver.videoDrivers = [ "nvidia" ];
 

@@ -15,10 +15,10 @@
 
     matugen.url = "github:InioX/Matugen";
 
-    silentSDDM = {
-      url = "github:uiriansan/SilentSDDM";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    #silentSDDM = {
+    #  url = "github:uiriansan/SilentSDDM";
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
 
     dms = {
       url = "github:AvengeMedia/DankMaterialShell";
@@ -41,7 +41,7 @@
     nixpkgs,
     zen-browser,
     matugen,
-    silentSDDM,
+    #silentSDDM,
     dms,
     llama-cpp,
     quickshell-src,
@@ -102,7 +102,7 @@
         inherit inputs;
         zen-browser = zen-browser;
         matugen = matugen;
-        silentSDDM = silentSDDM;
+        #silentSDDM = silentSDDM;
         dms = dms;
       };
     };
