@@ -28,17 +28,16 @@ in
   services.displayManager.sddm = {
     enable = true;
     theme = "nier-automata";
-    package = pkgs.kdePackages.sddm.override {
-      extraPackages = [ 
-        nier-sddm-theme 
-        pkgs.kdePackages.qt5compat
-        pkgs.kdePackages.qtshadertools
-        pkgs.kdePackages.qtsvg
-        pkgs.kdePackages.qtmultimedia
-        pkgs.kdePackages.qtvirtualkeyboard
-        pkgs.kdePackages.qtdeclarative
-      ];
-    };
+    wayland.enable = false;
+    extraPackages = [ 
+      nier-sddm-theme 
+      pkgs.kdePackages.qt5compat
+      pkgs.kdePackages.qtshadertools
+      pkgs.kdePackages.qtsvg
+      pkgs.kdePackages.qtmultimedia
+      pkgs.kdePackages.qtvirtualkeyboard
+      pkgs.kdePackages.qtdeclarative
+    ];
   };
 
   services.displayManager.sddm.settings = {
