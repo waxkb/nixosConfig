@@ -154,8 +154,9 @@ in
     extraPackages = [ 
       nier-sddm-theme 
       pkgs.kdePackages.qt5compat
-      pkgs.kdePackages.qtmultimedia
+      pkgs.kdePackages.qtshadertools
       pkgs.kdePackages.qtsvg
+      pkgs.kdePackages.qtmultimedia
       pkgs.kdePackages.qtvirtualkeyboard
     ];
   };

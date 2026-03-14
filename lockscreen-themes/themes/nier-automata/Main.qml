@@ -1,7 +1,7 @@
 import QtQuick
 import QtQuick.Window
 import Qt5Compat.QtGraphicalEffects
-import SddmComponents 2.0
+import SddmComponents
 
 Rectangle {
     readonly property real s: Screen.height / 768
