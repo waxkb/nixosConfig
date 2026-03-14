@@ -41,12 +41,14 @@ in
       pkgs.kdePackages.qtvirtualkeyboard
       pkgs.kdePackages.qtdeclarative
     ];
+    package = pkgs.kdePackages.sddm;
   };
 
   services.displayManager.sddm.settings = {
     General ={
       DisplayServer = "x11";
       InputMethod = "";
+      #GreeterCommand = "${pkgs.kdePackages.sddm}/bin/sddm-greeter-qt6";
     };
     Theme = {
       ThemeDir = "/run/current-system/sw/share/sddm/themes";
