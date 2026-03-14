@@ -158,6 +158,7 @@ in
       pkgs.kdePackages.qtsvg
       pkgs.kdePackages.qtmultimedia
       pkgs.kdePackages.qtvirtualkeyboard
+      pkgs.kdePackages.qtdeclarative
     ];
   };
 
