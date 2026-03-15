@@ -683,18 +683,9 @@ Rectangle {
                     width: parent.width; height: 60 * s
                     color: "transparent"; border.color: root.nierBorder; border.width: 1
                     onVisibleChanged: { if (visible) focusTimer.restart() }
-                    Text {
-                        id: focusDebug
-                        anchors.top: parent.bottom
-                        anchors.topMargin: 6 * s
-                        anchors.left: parent.left
-                        text: "DEBUG: pwFocus=" + (pwInput.activeFocus ? "YES" : "NO")
-                        font.family: root.fontName; font.pixelSize: 8 * s; color: root.nierBorder
-                        opacity: 0.7
-                    }
                     Rectangle {
                         id: authHdr; width: parent.width; height: 24 * s; color: root.nierDark
-                        Text { anchors.left: parent.left; anchors.leftMargin: 12 * s; anchors.verticalCenter: parent.verticalCenter; text: "Authentication"; font.family: root.fontName; font.pixelSize: 12 * s; font.letterSpacing: 1.5; color: root.nierAccent }
+                        Text { anchors.left: parent.left; anchors.leftMargin: 12 * s; anchors.verticalCenter: parent.verticalCenter; text: "DEBUG: pwFocus=" + (pwInput.activeFocus ? "YES" : "NO"); font.family: root.fontName; font.pixelSize: 12 * s; font.letterSpacing: 1.5; color: root.nierAccent }
                     }
                     Rectangle {
                         anchors.top: authHdr.bottom; anchors.topMargin: 8 * s; anchors.left: parent.left; anchors.leftMargin: 12 * s; anchors.right: parent.right; anchors.rightMargin: 12 * s; height: 32 * s
