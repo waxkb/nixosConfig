@@ -452,8 +452,10 @@ Rectangle {
                 anchors.right:  parent.right
                 model:        userModel
                 currentIndex: userModel.lastIndex
-                clip: true; spacing: 0; focus: true
-                keyNavigationEnabled: true
+                clip: true; spacing: 0; focus: false
+                activeFocusOnTab: false
+                keyNavigationEnabled: false
+                Keys.forwardTo: [pwInput]
 
                 highlight: Item {}  // disable default highlight
 
