@@ -28,11 +28,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773422513,
-        "narHash": "sha256-MPjR48roW7CUMU6lu0+qQGqj92Kuh3paIulMWFZy+NQ=",
+        "lastModified": 1773597207,
+        "narHash": "sha256-ZHoQqj+prlvfMItkQ/xTZbPguEcRlNPyRzh2j/51z8E=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "ef12a9a2b0f77c8fa3dda1e7e494fca668909056",
+        "rev": "585a161ea6d1ec78e0daee9f1b40f8539d53d4a3",
         "type": "github"
       },
       "original": {
@@ -65,11 +65,11 @@
     "llama-cpp": {
       "flake": false,
       "locked": {
-        "lastModified": 1773595847,
-        "narHash": "sha256-CYPqCdD6X+0rZySG5etLBkjtlNwnZKSCvUVnVboVmOU=",
+        "lastModified": 1773600877,
+        "narHash": "sha256-Y0Hrd/A7s+NiQouv8VQk6KrckN9Oylkzulq/qKv5XN4=",
         "owner": "ggml-org",
         "repo": "llama.cpp",
-        "rev": "ae40cd27c85aa30b9cd56033da1d6a954290f7ea",
+        "rev": "88915cb55c14769738fcab7f1c6eaa6dcc9c2b0c",
         "type": "github"
       },
       "original": {
@@ -84,11 +84,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1773432152,
-        "narHash": "sha256-fktwjABwDpdFB1y6cURFDQ4tGDJUCO3oxyTUj9eb+JY=",
+        "lastModified": 1773606684,
+        "narHash": "sha256-XihD1ExjBQHZ9AFgq4y1veb9ERUA8EYRcvI18DmfaqM=",
         "owner": "InioX",
         "repo": "Matugen",
-        "rev": "55e7b94f5674f320d9664caa98d349d2172d1551",
+        "rev": "b176a6caf7335ce931abf1730aff6d164fedb4dd",
         "type": "github"
       },
       "original": {
@@ -182,11 +182,11 @@
     "sddm-themes": {
       "flake": false,
       "locked": {
-        "lastModified": 1773595752,
-        "narHash": "sha256-8gKuaYQaZicTiyG/L4yxF81ifBsU7TfP8r+9ZANsr2U=",
+        "lastModified": 1773598605,
+        "narHash": "sha256-IxbzQTBIAS+Fq+GSYl9Z7dZAJNeH2zA9tlIHThwIGL0=",
         "ref": "refs/heads/main",
-        "rev": "d82643f5d3391be296bc446272ace5e78d372a74",
-        "revCount": 2,
+        "rev": "40028ef29f4331ea55262bdb10b29da14bf7382a",
+        "revCount": 3,
         "type": "git",
         "url": "ssh://git@github.com/waxkb/sddm-themes.git"
       },

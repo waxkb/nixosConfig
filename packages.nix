@@ -15,7 +15,6 @@
     fastfetch
     fd
     ffmpeg
-    foot
     fzf
     gcc
     gdu
