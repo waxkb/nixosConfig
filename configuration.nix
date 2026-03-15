@@ -17,8 +17,7 @@ in
   imports = [
     ./hardware-configuration.nix
     ./packages.nix
-    #silentSDDM.nixosModules.default
-    #dms.nixosModules.dankMaterialShell
+    dms.nixosModules.dankMaterialShell
   ];
 
   environment.systemPackages = [
@@ -87,7 +86,7 @@ in
 
   fonts.fontconfig.enable = true;
 
-  programs.dms-shell = {
+  programs.dank-material-shell = {
     enable = true;
     systemd = {
         enable = true;
