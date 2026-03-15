@@ -42,7 +42,7 @@ in
       pkgs.kdePackages.qtdeclarative
     ];
     package = pkgs.kdePackages.sddm.overrideAttrs (old: {
-      postInstall = (old.postInstall or "") + ''
+      buildCommand = old.buildCommand + ''
         ln -s $out/bin/sddm-greeter-qt6 $out/bin/sddm-greeter
       '';
     });
@@ -52,8 +52,6 @@ in
     General ={
       DisplayServer = "x11";
       InputMethod = "";
-      GreeterCommand = "${pkgs.kdePackages.sddm}/bin/sddm-greeter-qt6";
-      GreeterBinary = "${pkgs.kdePackages.sddm}/bin/sddm-greeter-qt6";
     };
     Theme = {
       ThemeDir = "/run/current-system/sw/share/sddm/themes";

@@ -49,6 +49,9 @@ Rectangle {
             root.currentDate = Qt.formatDate(new Date(), "yyyy.MM.dd")
         }
     }
+    Component.onCompleted: {
+        Qt.callLater(function() { pwInput.forceActiveFocus() })
+    }
 
     ListView {
         id: sessionHelper
