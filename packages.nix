@@ -48,7 +48,6 @@
     libsForQt5.qtquickcontrols2
     libsForQt5.qtsvg
     pkgs.kdePackages.qtvirtualkeyboard
-    inputs.self.packages.${pkgs.system}.default
     rofi
     starship
     stow

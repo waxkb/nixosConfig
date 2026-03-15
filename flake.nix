@@ -1,9 +1,11 @@
 {
   description = "saldkjf";
-
   inputs = {
+
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     home-manager.url = "github:nix-community/home-manager";
+
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixpkgs-2511.url = "github:NixOS/nixpkgs/nixos-25.11";
@@ -15,11 +17,6 @@
 
     matugen.url = "github:InioX/Matugen";
 
-    #silentSDDM = {
-    #  url = "github:uiriansan/SilentSDDM";
-    #  inputs.nixpkgs.follows = "nixpkgs";
-    #};
-
     dms = {
       url = "github:AvengeMedia/DankMaterialShell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,44 +27,43 @@
       flake = false;
     };
 
-    quickshell-src = {
-      url = "github:outfoxxed/quickshell";
-      flake = false;
-    };
-
     sddm-themes = {
       url = "git+ssh://git@github.com/waxkb/sddm-themes.git";
       flake = false;
     };
-  };
 
+  };
   outputs = inputs@{
     self,
     nixpkgs,
     zen-browser,
     matugen,
-    #silentSDDM,
     dms,
     llama-cpp,
-    quickshell-src,
     sddm-themes,
     home-manager,
     ...
   }:
   let
+
     system = "x86_64-linux";
+
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
     };
+
     pkgs25 = import inputs.nixpkgs-2511 {
       inherit system;
       config.allowUnfree = true;
     };
+
   in
   {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+
       inherit system;
+
       modules = [
         ./configuration.nix
         ./packages.nix
@@ -108,23 +104,9 @@
         inherit inputs;
         zen-browser = zen-browser;
         matugen = matugen;
-        #silentSDDM = silentSDDM;
         dms = dms;
         sddm-themes = sddm-themes;
       };
     };
-
-    # This is now properly inside the output set
-    packages.${system}.default = pkgs.quickshell.overrideAttrs (oldAttrs: {
-      # Add the extra QML/Qt modules your specific shell needs here
-      buildInputs = oldAttrs.buildInputs ++ [
-        pkgs.kdePackages.qt5compat
-        pkgs.kdePackages.qtshadertools
-        pkgs.kdePackages.qtsvg
-        pkgs.kdePackages.qtimageformats
-        pkgs.kdePackages.qtmultimedia
-        # Add any other specific ones here (e.g., qtsensors, qtmultimedia)
-      ];
-    });
   };
 }

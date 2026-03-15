@@ -167,22 +167,6 @@
         "url": "https://git.outfoxxed.me/quickshell/quickshell"
       }
     },
-    "quickshell-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1773480707,
-        "narHash": "sha256-VkuO1LWpK7tS/YDmxJSDeONEwt1RFLPfOucQJwKnsV0=",
-        "owner": "outfoxxed",
-        "repo": "quickshell",
-        "rev": "1b2519d9f3d963e575b8a1ef08fab47c7af0d1b3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "outfoxxed",
-        "repo": "quickshell",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "dms": "dms",
@@ -191,7 +175,6 @@
         "matugen": "matugen",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-2511": "nixpkgs-2511",
-        "quickshell-src": "quickshell-src",
         "sddm-themes": "sddm-themes",
         "zen-browser": "zen-browser"
       }
