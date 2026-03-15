@@ -695,7 +695,7 @@ Rectangle {
                             anchors.fill: parent
                             focus: true
                             onActiveFocusChanged: { if (activeFocus) pwInput.forceActiveFocus() }
-                            SddmComponents.TextField {
+                            TextInput {
                                 id: pwInput; anchors.fill: parent; anchors.leftMargin: 10 * s; anchors.rightMargin: 36 * s; font.family: root.fontName; font.pixelSize: 13 * s; color: root.nierAccent; echoMode: TextInput.Password; passwordCharacter: "◆"; focus: true; clip: true
                                 Text { text: "Passphrase..."; visible: !parent.text && !parent.activeFocus; color: root.nierBorder; font: parent.font; anchors.verticalCenter: parent.verticalCenter }
                                 Keys.onPressed: { if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) doLogin(); else if (event.key === Qt.Key_Tab) { event.accepted = true; if (sessionModel && sessionModel.rowCount() > 0) root.sessionIndex = (root.sessionIndex + 1) % sessionModel.rowCount(); } else if (event.key === Qt.Key_Up) { event.accepted = true; userList.currentIndex = Math.max(0, userList.currentIndex - 1); } else if (event.key === Qt.Key_Down) { event.accepted = true; userList.currentIndex = Math.min(userList.model.count - 1, userList.currentIndex + 1); } }
