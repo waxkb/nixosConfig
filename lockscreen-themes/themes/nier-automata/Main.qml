@@ -10,12 +10,6 @@ Rectangle {
     height: Screen.height
     color:  "#c0bc9e"
     focus: true
-    Keys.forwardTo: [pwInput]
-    Keys.onPressed: {
-        if (!pwInput.activeFocus) {
-            pwInput.forceActiveFocus()
-        }
-    }
 
     // ── Palette ──────────────────────────────────────────────────────────────
     readonly property color nierBg:        "#c0bc9e"
@@ -54,25 +48,6 @@ Rectangle {
         onTriggered: {
             root.currentTime = Qt.formatTime(new Date(), "hh:mm")
             root.currentDate = Qt.formatDate(new Date(), "yyyy.MM.dd")
-        }
-    }
-    Timer {
-        id: focusTimer
-        interval: 200; running: true; repeat: false
-        onTriggered: { pwInput.forceActiveFocus() }
-    }
-    Timer {
-        id: focusWatchdog
-        interval: 200; running: false; repeat: true
-        property int tries: 0
-        onTriggered: {
-            if (pwInput.activeFocus) {
-                stop()
-            } else {
-                pwInput.forceActiveFocus()
-                tries += 1
-                if (tries >= 20) stop()
-            }
         }
     }
     Component.onCompleted: {
@@ -388,7 +363,6 @@ Rectangle {
                 NumberAnimation { target: root; property: "brandReveal"; from: 0; to: 1; duration: 1800; easing.type: Easing.OutQuart }
             }
             ScriptAction { script: missionTypewriter.start() }
-            ScriptAction { script: focusWatchdog.restart() }
         }
 
 
@@ -452,10 +426,8 @@ Rectangle {
                 anchors.right:  parent.right
                 model:        userModel
                 currentIndex: userModel.lastIndex
-                clip: true; spacing: 0; focus: false
-                activeFocusOnTab: false
-                keyNavigationEnabled: false
-                Keys.forwardTo: [pwInput]
+                clip: true; spacing: 0; focus: true
+                keyNavigationEnabled: true
 
                 highlight: Item {}  // disable default highlight
 
@@ -682,7 +654,6 @@ Rectangle {
                     id: authBox
                     width: parent.width; height: 60 * s
                     color: "transparent"; border.color: root.nierBorder; border.width: 1
-                    onVisibleChanged: { if (visible) focusTimer.restart() }
                     Rectangle {
                         id: authHdr; width: parent.width; height: 24 * s; color: root.nierDark
                         Text { anchors.left: parent.left; anchors.leftMargin: 12 * s; anchors.verticalCenter: parent.verticalCenter; text: "Authentication"; font.family: root.fontName; font.pixelSize: 12 * s; font.letterSpacing: 1.5; color: root.nierAccent }
@@ -690,18 +661,12 @@ Rectangle {
                     Rectangle {
                         anchors.top: authHdr.bottom; anchors.topMargin: 8 * s; anchors.left: parent.left; anchors.leftMargin: 12 * s; anchors.right: parent.right; anchors.rightMargin: 12 * s; height: 32 * s
                         color: pwInput.activeFocus ? "#2c2a24" : "#201f1a"; border.color: pwInput.activeFocus ? root.nierAccent : root.nierBorder; border.width: 1
-                        FocusScope {
-                            id: authFocus
-                            anchors.fill: parent
-                            focus: true
-                            onActiveFocusChanged: { if (activeFocus) pwInput.forceActiveFocus() }
-                            TextInput {
-                                id: pwInput; anchors.fill: parent; anchors.leftMargin: 10 * s; anchors.rightMargin: 36 * s; verticalAlignment: TextInput.AlignVCenter; font.family: root.fontName; font.pixelSize: 13 * s; color: root.nierAccent; echoMode: TextInput.Password; passwordCharacter: "◆"; focus: true; clip: true
-                                Text { text: "Passphrase..."; visible: !parent.text && !parent.activeFocus; color: root.nierBorder; font: parent.font; anchors.verticalCenter: parent.verticalCenter }
-                                Keys.onPressed: { if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) doLogin(); else if (event.key === Qt.Key_Tab) { event.accepted = true; if (sessionModel && sessionModel.rowCount() > 0) root.sessionIndex = (root.sessionIndex + 1) % sessionModel.rowCount(); } else if (event.key === Qt.Key_Up) { event.accepted = true; userList.currentIndex = Math.max(0, userList.currentIndex - 1); } else if (event.key === Qt.Key_Down) { event.accepted = true; userList.currentIndex = Math.min(userList.model.count - 1, userList.currentIndex + 1); } }
-                            }
-                            Rectangle { anchors.right: parent.right; anchors.rightMargin: 2 * s; anchors.verticalCenter: parent.verticalCenter; width: 28 * s; height: 28 * s; color: subMa.pressed ? "#4a4840" : subMa.containsMouse ? "#3a3830" : "#2c2a24"; border.color: subMa.containsMouse ? root.nierAccent : root.nierBorder; border.width: 1; Text { anchors.centerIn: parent; text: "▶"; font.family: root.fontName; font.pixelSize: 11 * s; color: subMa.containsMouse ? root.nierAccent : root.nierBorder } MouseArea { id: subMa; anchors.fill: parent; hoverEnabled: true; onClicked: doLogin() } }
+                        TextInput {
+                            id: pwInput; anchors.fill: parent; anchors.leftMargin: 10 * s; anchors.rightMargin: 36 * s; verticalAlignment: TextInput.AlignVCenter; font.family: root.fontName; font.pixelSize: 13 * s; color: root.nierAccent; echoMode: TextInput.Password; passwordCharacter: "◆"; focus: true; clip: true
+                            Text { text: "Passphrase..."; visible: !parent.text && !parent.activeFocus; color: root.nierBorder; font: parent.font; anchors.verticalCenter: parent.verticalCenter }
+                            Keys.onPressed: { if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) doLogin(); else if (event.key === Qt.Key_Tab) { event.accepted = true; if (sessionModel && sessionModel.rowCount() > 0) root.sessionIndex = (root.sessionIndex + 1) % sessionModel.rowCount(); } else if (event.key === Qt.Key_Up) { event.accepted = true; userList.currentIndex = Math.max(0, userList.currentIndex - 1); } else if (event.key === Qt.Key_Down) { event.accepted = true; userList.currentIndex = Math.min(userList.model.count - 1, userList.currentIndex + 1); } }
                         }
+                        Rectangle { anchors.right: parent.right; anchors.rightMargin: 2 * s; anchors.verticalCenter: parent.verticalCenter; width: 28 * s; height: 28 * s; color: subMa.pressed ? "#4a4840" : subMa.containsMouse ? "#3a3830" : "#2c2a24"; border.color: subMa.containsMouse ? root.nierAccent : root.nierBorder; border.width: 1; Text { anchors.centerIn: parent; text: "▶"; font.family: root.fontName; font.pixelSize: 11 * s; color: subMa.containsMouse ? root.nierAccent : root.nierBorder } MouseArea { id: subMa; anchors.fill: parent; hoverEnabled: true; onClicked: doLogin() } }
                     }
                 }
 
