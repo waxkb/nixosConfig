@@ -1,14 +1,14 @@
-{ config, pkgs, zen-browser, matugen, dms, ... }:
+{ config, pkgs, zen-browser, matugen, dms, sddm-themes, ... }:
 
 let
   system = pkgs.system;
   nier-sddm-theme = pkgs.stdenv.mkDerivation {
     name = "nier-sddm-theme";
-    src = ./lockscreen-themes/themes;
+    src = sddm-themes;
     installPhase = ''
       mkdir -p $out/share/sddm/themes
       # Copy the specific nier folder into the output
-      cp -r ./nier-automata $out/share/sddm/themes/
+      cp -r ./themes/nier-automata $out/share/sddm/themes/
     '';
   };
 in

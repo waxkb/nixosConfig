@@ -34,6 +34,11 @@
       url = "github:outfoxxed/quickshell";
       flake = false;
     };
+
+    sddm-themes = {
+      url = "git+ssh://git@github.com/waxkb/sddm-themes.git";
+      flake = false;
+    };
   };
 
   outputs = inputs@{
@@ -45,6 +50,7 @@
     dms,
     llama-cpp,
     quickshell-src,
+    sddm-themes,
     home-manager,
     ...
   }:
@@ -104,6 +110,7 @@
         matugen = matugen;
         #silentSDDM = silentSDDM;
         dms = dms;
+        sddm-themes = sddm-themes;
       };
     };
 
