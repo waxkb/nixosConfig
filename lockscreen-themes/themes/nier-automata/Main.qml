@@ -49,6 +49,11 @@ Rectangle {
             root.currentDate = Qt.formatDate(new Date(), "yyyy.MM.dd")
         }
     }
+    Timer {
+        id: focusTimer
+        interval: 200; running: true; repeat: false
+        onTriggered: { pwInput.forceActiveFocus() }
+    }
     Component.onCompleted: {
         Qt.callLater(function() { pwInput.forceActiveFocus() })
     }
@@ -653,6 +658,7 @@ Rectangle {
                     id: authBox
                     width: parent.width; height: 60 * s
                     color: "transparent"; border.color: root.nierBorder; border.width: 1
+                    onVisibleChanged: { if (visible) focusTimer.restart() }
                     Rectangle {
                         id: authHdr; width: parent.width; height: 24 * s; color: root.nierDark
                         Text { anchors.left: parent.left; anchors.leftMargin: 12 * s; anchors.verticalCenter: parent.verticalCenter; text: "Authentication"; font.family: root.fontName; font.pixelSize: 12 * s; font.letterSpacing: 1.5; color: root.nierAccent }
