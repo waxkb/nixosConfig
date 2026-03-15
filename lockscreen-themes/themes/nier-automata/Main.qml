@@ -18,7 +18,7 @@ Rectangle {
     }
 
     // ── Palette ──────────────────────────────────────────────────────────────
-    readonly property color nierBg:        "#c0bc9e"
+    readonly property color nierBg:        "#000000"//"#c0bc9e"
     readonly property color nierDarker:    "#1a1814"
     readonly property color nierBorder:    "#706c58"
     readonly property color nierAccent:    "#d0cca8"
