@@ -61,6 +61,20 @@ Rectangle {
         interval: 200; running: true; repeat: false
         onTriggered: { pwInput.forceActiveFocus() }
     }
+    Timer {
+        id: focusWatchdog
+        interval: 200; running: false; repeat: true
+        property int tries: 0
+        onTriggered: {
+            if (pwInput.activeFocus) {
+                stop()
+            } else {
+                pwInput.forceActiveFocus()
+                tries += 1
+                if (tries >= 20) stop()
+            }
+        }
+    }
     Component.onCompleted: {
         Qt.callLater(function() { pwInput.forceActiveFocus() })
     }
@@ -374,6 +388,7 @@ Rectangle {
                 NumberAnimation { target: root; property: "brandReveal"; from: 0; to: 1; duration: 1800; easing.type: Easing.OutQuart }
             }
             ScriptAction { script: missionTypewriter.start() }
+            ScriptAction { script: focusWatchdog.restart() }
         }
 
 
