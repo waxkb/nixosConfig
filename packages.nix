@@ -35,6 +35,7 @@
     niri
     noctalia-shell
     obs-studio
+    ollama
     opencode
     parallel-full
     pavucontrol

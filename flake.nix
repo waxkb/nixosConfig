@@ -81,7 +81,7 @@
                 blasSupport = false;
               }).overrideAttrs (oldAttrs: {
                 src = llama-cpp;
-                npmDepsHash = "sha256-5ZswgZFLeI32/xQZqCTTFbCzleDqr5AotjFg/5rNn1M=";
+                npmDepsHash = "sha256-DxgUDVr+kwtW55C4b89Pl+j3u2ILmACcQOvOBjKWAKQ=";
                 version = "100000";
                 cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
                   "-DGGML_NATIVE=ON"

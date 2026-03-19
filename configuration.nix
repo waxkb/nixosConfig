@@ -20,6 +20,18 @@ in
     dms.nixosModules.dankMaterialShell
   ];
 
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+      };
+    };
+  };
+
+  services.blueman.enable = true;
+
   environment.systemPackages = [
     nier-sddm-theme
   ];
