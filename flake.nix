@@ -23,7 +23,8 @@
     };
 
     llama-cpp = {
-      url = "github:ggml-org/llama.cpp";
+      #url = "github:ggml-org/llama.cpp";
+      url = "github:RokketCrypto/llama.cpp";
       flake = false;
     };
 
@@ -81,6 +82,7 @@
                 blasSupport = false;
               }).overrideAttrs (oldAttrs: {
                 src = llama-cpp;
+                #npmDepsHash = "sha256-DxgUDVr+kwtW55C4b89Pl+j3u2ILmACcQOvOBjKWAKQ=";
                 npmDepsHash = "sha256-DxgUDVr+kwtW55C4b89Pl+j3u2ILmACcQOvOBjKWAKQ=";
                 version = "100000";
                 cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [

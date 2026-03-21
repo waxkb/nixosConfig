@@ -29,6 +29,7 @@
     kitty
     libnotify
     libxkbcommon
+    litellm
     llama-cpp
     mpv
     neovim
