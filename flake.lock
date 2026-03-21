@@ -8,11 +8,11 @@
         "quickshell": "quickshell"
       },
       "locked": {
-        "lastModified": 1774048143,
-        "narHash": "sha256-j+obtqNMEPqGUGqOR04kadwuKL2VxlJIxz+tQNJQurg=",
+        "lastModified": 1774114097,
+        "narHash": "sha256-Buhqmavvc+33sXgTZafhPTrdUR4O/vj4FGENNXK14l0=",
         "owner": "AvengeMedia",
         "repo": "DankMaterialShell",
-        "rev": "07dbba6c53b4dca29452bcf944b6669d88550646",
+        "rev": "be8326f49786b1bc01641eb56d0aed22f486dae9",
         "type": "github"
       },
       "original": {
@@ -65,15 +65,15 @@
     "llama-cpp": {
       "flake": false,
       "locked": {
-        "lastModified": 1773846587,
-        "narHash": "sha256-VDPpovwXB2jU9uY8AYFEUls/NFiqGMpu+hpHstFam5k=",
-        "owner": "RokketCrypto",
+        "lastModified": 1774115015,
+        "narHash": "sha256-HH2KWrL0znyMfJ8QIDDS5/a4fhxB4u0rrDdv9D050Eg=",
+        "owner": "ggml-org",
         "repo": "llama.cpp",
-        "rev": "5c99148aa8b02e5356216f946a8116bfeed7a910",
+        "rev": "990e4d96980d0b016a2b07049cc9031642fb9903",
         "type": "github"
       },
       "original": {
-        "owner": "RokketCrypto",
+        "owner": "ggml-org",
         "repo": "llama.cpp",
         "type": "github"
       }

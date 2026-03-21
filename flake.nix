@@ -23,8 +23,7 @@
     };
 
     llama-cpp = {
-      #url = "github:ggml-org/llama.cpp";
-      url = "github:RokketCrypto/llama.cpp";
+      url = "github:ggml-org/llama.cpp";
       flake = false;
     };
 
@@ -81,16 +80,31 @@
                 cudaSupport = true;
                 blasSupport = false;
               }).overrideAttrs (oldAttrs: {
-                src = llama-cpp;
-                #npmDepsHash = "sha256-DxgUDVr+kwtW55C4b89Pl+j3u2ILmACcQOvOBjKWAKQ=";
+                src = llama-cpp; # This refers to your flake input
                 npmDepsHash = "sha256-DxgUDVr+kwtW55C4b89Pl+j3u2ILmACcQOvOBjKWAKQ=";
                 version = "100000";
+
+                # 1. Use Ninja for faster build orchestration
+                nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ 
+                  prev.ninja 
+                  prev.ccache 
+                ];
+
                 cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
                   "-DGGML_NATIVE=ON"
                   "-DCMAKE_CUDA_ARCHITECTURES=89"
+                  "-GNinja" # Tell CMake to use Ninja
                 ];
+
+                # 2. Faster Linking with 'mold'
+                # We add the flag to the linker via stdenv
+                NIX_CFLAGS_COMPILE = (oldAttrs.NIX_CFLAGS_COMPILE or "") + " -fuse-ld=mold";
+                buildInputs = (oldAttrs.buildInputs or [ ]) ++ [ prev.mold ];
+
                 preConfigure = ''
                   export NIX_ENFORCE_NO_NATIVE=0
+                  # 3. Setup ccache directory within the build sandbox
+                  export CCACHE_DIR="/tmp/ccache" 
                   ${oldAttrs.preConfigure or ""}
                 '';
               });
