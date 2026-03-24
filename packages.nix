@@ -15,7 +15,6 @@
     fastfetch
     fd
     ffmpeg
-    furmark
     fzf
     gcc
     gdu
@@ -32,6 +31,7 @@
     libxkbcommon
     litellm
     llama-cpp
+    mprime
     mpv
     neovim
     niri
@@ -53,6 +53,7 @@
     pkgs.kdePackages.qtvirtualkeyboard
     rofi
     starship
+    stress-ng
     stow
     swww
     texliveFull
