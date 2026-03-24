@@ -15,6 +15,7 @@
     fastfetch
     fd
     ffmpeg
+    furmark
     fzf
     gcc
     gdu
