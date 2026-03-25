@@ -18,6 +18,7 @@
     fzf
     gcc
     gdu
+    gh
     git
     gita
     hyprlock
@@ -29,7 +30,6 @@
     kitty
     libnotify
     libxkbcommon
-    litellm
     llama-cpp
     mprime
     mpv
