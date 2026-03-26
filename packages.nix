@@ -24,6 +24,7 @@
     hyprlock
     hyprpicker
     imagemagick
+    infisical
     iwd
     jdk
     jq
