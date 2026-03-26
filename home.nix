@@ -11,12 +11,5 @@
       init.defaultBranch = "main";
     };
     enable = true;
-
-    #userName = "waxkb";
-    #userEmail = "maxwellr2028@gmail.com";
-
-    #extraConfig = {
-    #  init.defaultBranch = "main";
-    #};
   };
 }
