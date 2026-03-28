@@ -36,6 +36,8 @@ in
     nier-sddm-theme
   ];
 
+  programs.kdeconnect.enable = true;
+
   services.displayManager.sddm = {
     enable = true;
     theme = "nier-automata";

@@ -53,6 +53,7 @@
     libsForQt5.qtsvg
     pkgs.kdePackages.qtvirtualkeyboard
     rofi
+    smartmontools
     starship
     stress-ng
     stow
