@@ -23,7 +23,8 @@
     };
 
     llama-cpp = {
-      url = "github:ggml-org/llama.cpp?ref=refs/pull/19493/merge";
+      #url = "github:ggml-org/llama.cpp?ref=refs/pull/19493/merge";
+      url = "github:ggml-org";
       flake = false;
     };
 
