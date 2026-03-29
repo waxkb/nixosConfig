@@ -65,19 +65,14 @@
     "llama-cpp": {
       "flake": false,
       "locked": {
-        "lastModified": 1774224259,
-        "narHash": "sha256-oZXuUOVVkC2unbFYu3npx22K2o7qPLrPBPfOgGSHWF4=",
-        "owner": "ggml-org",
-        "repo": "llama.cpp",
-        "rev": "916a95ccf4d84f7275aad447495f400aa385b1c6",
-        "type": "github"
+        "path": "github:ggml-org",
+        "type": "path"
       },
       "original": {
-        "owner": "ggml-org",
-        "ref": "refs/pull/19493/merge",
-        "repo": "llama.cpp",
-        "type": "github"
-      }
+        "path": "github:ggml-org",
+        "type": "path"
+      },
+      "parent": []
     },
     "matugen": {
       "inputs": {
