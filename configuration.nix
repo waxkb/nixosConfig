@@ -38,6 +38,14 @@ in
 
   programs.kdeconnect.enable = true;
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "ventoy-1.1.10"
+    "openclaw-2026.3.12"
+  ];
+
+  boot.kernelModules = [ "ryzen_smu" ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.ryzen-smu ];
+
   services.displayManager.sddm = {
     enable = true;
     theme = "nier-automata";

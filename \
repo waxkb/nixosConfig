@@ -41,7 +41,6 @@
     noctalia-shell
     obs-studio
     ollama
-    openclaw
     opencode
     parallel-full
     parted
@@ -56,7 +55,7 @@
     libsForQt5.qtquickcontrols2
     libsForQt5.qtsvg
     pkgs.kdePackages.qtvirtualkeyboard
-    msr-tools
+    rdmsr-tools
     rofi
     smartmontools
     starship
