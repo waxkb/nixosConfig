@@ -1,12 +1,12 @@
-{ pkgs, zen-browser, inputs, ... }:
+{ pkgs, zen-browser, inputs, openclaw, ... }:
 
 {
   environment.systemPackages = with pkgs; [
     activate-linux
     bibata-cursors
     btop
+    chromium
     claude-code
-    cliphist
     cmake
     codex
     curl
@@ -33,16 +33,14 @@
     libnotify
     libxkbcommon
     llama-cpp
-    lm_sensors
     mprime
     mpv
     neovim
     niri
-    noctalia-shell
     obs-studio
     ollama
-    openclaw
     opencode
+    openclaw.packages.${system}.default
     parallel-full
     parted
     pavucontrol
@@ -56,9 +54,6 @@
     libsForQt5.qtquickcontrols2
     libsForQt5.qtsvg
     pkgs.kdePackages.qtvirtualkeyboard
-    msr-tools
-    rofi
-    smartmontools
     starship
     stress-ng
     stow
@@ -69,10 +64,8 @@
     ventoy-full
     vesktop
     vicinae
-    vscode
     wev
     wget
-    wl-clipboard
     xwayland-satellite
     yazi
     zathura

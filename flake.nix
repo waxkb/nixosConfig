@@ -33,6 +33,8 @@
       flake = false;
     };
 
+    openclaw.url = "git@github.com:waxkb/nix-openclaw.git";
+
   };
   outputs = inputs@{
     self,
@@ -43,6 +45,7 @@
     llama-cpp,
     sddm-themes,
     home-manager,
+    openclaw,
     ...
   }:
   let
@@ -85,6 +88,9 @@
                 npmDepsHash = "sha256-DxgUDVr+kwtW55C4b89Pl+j3u2ILmACcQOvOBjKWAKQ=";
                 version = "100000";
 
+                patches = [];   # Ignore patches meant for older versions
+                postPatch = ""; # Ignore the cleanup script that is failing
+
                 # 1. Use Ninja for faster build orchestration
                 nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ 
                   prev.ninja 
@@ -123,6 +129,7 @@
         matugen = matugen;
         dms = dms;
         sddm-themes = sddm-themes;
+        openclaw = openclaw;
       };
     };
   };
