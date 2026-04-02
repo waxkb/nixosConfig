@@ -33,8 +33,6 @@
       flake = false;
     };
 
-    openclaw.url = "git@github.com:waxkb/nix-openclaw.git";
-
   };
   outputs = inputs@{
     self,
@@ -45,7 +43,6 @@
     llama-cpp,
     sddm-themes,
     home-manager,
-    openclaw,
     ...
   }:
   let
@@ -129,7 +126,6 @@
         matugen = matugen;
         dms = dms;
         sddm-themes = sddm-themes;
-        openclaw = openclaw;
       };
     };
   };

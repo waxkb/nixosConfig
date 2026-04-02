@@ -40,7 +40,7 @@ in
 
   nixpkgs.config.permittedInsecurePackages = [
     "ventoy-1.1.10"
-    "openclaw-2026.3.12"
+    "openclaw-2026.4.01"
   ];
 
   boot.kernelModules = [ "ryzen_smu" ];
