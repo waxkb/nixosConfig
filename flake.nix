@@ -23,8 +23,11 @@
     };
 
     llama-cpp = {
-      #url = "github:ggml-org/llama.cpp?ref=refs/pull/19493/merge";
-      url = "github:ggml-org/llama.cpp";
+      #url = "github:ggml-org/llama.cpp/9f26182";
+      #url = "github:ggml-org/llama.cpp?ref=refs/pull/21131/merge";
+      #url = "github:ggml-org/llama.cpp";
+      #url = "github:AmesianX/TurboQuant";
+      url = "github:TheTom/llama-cpp-turboquant/feature/turboquant-kv-cache";
       flake = false;
     };
 

@@ -5,26 +5,26 @@
     activate-linux
     bibata-cursors
     btop
-    chromium
-    claude-code
+    #chromium
+    #claude-code
     cmake
-    codex
+    #codex
     curl
-    discord-canary
+    #discord-canary
     efibootmgr
     fastfetch
     fd
-    ffmpeg
+    #ffmpeg
     fzf
     gcc
-    gdu
-    gh
+    #gdu
+    #gh
     git
     gita
     gptfdisk
     hyprlock
     hyprpicker
-    imagemagick
+    #imagemagick
     infisical
     iwd
     jdk
@@ -33,15 +33,16 @@
     libnotify
     libxkbcommon
     llama-cpp
-    mprime
-    mpv
+    #mprime
+    #mpv
     neovim
     niri
-    obs-studio
-    ollama
+    #obs-studio
+    #ollama
+    open-webui
     opencode
     (pkgs.openclaw.overrideAttrs (oldAttrs: rec {
-      version = "2026.4.01"; # Update this to your target version
+      version = "2026.4.01-beta.1"; # Update this to your target version
       
       src = fetchFromGitHub {
         owner = "openclaw";
@@ -63,33 +64,40 @@
       buildPhase = ''
         runHook preBuild
         
-        # Create a more convincing fake bundle
+        # 1. Convince the build A2UI is fine
         mkdir -p ui/canvas-a2ui/dist
         echo "<html></html>" > ui/canvas-a2ui/dist/index.html
         
-        # Run the core build steps only
+        # 2. Base Build
         node scripts/tsdown-build.mjs
         node scripts/copy-plugin-sdk-root-alias.mjs
         pnpm build:plugin-sdk:dts
         node --import tsx scripts/write-plugin-sdk-entry-dts.ts
+
+        # 3. DISCOVERY: Find where the channel metadata script went
+        echo "Searching for channel metadata scripts..."
+        find . -name "*channel*metadata*" 
         
-        # SKIP: node --import tsx scripts/canvas-a2ui-copy.ts (This is the culprit)
-        
+        # 4. Attempt to run the generator if we find it
+        # We look for the script and run it via tsx regardless of where it moved
+        GEN_SCRIPT=$(find scripts -name "generate*channel*metadata.ts" | head -n 1)
+        if [ -n "$GEN_SCRIPT" ]; then
+          echo "Found script at $GEN_SCRIPT. Running..."
+          node --import tsx "$GEN_SCRIPT" --write
+        else
+          echo "WARNING: Could not find channel metadata generator. Skipping..."
+        fi
+
+        # 5. Finalize
         node --import tsx scripts/copy-hook-metadata.ts
         node --import tsx scripts/copy-export-html-templates.ts
         node --import tsx scripts/write-build-info.ts
         
-        # Generate your channel metadata
-        node --import tsx scripts/generate-bundled-channel-config-metadata.ts --write
-        
-        # Now run these - they might fail if they ALSO check for A2UI, 
-        # which is why the 'sed' command in postPatch is important.
-        node --import tsx scripts/write-cli-startup-metadata.ts
+        # We skip write-cli-startup-metadata if it keeps crashing, 
+        # as it's mostly for the help text.
+        node --import tsx scripts/write-cli-startup-metadata.ts || echo "Skipping startup metadata..."
         node --import tsx scripts/write-cli-compat.ts
         
-        # We might need to skip pnpm ui:build if it's too heavy/broken
-        # pnpm ui:build 
-
         runHook postBuild
       '';
 
@@ -109,7 +117,7 @@
       # Disable the check that was failing earlier due to broken node_modules links
       doInstallCheck = false; 
     }))
-    parallel-full
+    #parallel-full
     parted
     pavucontrol
     pkg-config
@@ -123,14 +131,14 @@
     libsForQt5.qtsvg
     pkgs.kdePackages.qtvirtualkeyboard
     starship
-    stress-ng
+    #stress-ng
     stow
-    swww
-    texliveFull
+    #swww
+    #texliveFull
     tofi
     unzip
-    ventoy-full
-    vesktop
+    #ventoy-full
+    #vesktop
     vicinae
     wev
     wget
@@ -139,7 +147,7 @@
     zathura
     zathuraPkgs.zathura_pdf_poppler
     zen-browser.packages.${system}.default
-    zenmonitor
+    #zenmonitor
     zsh
     (let
       matugenFixed = pkgs.writeShellScriptBin "matugen" ''
