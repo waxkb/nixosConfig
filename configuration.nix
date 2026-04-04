@@ -43,8 +43,6 @@ in
   boot.enableContainers = true;
   virtualisation.containers.enable = true;
 
-  services.fu.enable = true;
-
   environment.systemPackages = [
     nier-sddm-theme
   ];
@@ -60,6 +58,10 @@ in
     enable = true;
     settings = {
       server = {
+        default_http_headers = {
+          "User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36";
+          "Accept-Language" = "en-US,en;q=0.9";
+        };
         # Standard local port
         port = 9090;
         bind_address = "127.0.0.1";
@@ -67,6 +69,8 @@ in
         secret_key = "a"; 
       };
       search = {
+        safe_search = 0;
+        autocomplete = "google";
         # CRITICAL: Open WebUI requires JSON format to parse results
         formats = [ "html" "json" ];
       };
@@ -74,6 +78,12 @@ in
       engines = [
         { name = "google"; engine = "google"; shortcut = "go"; }
         { name = "duckduckgo"; engine = "duckduckgo"; shortcut = "ddg"; }
+        { name = "reddit"; engine = "reddit"; shortcut = "re"; }
+      ];
+      enabled_plugins = [
+        "Hash plugin"
+        "Self_Information"
+        "Tracker_aware"
       ];
     };
   };
