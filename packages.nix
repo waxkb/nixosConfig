@@ -8,8 +8,8 @@
     chromium
     #claude-code
     cmake
+    compose2nix
     curl
-    docker
     efibootmgr
     fastfetch
     fd
@@ -116,6 +116,7 @@
     pavucontrol
     pkg-config
     playerctl
+    playwright
     pulseaudio
     python314
     python314Packages.pipx

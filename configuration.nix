@@ -18,6 +18,7 @@ in
     ./hardware-configuration.nix
     ./packages.nix
     dms.nixosModules.dankMaterialShell
+    ./docker/docker-compose.nix
   ];
 
   hardware.bluetooth = {
@@ -31,6 +32,18 @@ in
   };
 
   services.blueman.enable = true;
+
+  virtualisation.docker = {
+      enable = true;
+      rootless = {
+          enable = true;
+      };
+  };
+
+  boot.enableContainers = true;
+  virtualisation.containers.enable = true;
+
+  services.fu.enable = true;
 
   environment.systemPackages = [
     nier-sddm-theme
@@ -289,7 +302,6 @@ in
   boot.initrd.availableKernelModules = [
       "nvidia_drm" "nvidia_modeset" "nvidia" "nvidia_uvm"
   ];
-
 
   nixpkgs.config.cudaSupport = true;
 
