@@ -43,6 +43,28 @@ in
     "openclaw-2026.4.01-beta.1"
   ];
 
+  services.searx = {
+    enable = true;
+    settings = {
+      server = {
+        # Standard local port
+        port = 9090;
+        bind_address = "127.0.0.1";
+        # Essential: Open WebUI needs a secret key to communicate safely
+        secret_key = "a"; 
+      };
+      search = {
+        # CRITICAL: Open WebUI requires JSON format to parse results
+        formats = [ "html" "json" ];
+      };
+      # Optional: Enable engines you like
+      engines = [
+        { name = "google"; engine = "google"; shortcut = "go"; }
+        { name = "duckduckgo"; engine = "duckduckgo"; shortcut = "ddg"; }
+      ];
+    };
+  };
+
   boot.kernelModules = [ "ryzen_smu" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.ryzen-smu ];
 

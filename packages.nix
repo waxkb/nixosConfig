@@ -5,26 +5,24 @@
     activate-linux
     bibata-cursors
     btop
-    #chromium
+    chromium
     #claude-code
     cmake
-    #codex
     curl
-    #discord-canary
+    docker
     efibootmgr
     fastfetch
     fd
-    #ffmpeg
+    ffmpeg
     fzf
     gcc
-    #gdu
     #gh
     git
     gita
     gptfdisk
     hyprlock
     hyprpicker
-    #imagemagick
+    imagemagick
     infisical
     iwd
     jdk
@@ -34,12 +32,11 @@
     libxkbcommon
     llama-cpp
     #mprime
-    #mpv
+    mpv
     neovim
     niri
     #obs-studio
     #ollama
-    open-webui
     opencode
     (pkgs.openclaw.overrideAttrs (oldAttrs: rec {
       version = "2026.4.01-beta.1"; # Update this to your target version
@@ -124,6 +121,7 @@
     playerctl
     pulseaudio
     python314
+    python314Packages.pipx
     libsForQt5.qtgraphicaleffects
     libsForQt5.qtmultimedia
     libsForQt5.qtquickcontrols
@@ -131,14 +129,13 @@
     libsForQt5.qtsvg
     pkgs.kdePackages.qtvirtualkeyboard
     starship
-    #stress-ng
+    stress-ng
     stow
-    #swww
+    #awww
     #texliveFull
     tofi
     unzip
     #ventoy-full
-    #vesktop
     vicinae
     wev
     wget
