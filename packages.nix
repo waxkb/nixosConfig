@@ -31,12 +31,9 @@
     libnotify
     libxkbcommon
     llama-cpp
-    #mprime
     mpv
     neovim
     niri
-    #obs-studio
-    #ollama
     opencode
     (pkgs.openclaw.overrideAttrs (oldAttrs: rec {
       version = "2026.4.01-beta.1"; # Update this to your target version
@@ -131,11 +128,10 @@
     starship
     stress-ng
     stow
-    #awww
     #texliveFull
     tofi
     unzip
-    #ventoy-full
+    ventoy-full
     vicinae
     wev
     wget
@@ -144,7 +140,6 @@
     zathura
     zathuraPkgs.zathura_pdf_poppler
     zen-browser.packages.${system}.default
-    #zenmonitor
     zsh
     (let
       matugenFixed = pkgs.writeShellScriptBin "matugen" ''
