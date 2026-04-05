@@ -18,7 +18,6 @@ in
     ./hardware-configuration.nix
     ./packages.nix
     dms.nixosModules.dankMaterialShell
-    ./docker/docker-compose.nix
   ];
 
   hardware.bluetooth = {
@@ -37,11 +36,9 @@ in
       enable = true;
       rootless = {
           enable = true;
+          setSocketVariable = true;
       };
   };
-
-  boot.enableContainers = true;
-  virtualisation.containers.enable = true;
 
   environment.systemPackages = [
     nier-sddm-theme

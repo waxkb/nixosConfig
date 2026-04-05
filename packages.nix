@@ -1,14 +1,17 @@
 { pkgs, zen-browser, inputs, openclaw, ... }:
 
+let
+  playwrightBrowsers = pkgs.playwright-driver.browsers;
+in
 {
   environment.systemPackages = with pkgs; [
     activate-linux
     bibata-cursors
     btop
+    codex
     chromium
     #claude-code
     cmake
-    compose2nix
     curl
     efibootmgr
     fastfetch
@@ -31,9 +34,12 @@
     libnotify
     libxkbcommon
     llama-cpp
+    lsof
+    mitmproxy
     mpv
     neovim
     niri
+    nodejs
     opencode
     (pkgs.openclaw.overrideAttrs (oldAttrs: rec {
       version = "2026.4.01-beta.1"; # Update this to your target version
@@ -116,7 +122,8 @@
     pavucontrol
     pkg-config
     playerctl
-    playwright
+    playwright-test
+    playwrightBrowsers
     pulseaudio
     python314
     python314Packages.pipx
@@ -140,7 +147,7 @@
     yazi
     zathura
     zathuraPkgs.zathura_pdf_poppler
-    zen-browser.packages.${system}.default
+    zen-browser.packages.${pkgs.system}.default
     zsh
     (let
       matugenFixed = pkgs.writeShellScriptBin "matugen" ''
@@ -162,4 +169,10 @@
       '';
     in matugenFixed)
   ];
+
+  environment.variables = {
+    # Reuse the Nix-provided browser bundle for both the CLI wrapper and npm projects.
+    PLAYWRIGHT_BROWSERS_PATH = "${playwrightBrowsers}";
+    PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
+  };
 }
