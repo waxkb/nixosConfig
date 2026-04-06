@@ -1,4 +1,4 @@
-{ pkgs, zen-browser, inputs, openclaw, ... }:
+{ pkgs, zen-browser, inputs, openclaw, claude-code, ... }:
 
 let
   playwrightBrowsers = pkgs.playwright-driver.browsers;
@@ -22,6 +22,8 @@ in
     #gh
     git
     gita
+    glow
+    google-chrome
     gptfdisk
     hyprlock
     hyprpicker
@@ -35,7 +37,7 @@ in
     libxkbcommon
     llama-cpp
     lsof
-    mitmproxy
+    #mitmproxy
     mpv
     neovim
     niri
@@ -125,8 +127,10 @@ in
     playwright-test
     playwrightBrowsers
     pulseaudio
-    python314
-    python314Packages.pipx
+    (pkgs.python314.withPackages (ps: with ps; [
+      mitmproxy
+      requests
+    ]))
     libsForQt5.qtgraphicaleffects
     libsForQt5.qtmultimedia
     libsForQt5.qtquickcontrols
@@ -139,6 +143,7 @@ in
     #texliveFull
     tofi
     unzip
+    uv
     ventoy-full
     vicinae
     wev

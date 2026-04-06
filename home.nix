@@ -2,6 +2,9 @@
 
 {
   home.stateVersion = "25.11";
+  home.packages = with pkgs; [
+    claude-code
+  ];
   programs.git = {
     settings = {
       user = {

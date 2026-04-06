@@ -50,6 +50,12 @@ in
     "openclaw-2026.4.01-beta.1"
   ];
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    zlib
+  ];
+
   services.searx = {
     enable = true;
     settings = {

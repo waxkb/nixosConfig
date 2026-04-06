@@ -36,6 +36,8 @@
       flake = false;
     };
 
+    claude-code.url = "github:sadjow/claude-code-nix";
+
   };
   outputs = inputs@{
     self,
@@ -46,6 +48,7 @@
     llama-cpp,
     sddm-themes,
     home-manager,
+    claude-code,
     ...
   }:
   let
@@ -119,6 +122,7 @@
             (final: prev: {
               khal = pkgs25.khal;
             })
+            claude-code.overlays.default
           ];
         }
       ];
