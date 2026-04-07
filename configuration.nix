@@ -54,7 +54,15 @@ in
   programs.nix-ld.libraries = with pkgs; [
     stdenv.cc.cc
     zlib
+    libx11
+    libxinerama
+    libxext
+    libGL
   ];
+
+    # Disable generation of documentation to bypass the Sphinx/Docutils bug
+    documentation.enable = false;
+    documentation.man.enable = false;
 
   services.searx = {
     enable = true;
@@ -244,7 +252,10 @@ in
 
   programs.niri.enable = true;
 
-  services.xserver.enable = true;
+  services.xserver = {
+    enable = true;
+    videoDrivers = [ "nvidia" ];
+  };
 
 
   #environment.etc."sddm.conf.d/theme.conf".text = ''
@@ -252,8 +263,6 @@ in
   #  Current=nier-automata
   #  ThemeDir=/run/current-system/sw/share/sddm/themes
   #'';
-
-  services.xserver.videoDrivers = [ "nvidia" ];
 
   systemd.services."getty@tty1".enable = false;
 

@@ -33,6 +33,7 @@ in
     jdk
     jq
     kitty
+    libffi
     libnotify
     libxkbcommon
     llama-cpp
@@ -127,10 +128,6 @@ in
     playwright-test
     playwrightBrowsers
     pulseaudio
-    (pkgs.python314.withPackages (ps: with ps; [
-      mitmproxy
-      requests
-    ]))
     libsForQt5.qtgraphicaleffects
     libsForQt5.qtmultimedia
     libsForQt5.qtquickcontrols
