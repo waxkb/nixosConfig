@@ -32,12 +32,15 @@ in
 
   services.blueman.enable = true;
 
-  virtualisation.docker = {
+  virtualisation = {
+    containers.enable = true;
+    podman = {
       enable = true;
-      rootless = {
-          enable = true;
-      };
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
   };
+
 
   environment.systemPackages = [
     nier-sddm-theme
@@ -47,7 +50,7 @@ in
 
   nixpkgs.config.permittedInsecurePackages = [
     "ventoy-1.1.10"
-    "openclaw-2026.4.01-beta.1"
+    "openclaw-2026.4.08"
   ];
 
   programs.nix-ld.enable = true;
@@ -283,7 +286,7 @@ in
     isNormalUser = true;
     description = "max";
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "podman" ];
     packages = [];
   };
 
