@@ -41,6 +41,7 @@ in
     };
   };
 
+  networking.firewall.allowedTCPPorts = [ 18789 18790 ];
 
   environment.systemPackages = [
     nier-sddm-theme
@@ -50,7 +51,7 @@ in
 
   nixpkgs.config.permittedInsecurePackages = [
     "ventoy-1.1.10"
-    "openclaw-2026.4.08"
+    "openclaw-2026.4.11"
   ];
 
   programs.nix-ld.enable = true;
