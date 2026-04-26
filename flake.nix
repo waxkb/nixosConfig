@@ -88,11 +88,13 @@
                 blasSupport = false;
               }).overrideAttrs (oldAttrs: {
                 src = llama-cpp; # This refers to your flake input
-                npmDepsHash = "sha256-DxgUDVr+kwtW55C4b89Pl+j3u2ILmACcQOvOBjKWAKQ=";
+                npmDepsHash = "sha256-RAFtsbBGBjteCt5yXhrmHL39rIDJMCFBETgzId2eRRk=";
                 version = "100000";
 
                 patches = [];   # Ignore patches meant for older versions
                 postPatch = ""; # Ignore the cleanup script that is failing
+
+                stdenv = prev.ccacheStdenv;
 
                 # 1. Use Ninja for faster build orchestration
                 nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ 
@@ -101,15 +103,18 @@
                 ];
 
                 cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+                  "-GNinja" # Tell CMake to use Ninja
                   "-DGGML_NATIVE=ON"
                   "-DCMAKE_CUDA_ARCHITECTURES=89"
-                  "-GNinja" # Tell CMake to use Ninja
+                  #"-DCMAKE_UNITY_BUILD=ON"
+                  #"-DCMAKE_UNITY_BUILD_BATCH_SIZE=32"
                 ];
 
-                # 2. Faster Linking with 'mold'
-                # We add the flag to the linker via stdenv
-                NIX_CFLAGS_COMPILE = (oldAttrs.NIX_CFLAGS_COMPILE or "") + " -fuse-ld=mold";
+                NIX_CFLAGS_COMPILE = (oldAttrs.NIX_CFLAGS_COMPILE or "") + " -fuse-ld=mold -Wl,--threads";
+
                 buildInputs = (oldAttrs.buildInputs or [ ]) ++ [ prev.mold ];
+
+                CCACHE_DIR = "/var/cache/ccache";
 
                 preConfigure = ''
                   export NIX_ENFORCE_NO_NATIVE=0

@@ -30,6 +30,34 @@ in
     };
   };
 
+  fonts = {
+    packages = with pkgs; [
+      nerd-fonts.jetbrains-mono
+      material-symbols
+      google-fonts
+      inter
+      noto-fonts
+    ];
+    fontconfig = {
+      enable = true;
+      antialias = true;
+      hinting = {
+        enable = true;
+        style = "slight";
+      };
+      subpixel = {
+        rgba = "none";
+        lcdfilter = "light";
+      };
+      defaultFonts = {
+        serif = [ "Noto Serif" ];
+        sansSerif = [ "Inter" ];
+        monospace = [ "JetBrainsMono Nerd Font Mono" ];
+      };
+    };
+    fontDir.enable = true;
+  };
+
   services.blueman.enable = true;
 
   virtualisation = {
@@ -51,7 +79,7 @@ in
 
   nixpkgs.config.permittedInsecurePackages = [
     "ventoy-1.1.10"
-    "openclaw-2026.4.11"
+    "openclaw-2026.4.12"
   ];
 
   programs.nix-ld.enable = true;
@@ -164,8 +192,6 @@ in
       obs-pipewire-audio-capture
     ];
   };
-
-  fonts.fontconfig.enable = true;
 
   programs.dank-material-shell = {
     enable = true;
@@ -313,8 +339,6 @@ in
     nvidiaSettings = true;
   };
 
-  fonts.packages = with pkgs; [ nerd-fonts.jetbrains-mono material-symbols google-fonts ];
-  fonts.fontDir.enable = true;
 
   boot.kernelParams = [
     "nvidia-drm.modeset=1"
@@ -353,5 +377,10 @@ in
     variant = "";
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    freetype = {
+      hinting = true;
+    };
+  };
 }

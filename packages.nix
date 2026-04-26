@@ -9,6 +9,7 @@ in
     agent-browser
     bibata-cursors
     btop
+    cliphist
     codex
     chromium
     cmake
@@ -17,6 +18,7 @@ in
     fastfetch
     fd
     ffmpeg
+    foot
     fzf
     gcc
     git
@@ -36,6 +38,7 @@ in
     libxkbcommon
     llama-cpp
     lsof
+    litellm
     mpv
     neovim
     niri
@@ -67,6 +70,7 @@ in
     vicinae
     wev
     wget
+    wl-clipboard
     xwayland-satellite
     yazi
     zathura
