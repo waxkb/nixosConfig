@@ -119,11 +119,11 @@
     "llama-cpp": {
       "flake": false,
       "locked": {
-        "lastModified": 1776726758,
-        "narHash": "sha256-3RkAiuEC8lSqitwHME75qrHaaZthkK0zQIxSsJq+E9w=",
+        "lastModified": 1777066729,
+        "narHash": "sha256-f+a+ikbq0VS6RQFf+A6EuVnsWYn2RR3ggRJNkzZgMto=",
         "owner": "TheTom",
         "repo": "llama-cpp-turboquant",
-        "rev": "8ba9f128822b4cef73f5555ca5fcccfbfadbcd20",
+        "rev": "11a241d0db78a68e0a5b99fe6f36de6683100f6a",
         "type": "github"
       },
       "original": {
