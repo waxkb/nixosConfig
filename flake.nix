@@ -24,10 +24,9 @@
 
     llama-cpp = {
       #url = "github:ggml-org/llama.cpp/9f26182";
-      #url = "github:ggml-org/llama.cpp?ref=refs/pull/21131/merge";
+      url = "github:ggml-org/llama.cpp?ref=refs/pull/22673/merge";
       #url = "github:ggml-org/llama.cpp";
-      #url = "github:AmesianX/TurboQuant";
-      url = "github:TheTom/llama-cpp-turboquant/feature/turboquant-kv-cache";
+      #url = "github:TheTom/llama-cpp-turboquant/feature/turboquant-kv-cache";
       flake = false;
     };
 
@@ -88,7 +87,7 @@
                 blasSupport = false;
               }).overrideAttrs (oldAttrs: {
                 src = llama-cpp; # This refers to your flake input
-                npmDepsHash = "sha256-RAFtsbBGBjteCt5yXhrmHL39rIDJMCFBETgzId2eRRk=";
+                npmDepsHash = "sha256-cV3noOyKmst9vfxyvkCNhihPgwfVGhmPPT4UMloeWZM=";
                 version = "100000";
 
                 patches = [];   # Ignore patches meant for older versions

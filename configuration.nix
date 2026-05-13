@@ -34,7 +34,6 @@ in
     packages = with pkgs; [
       nerd-fonts.jetbrains-mono
       material-symbols
-      google-fonts
       inter
       noto-fonts
     ];
@@ -78,8 +77,8 @@ in
   programs.kdeconnect.enable = true;
 
   nixpkgs.config.permittedInsecurePackages = [
-    "ventoy-1.1.10"
-    "openclaw-2026.4.12"
+    "ventoy-1.1.12"
+    "openclaw-2026.5.7"
   ];
 
   programs.nix-ld.enable = true;
@@ -280,6 +279,8 @@ in
     enable = true;
   };
 
+  programs.java.enable = true;
+
   programs.niri.enable = true;
 
   services.xserver = {
@@ -326,7 +327,6 @@ in
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
-    GBM_BACKEND = "nvidia-drm";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     NIXOS_OZONE_WL = "1";
   };

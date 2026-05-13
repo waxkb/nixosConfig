@@ -6,12 +6,10 @@ in
 {
   environment.systemPackages = with pkgs; [
     activate-linux
-    agent-browser
     bibata-cursors
     btop
     cliphist
     codex
-    chromium
     cmake
     curl
     efibootmgr
@@ -30,15 +28,12 @@ in
     imagemagick
     infisical
     iwd
-    jdk
     jq
-    kitty
     libffi
     libnotify
     libxkbcommon
     llama-cpp
     lsof
-    litellm
     mpv
     neovim
     niri
@@ -58,11 +53,9 @@ in
     libsForQt5.qtquickcontrols2
     libsForQt5.qtsvg
     pkgs.kdePackages.qtvirtualkeyboard
-    shadow
     starship
     stress-ng
     stow
-    #texliveFull
     tofi
     unzip
     uv
@@ -96,6 +89,7 @@ in
         exec ${pkgs.matugen}/bin/matugen --base16-backend wal --source-color-index 0 "''${args[@]}"
       '';
     in matugenFixed)
+    (pkgs.callPackage ./ratty.nix {})
   ];
 
   environment.variables = {
