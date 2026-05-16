@@ -17,7 +17,7 @@ in
   imports = [
     ./hardware-configuration.nix
     ./packages.nix
-    dms.nixosModules.dankMaterialShell
+    dms.nixosModules.dank-material-shell
   ];
 
   hardware.bluetooth = {
@@ -193,6 +193,8 @@ in
   ];
 
   hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
+
 
   programs.direnv = {
     enable = true;
@@ -346,8 +348,6 @@ in
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
-
-  hardware.graphics.enable = true;
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";

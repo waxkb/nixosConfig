@@ -4,6 +4,7 @@ let
   tex = (pkgs.texliveSmall.withPackages (
     ps: with ps; [
       latexmk
+      thmtools
     ]
   ));
   matugenFixed = pkgs.writeShellScriptBin "matugen" ''
