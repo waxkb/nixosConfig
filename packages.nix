@@ -1,11 +1,33 @@
-{ pkgs, zen-browser, inputs, claude-code, ... }:
+{ pkgs, pkgs25, zen-browser, inputs, claude-code, ... }:
 
 let
-  playwrightBrowsers = pkgs.playwright-driver.browsers;
+  tex = (pkgs.texliveSmall.withPackages (
+    ps: with ps; [
+      latexmk
+    ]
+  ));
+  matugenFixed = pkgs.writeShellScriptBin "matugen" ''
+    #!/usr/bin/env bash
+
+    args=()
+    for arg in "$@"; do
+      case "$arg" in
+        file://*)
+          args+=("$(printf '%s\n' "$arg" | sed 's|^file://||')")
+          ;;
+        *)
+          args+=("$arg")
+          ;;
+      esac
+    done
+
+    exec ${pkgs.matugen}/bin/matugen --base16-backend wal --source-color-index 0 "''${args[@]}"
+  '';
 in
 {
   environment.systemPackages = with pkgs; [
     activate-linux
+    inputs.areofyl-fetch.packages.${pkgs.system}.default
     bibata-cursors
     btop
     cliphist
@@ -21,6 +43,7 @@ in
     gcc
     git
     gita
+    gnumake
     google-chrome
     gptfdisk
     hyprlock
@@ -34,12 +57,13 @@ in
     libxkbcommon
     llama-cpp
     lsof
+    matugenFixed
     mpv
     neovim
     niri
     nodejs
-    ollama-cuda
     openclaw
+    ollama-cuda
     opencode
     parted
     pavucontrol
@@ -53,9 +77,11 @@ in
     libsForQt5.qtquickcontrols2
     libsForQt5.qtsvg
     pkgs.kdePackages.qtvirtualkeyboard
+    ratty
     starship
     stress-ng
     stow
+    tex
     tofi
     unzip
     uv
@@ -70,31 +96,5 @@ in
     zathuraPkgs.zathura_pdf_poppler
     zen-browser.packages.${pkgs.system}.default
     zsh
-    (let
-      matugenFixed = pkgs.writeShellScriptBin "matugen" ''
-        #!/usr/bin/env bash
-
-        args=()
-        for arg in "$@"; do
-          case "$arg" in
-            file://*)
-              args+=("$(printf '%s\n' "$arg" | sed 's|^file://||')")
-              ;;
-            *)
-              args+=("$arg")
-              ;;
-          esac
-        done
-
-        exec ${pkgs.matugen}/bin/matugen --base16-backend wal --source-color-index 0 "''${args[@]}"
-      '';
-    in matugenFixed)
-    (pkgs.callPackage ./ratty.nix {})
   ];
-
-  environment.variables = {
-    # Reuse the Nix-provided browser bundle for both the CLI wrapper and npm projects.
-    PLAYWRIGHT_BROWSERS_PATH = "${playwrightBrowsers}";
-    PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1";
-  };
 }

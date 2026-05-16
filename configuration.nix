@@ -42,6 +42,7 @@ in
       antialias = true;
       hinting = {
         enable = true;
+        autohint = false;
         style = "slight";
       };
       subpixel = {
@@ -53,6 +54,29 @@ in
         sansSerif = [ "Inter" ];
         monospace = [ "JetBrainsMono Nerd Font Mono" ];
       };
+      localConf = ''
+        <?xml version="1.0"?>
+        <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+        <fontconfig>
+          <match target="pattern">
+            <test name="family"><string>TerminalFont</string></test>
+            <edit name="family" mode="assign" binding="strong">
+              <string>JetBrainsMono Nerd Font Mono</string>
+            </edit>
+            <edit name="style" mode="assign" binding="strong">
+              <string>Medium</string>
+            </edit>
+          </match>
+
+          <match target="font">
+            <test name="family"><string>JetBrainsMono Nerd Font Mono</string></test>
+            <edit name="antialias" mode="assign"><bool>true</bool></edit>
+            <edit name="autohint" mode="assign"><bool>false</bool></edit>
+            <edit name="hinting" mode="assign"><bool>true</bool></edit>
+            <edit name="hintstyle" mode="assign"><const>hintslight</const></edit>
+          </match>
+        </fontconfig>
+      '';
     };
     fontDir.enable = true;
   };

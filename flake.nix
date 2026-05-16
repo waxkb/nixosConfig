@@ -24,9 +24,9 @@
 
     llama-cpp = {
       #url = "github:ggml-org/llama.cpp/9f26182";
-      url = "github:ggml-org/llama.cpp?ref=refs/pull/22673/merge";
+      #url = "github:ggml-org/llama.cpp?ref=refs/pull/22673/merge";
       #url = "github:ggml-org/llama.cpp";
-      #url = "github:TheTom/llama-cpp-turboquant/feature/turboquant-kv-cache";
+      url = "github:TheTom/llama-cpp-turboquant/feature/turboquant-kv-cache";
       flake = false;
     };
 
@@ -36,6 +36,8 @@
     };
 
     claude-code.url = "github:sadjow/claude-code-nix";
+
+    areofyl-fetch.url = "github:areofyl/fetch";
 
   };
   outputs = inputs@{
@@ -48,6 +50,7 @@
     sddm-themes,
     home-manager,
     claude-code,
+    areofyl-fetch,
     ...
   }:
   let
@@ -87,7 +90,7 @@
                 blasSupport = false;
               }).overrideAttrs (oldAttrs: {
                 src = llama-cpp; # This refers to your flake input
-                npmDepsHash = "sha256-cV3noOyKmst9vfxyvkCNhihPgwfVGhmPPT4UMloeWZM=";
+                npmDepsHash = "sha256-RAFtsbBGBjteCt5yXhrmHL39rIDJMCFBETgzId2eRRk=";
                 version = "100000";
 
                 patches = [];   # Ignore patches meant for older versions
@@ -132,7 +135,7 @@
       ];
 
       specialArgs = {
-        inherit inputs;
+        inherit inputs pkgs25 areofyl-fetch;
         zen-browser = zen-browser;
         matugen = matugen;
         dms = dms;
