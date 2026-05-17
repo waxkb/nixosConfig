@@ -1,10 +1,16 @@
-{ pkgs, pkgs25, zen-browser, inputs, claude-code, ... }:
+{ pkgs, pkgs25, zen-browser, inputs, claude-code, noctalia, ... }:
 
 let
   tex = (pkgs.texliveSmall.withPackages (
     ps: with ps; [
       latexmk
       thmtools
+      tikz-cd
+      mdframed
+      zref
+      needspace
+      mhchem
+      siunitx
     ]
   ));
   matugenFixed = pkgs.writeShellScriptBin "matugen" ''
@@ -62,6 +68,7 @@ in
     mpv
     neovim
     niri
+    noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     nodejs
     openclaw
     ollama-cuda

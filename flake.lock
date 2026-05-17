@@ -45,11 +45,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778852883,
-        "narHash": "sha256-seaIGkMReVnJawQ3PZjzbKmQzuoIipQui+Be8bLUKes=",
+        "lastModified": 1778958785,
+        "narHash": "sha256-s1YrO4iSmWAdLOLGDoeAL/aqlJlxmOLvbfz9KQPDkI0=",
         "owner": "AvengeMedia",
         "repo": "DankMaterialShell",
-        "rev": "fbcc28785a2f42b17becf1d208d982cf218ede76",
+        "rev": "05c7a77c8bb895fc61f759b05ab477306395192b",
         "type": "github"
       },
       "original": {
@@ -249,6 +249,27 @@
         "type": "github"
       }
     },
+    "noctalia": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1778960989,
+        "narHash": "sha256-sp1i5nAeVdJrSyXJ6NsHe0gNVEBew91esqtF1wNmrxQ=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "rev": "69ca7ac3b12d66381b324297960884b52dd537f7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "ref": "v5",
+        "repo": "noctalia-shell",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "areofyl-fetch": "areofyl-fetch",
@@ -259,6 +280,7 @@
         "matugen": "matugen",
         "nixpkgs": "nixpkgs_4",
         "nixpkgs-2511": "nixpkgs-2511",
+        "noctalia": "noctalia",
         "sddm-themes": "sddm-themes",
         "zen-browser": "zen-browser"
       }

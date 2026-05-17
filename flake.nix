@@ -22,6 +22,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell/v5";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     llama-cpp = {
       #url = "github:ggml-org/llama.cpp/9f26182";
       #url = "github:ggml-org/llama.cpp?ref=refs/pull/22673/merge";
@@ -46,6 +51,7 @@
     zen-browser,
     matugen,
     dms,
+    noctalia,
     llama-cpp,
     sddm-themes,
     home-manager,
@@ -139,6 +145,7 @@
         zen-browser = zen-browser;
         matugen = matugen;
         dms = dms;
+        noctalia = noctalia;
         sddm-themes = sddm-themes;
       };
     };

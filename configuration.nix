@@ -344,6 +344,9 @@ in
     packages = [];
   };
 
+  services.power-profiles-daemon.enable = true;
+  services.upower.enable = true;
+
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
