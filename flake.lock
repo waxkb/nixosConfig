@@ -5,11 +5,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1778093921,
-        "narHash": "sha256-qnemWvrYluWHY1YmxlEapf50K5HicGqObls2bgZxgMw=",
+        "lastModified": 1779038093,
+        "narHash": "sha256-OWKgMUoJhoG/7jmB3SXRUAOy+vbfnSBy0aKfmSRUAw8=",
         "owner": "areofyl",
         "repo": "fetch",
-        "rev": "78bc5c5511c6800e99d6660d07d37f31d538a3a3",
+        "rev": "b7c755661246dc9f45839f92f232680ef8e02a93",
         "type": "github"
       },
       "original": {
@@ -45,11 +45,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778958785,
-        "narHash": "sha256-s1YrO4iSmWAdLOLGDoeAL/aqlJlxmOLvbfz9KQPDkI0=",
+        "lastModified": 1779137485,
+        "narHash": "sha256-QMq/xD05FQy5f+we8+hbm2VE2nC1yA1rTjzz28TvyFM=",
         "owner": "AvengeMedia",
         "repo": "DankMaterialShell",
-        "rev": "05c7a77c8bb895fc61f759b05ab477306395192b",
+        "rev": "81a1bb1cd780b90a4e3b0db2f8062a2d0bf186cb",
         "type": "github"
       },
       "original": {
@@ -99,11 +99,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778954430,
-        "narHash": "sha256-oaNyOr05lblaQdtbkbN1wO0b2KLIL2O1LkmwDgdQp4I=",
+        "lastModified": 1779143091,
+        "narHash": "sha256-qxiUVquHM09KOV1aD4We9q0ooPWO4qOc0v9J9NDWSAo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "26aaab785b0bab4af60a2c42b22760fa906ef22a",
+        "rev": "736c2084ea750a049ecdbdd7ff5817d2eeeef444",
         "type": "github"
       },
       "original": {
@@ -136,17 +136,17 @@
     "llama-cpp": {
       "flake": false,
       "locked": {
-        "lastModified": 1778367223,
-        "narHash": "sha256-STquDJ1R2vhbGkTCMFKey5PtkaO/AAXiJU+RjK3Fvr0=",
-        "owner": "TheTom",
-        "repo": "llama-cpp-turboquant",
-        "rev": "5aeb2fdbe26cd4c534c6fa15de73cb5749bd0403",
+        "lastModified": 1778753152,
+        "narHash": "sha256-gF+zgI5wV1+30jjJ8C9ZB9QJuqwg8WzsVu/CQLaSMjE=",
+        "owner": "ggml-org",
+        "repo": "llama.cpp",
+        "rev": "67b2b7f2f2d6dac7962b219168a4c7a20c7359b7",
         "type": "github"
       },
       "original": {
-        "owner": "TheTom",
-        "ref": "feature/turboquant-kv-cache",
-        "repo": "llama-cpp-turboquant",
+        "owner": "ggml-org",
+        "repo": "llama.cpp",
+        "rev": "67b2b7f2f2d6dac7962b219168a4c7a20c7359b7",
         "type": "github"
       }
     },
@@ -256,11 +256,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778960989,
-        "narHash": "sha256-sp1i5nAeVdJrSyXJ6NsHe0gNVEBew91esqtF1wNmrxQ=",
+        "lastModified": 1779140941,
+        "narHash": "sha256-kZ1P3Gf3Ue1v/NU7eVtf35QMDAA9ICTmV2OMAjShm+4=",
         "owner": "noctalia-dev",
         "repo": "noctalia-shell",
-        "rev": "69ca7ac3b12d66381b324297960884b52dd537f7",
+        "rev": "7c176696e974186353490b4bfcf9afdefe5d6705",
         "type": "github"
       },
       "original": {
@@ -339,11 +339,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778919017,
-        "narHash": "sha256-P2+aRay2sPQGVXzNmiD4yYlhy4ytxqBvT4A2OLOvkoU=",
+        "lastModified": 1779093899,
+        "narHash": "sha256-wzHbwUimm45J5r+d4VOi2rrRWwvYimP6OM8BJBIHbYc=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "7c41a80acc12ab012448b84aec90ca9b4bf8b9ac",
+        "rev": "d21282d88c6bd4b3dc692566c5d84de39f7a96c0",
         "type": "github"
       },
       "original": {

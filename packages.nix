@@ -35,6 +35,7 @@ in
   environment.systemPackages = with pkgs; [
     activate-linux
     inputs.areofyl-fetch.packages.${pkgs.system}.default
+    bat
     bibata-cursors
     btop
     cliphist
@@ -59,6 +60,7 @@ in
     infisical
     iwd
     jq
+    kitty
     libffi
     libnotify
     libxkbcommon
@@ -66,7 +68,6 @@ in
     lsof
     matugenFixed
     mpv
-    neovim
     niri
     noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     nodejs
@@ -86,6 +87,7 @@ in
     libsForQt5.qtsvg
     pkgs.kdePackages.qtvirtualkeyboard
     ratty
+    ripgrep
     starship
     stress-ng
     stow

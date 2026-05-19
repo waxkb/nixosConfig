@@ -344,6 +344,11 @@ in
     packages = [];
   };
 
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+  };
+
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
 
