@@ -94,6 +94,7 @@ in
     stow
     tex
     tofi
+    tree
     unzip
     uv
     ventoy-full
