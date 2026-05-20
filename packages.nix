@@ -88,6 +88,7 @@ in
     pkgs.kdePackages.qtvirtualkeyboard
     ratty
     ripgrep
+    (pkgs.callPackage ./skim.nix { })
     starship
     stress-ng
     stow
