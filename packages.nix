@@ -38,6 +38,7 @@ in
     bat
     bibata-cursors
     btop
+    cargo
     cliphist
     codex
     cmake
@@ -54,6 +55,7 @@ in
     gnumake
     google-chrome
     gptfdisk
+    hyperfine
     hyprlock
     hyprpicker
     imagemagick
