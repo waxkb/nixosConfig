@@ -37,6 +37,7 @@ in
     inputs.areofyl-fetch.packages.${pkgs.system}.default
     bat
     bibata-cursors
+    broot
     btop
     cargo
     cliphist
@@ -70,6 +71,7 @@ in
     lsof
     matugenFixed
     mpv
+    neovim
     niri
     noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     nodejs
@@ -90,10 +92,12 @@ in
     pkgs.kdePackages.qtvirtualkeyboard
     ratty
     ripgrep
+    rustc
     (pkgs.callPackage ./skim.nix { })
     starship
     stress-ng
     stow
+    television
     tex
     tofi
     tree
