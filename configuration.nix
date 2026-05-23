@@ -20,18 +20,9 @@ in
     dms.nixosModules.dank-material-shell
   ];
 
-  hardware.bluetooth = {
+  programs.neovim = {
     enable = true;
-    powerOnBoot = true;
-    settings = {
-      General = {
-        Experimental = true;
-      };
-    };
-  };
-
-  nix.settings = {
-    extra-sandbox-paths = [ config.programs.ccache.cacheDir ];
+    defaultEditor = true;
   };
 
   programs.ccache = {
@@ -40,65 +31,6 @@ in
     group = "nixbld";
     packageNames = [ "noctalia" ];
   };
-
-  system.activationScripts.ccacheCacheDir.text = ''
-    mkdir -p ${config.programs.ccache.cacheDir}
-    install -d -m 0770 -o ${config.programs.ccache.owner} -g ${config.programs.ccache.group} ${config.programs.ccache.cacheDir}
-    install -d -m 0770 -o ${config.programs.ccache.owner} -g ${config.programs.ccache.group} ${config.programs.ccache.cacheDir}/tmp
-  '';
-
-  fonts = {
-    packages = with pkgs; [
-      nerd-fonts.jetbrains-mono
-      material-symbols
-      inter
-      noto-fonts
-    ];
-    fontconfig = {
-      enable = true;
-      antialias = true;
-      hinting = {
-        enable = true;
-        autohint = false;
-        style = "slight";
-      };
-      subpixel = {
-        rgba = "none";
-        lcdfilter = "light";
-      };
-      defaultFonts = {
-        serif = [ "Noto Serif" ];
-        sansSerif = [ "Inter" ];
-        monospace = [ "JetBrainsMono Nerd Font Mono" ];
-      };
-      localConf = ''
-        <?xml version="1.0"?>
-        <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
-        <fontconfig>
-          <match target="pattern">
-            <test name="family"><string>TerminalFont</string></test>
-            <edit name="family" mode="assign" binding="strong">
-              <string>JetBrainsMono Nerd Font Mono</string>
-            </edit>
-            <edit name="style" mode="assign" binding="strong">
-              <string>Medium</string>
-            </edit>
-          </match>
-
-          <match target="font">
-            <test name="family"><string>JetBrainsMono Nerd Font Mono</string></test>
-            <edit name="antialias" mode="assign"><bool>true</bool></edit>
-            <edit name="autohint" mode="assign"><bool>false</bool></edit>
-            <edit name="hinting" mode="assign"><bool>true</bool></edit>
-            <edit name="hintstyle" mode="assign"><const>hintslight</const></edit>
-          </match>
-        </fontconfig>
-      '';
-    };
-    fontDir.enable = true;
-  };
-
-  services.blueman.enable = true;
 
   virtualisation = {
     containers.enable = true;
@@ -170,9 +102,6 @@ in
     };
   };
 
-  boot.kernelModules = [ "ryzen_smu" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.ryzen-smu ];
-
   services.displayManager.sddm = {
     enable = true;
     theme = "nier-automata";
@@ -204,26 +133,11 @@ in
     };
   };
 
-  security.pam.loginLimits = [
-    { domain = "*"; item = "memlock"; value = "unlimited"; type = "soft"; }
-    { domain = "*"; item = "memlock"; value = "unlimited"; type = "hard"; }
-  ];
-
-  hardware.opengl.enable = true;
-  hardware.graphics.enable = true;
-
-
   programs.direnv = {
     enable = true;
     silent = true;
     nix-direnv.enable = true;
   };
-
-  services.envfs.enable = true;
-
-  security.polkit.enable = true;
-
-  programs.hyprland.enable = true;
 
   programs.obs-studio = {
     enable = true;
@@ -243,73 +157,6 @@ in
       };
   };
 
-  security.rtkit.enable = true;
-
-  services.pipewire = {
-    enable = true;
-    audio.enable = true;
-    pulse.enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    wireplumber.enable = true;
-  };
-
-  #programs.silentSDDM = {
-  #  enable = false;
-  #  theme = "nord";
-  #  backgrounds = {
-  #    purpleKeyboards = ./wall/purpleKeyboards.jpg;
-  #  };
-  #  profileIcons = {
-  #    max = ./wall/xkcdLocalViewing.jpg;
-  #  };
-
-  #  settings = {
-  #    "LockScreen" = {
-  #      background = "purpleKeyboards.jpg";
-  #      use-background-color = false;
-  #      #blur = false;
-  #    };
-  #    "LockScreen.Clock" = {
-  #      display = false;
-  #    };
-  #    "LockScreen.Date" = {
-  #      display = false;
-  #    };
-  #    "LockScreen.Message" = {
-  #      display = true;
-  #      position= "center";
-  #      text = "λ";
-  #      font-family = "Playfair Display";
-  #      font-size = 100;
-  #      font-weight = 500;
-  #      display-icon= false;
-  #    };
-  #    "LoginScreen" = {
-  #      background = "purpleKeyboards.jpg";
-  #      use-background-color = false;
-  #    };
-  #    "LoginScreen.LoginArea.PasswordInput" = {
-  #      background-color = "#321C33";
-  #      background-opacity = 0.1;
-  #    };
-  #    "LoginScreen.LoginArea.LoginButton" = {
-  #      hide-if-not-needed = true;
-  #      background-color = "#321C33";
-  #    };
-  #    "LoginScreen.MenuArea.Layout" = {
-  #      display = false;
-  #    };
-  #    "LoginScreen.MenuArea.Keyboard" = {
-  #      display = false;
-  #    };
-  #    "Tooltips" = {
-  #      enable = false;
-  #    };
-  #  };
-  #};
-
-
   programs.zsh = {
     enable = true;
   };
@@ -322,13 +169,6 @@ in
     enable = true;
     videoDrivers = [ "nvidia" ];
   };
-
-
-  #environment.etc."sddm.conf.d/theme.conf".text = ''
-  #  [Theme]
-  #  Current=nier-automata
-  #  ThemeDir=/run/current-system/sw/share/sddm/themes
-  #'';
 
   systemd.services."getty@tty1".enable = false;
 
@@ -353,10 +193,6 @@ in
     packages = [];
   };
 
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
 
   services.power-profiles-daemon.enable = true;
   services.upower.enable = true;
@@ -379,7 +215,6 @@ in
     open = false;
     nvidiaSettings = true;
   };
-
 
   boot.kernelParams = [
     "nvidia-drm.modeset=1"
@@ -421,5 +256,104 @@ in
     freetype = {
       hinting = true;
     };
+  };
+
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+    settings = {
+      General = {
+        Experimental = true;
+      };
+    };
+  };
+
+  services.blueman.enable = true;
+
+  fonts = {
+    packages = with pkgs; [
+      nerd-fonts.jetbrains-mono
+      material-symbols
+      inter
+      noto-fonts
+    ];
+    fontconfig = {
+      enable = true;
+      antialias = true;
+      hinting = {
+        enable = true;
+        autohint = false;
+        style = "slight";
+      };
+      subpixel = {
+        rgba = "none";
+        lcdfilter = "light";
+      };
+      defaultFonts = {
+        serif = [ "Noto Serif" ];
+        sansSerif = [ "Inter" ];
+        monospace = [ "JetBrainsMono Nerd Font Mono" ];
+      };
+      localConf = ''
+        <?xml version="1.0"?>
+        <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+        <fontconfig>
+          <match target="pattern">
+            <test name="family"><string>TerminalFont</string></test>
+            <edit name="family" mode="assign" binding="strong">
+              <string>JetBrainsMono Nerd Font Mono</string>
+            </edit>
+            <edit name="style" mode="assign" binding="strong">
+              <string>Medium</string>
+            </edit>
+          </match>
+
+          <match target="font">
+            <test name="family"><string>JetBrainsMono Nerd Font Mono</string></test>
+            <edit name="antialias" mode="assign"><bool>true</bool></edit>
+            <edit name="autohint" mode="assign"><bool>false</bool></edit>
+            <edit name="hinting" mode="assign"><bool>true</bool></edit>
+            <edit name="hintstyle" mode="assign"><const>hintslight</const></edit>
+          </match>
+        </fontconfig>
+      '';
+    };
+    fontDir.enable = true;
+  };
+
+  nix.settings = {
+    extra-sandbox-paths = [ config.programs.ccache.cacheDir ];
+  };
+
+  system.activationScripts.ccacheCacheDir.text = ''
+    mkdir -p ${config.programs.ccache.cacheDir}
+    install -d -m 0770 -o ${config.programs.ccache.owner} -g ${config.programs.ccache.group} ${config.programs.ccache.cacheDir}
+    install -d -m 0770 -o ${config.programs.ccache.owner} -g ${config.programs.ccache.group} ${config.programs.ccache.cacheDir}/tmp
+  '';
+
+  boot.kernelModules = [ "ryzen_smu" ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.ryzen-smu ];
+
+  security.pam.loginLimits = [
+    { domain = "*"; item = "memlock"; value = "unlimited"; type = "soft"; }
+    { domain = "*"; item = "memlock"; value = "unlimited"; type = "hard"; }
+  ];
+
+  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
+
+  services.envfs.enable = true;
+
+  security.polkit.enable = true;
+
+  security.rtkit.enable = true;
+
+  services.pipewire = {
+    enable = true;
+    audio.enable = true;
+    pulse.enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    wireplumber.enable = true;
   };
 }

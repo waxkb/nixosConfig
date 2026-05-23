@@ -40,8 +40,8 @@ in
     broot
     btop
     cliphist
-    codex
     cmake
+    codex
     curl
     efibootmgr
     fastfetch
@@ -60,6 +60,7 @@ in
     infisical
     iwd
     jq
+    kitty
     libffi
     libnotify
     libxkbcommon
@@ -68,6 +69,7 @@ in
     matugenFixed
     mpv
     niri
+    nnd
     noctalia
     ollama
     opencode
@@ -94,6 +96,7 @@ in
     uv
     vicinae
     wev
+    wezterm
     wget
     wl-clipboard
     xwayland-satellite
