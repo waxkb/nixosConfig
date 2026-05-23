@@ -36,8 +36,16 @@ in
 
   programs.ccache = {
     enable = true;
-    packageNames = [ "llama-cpp" "noctalia" ];
+    owner = "root";
+    group = "nixbld";
+    packageNames = [ "noctalia" ];
   };
+
+  system.activationScripts.ccacheCacheDir.text = ''
+    mkdir -p ${config.programs.ccache.cacheDir}
+    install -d -m 0770 -o ${config.programs.ccache.owner} -g ${config.programs.ccache.group} ${config.programs.ccache.cacheDir}
+    install -d -m 0770 -o ${config.programs.ccache.owner} -g ${config.programs.ccache.group} ${config.programs.ccache.cacheDir}/tmp
+  '';
 
   fonts = {
     packages = with pkgs; [

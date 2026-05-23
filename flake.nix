@@ -92,80 +92,63 @@
         }
         {
           nixpkgs.overlays = [
-            (final: prev: {
-              llama-cpp = (prev.llama-cpp.override {
-                cudaSupport = true;
-                rocmSupport = false;
-                metalSupport = false;
-                blasSupport = true;
-              }).overrideAttrs (oldAttrs: {
-                src = llama-cpp;
-                npmDepsHash = "sha256-Iyg8FpcTKf2UYHuK7mA3cTAqVaLcQPcS0YCa5Qf01Gc=";
-                version = "1";
+            noctalia.overlays.default
+            (final: prev:
+              let
+                ccacheCudaPackages = prev.cudaPackages.overrideScope (_: cudaPrev: {
+                  # llama-cpp uses cudaPackages.backendStdenv when CUDA is enabled,
+                  # so wrapping only the package's stdenv does not reach the actual compiler.
+                  backendStdenv = final.ccacheStdenv.override {
+                    stdenv = cudaPrev.backendStdenv;
+                  };
+                });
+              in
+              {
+                llama-cpp = (prev.llama-cpp.override {
+                  cudaSupport = true;
+                  cudaPackages = ccacheCudaPackages;
+                  rocmSupport = false;
+                  metalSupport = false;
+                  blasSupport = true;
+                }).overrideAttrs (oldAttrs: {
+                  src = llama-cpp;
+                  npmDepsHash = "sha256-Iyg8FpcTKf2UYHuK7mA3cTAqVaLcQPcS0YCa5Qf01Gc=";
+                  version = "1";
 
-                patches = [];
-                postPatch = "";
+                  patches = [];
+                  postPatch = "";
 
-                stdenv = prev.ccacheStdenv;
+                  nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [
+                    prev.ninja
+                  ];
 
-                nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ 
-                  prev.ninja 
-                  prev.ccache 
-                ];
+                  cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+                    "-GNinja"
+                    "-DGGML_NATIVE=ON"
+                    "-DCMAKE_CUDA_ARCHITECTURES=89"
+                    "-DGGML_AVX=ON"
+                    "-DGGML_AVX2=ON"
+                    "-DGGML_AVX512=ON"
+                    "-DGGML_CUDA_FA_ALL_QUANTS=ON"
+                    "-DGGML_CUDA_GRAPHS=ON"
+                    # "-DCMAKE_UNITY_BUILD=ON"
+                    # "-DCMAKE_UNITY_BUILD_BATCH_SIZE=32"
+                  ];
 
-                cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
-                  "-GNinja"
-                  "-DGGML_NATIVE=ON"
-                  "-DCMAKE_CUDA_ARCHITECTURES=89"
-                  "-DGGML_AVX=ON"
-                  "-DGGML_AVX2=ON"
-                  "-DGGML_AVX512=ON"
-                  "-DGGML_CUDA_FA_ALL_QUANTS=ON"
-                  "-DGGML_CUDA_GRAPHS=ON"
-                  # "-DCMAKE_UNITY_BUILD=ON"
-                  # "-DCMAKE_UNITY_BUILD_BATCH_SIZE=32"
-                ];
+                  NIX_CFLAGS_COMPILE = (oldAttrs.NIX_CFLAGS_COMPILE or "") + " -march=native -mtune=native -fuse-ld=mold -Wl,--threads";
 
-                NIX_CFLAGS_COMPILE = (oldAttrs.NIX_CFLAGS_COMPILE or "") + " -march=native -mtune=native -fuse-ld=mold -Wl,--threads";
+                  buildInputs = (oldAttrs.buildInputs or [ ]) ++ [ prev.mold ];
 
-                buildInputs = (oldAttrs.buildInputs or [ ]) ++ [ prev.mold ];
-
-                preConfigure = ''
-                  export NIX_ENFORCE_NO_NATIVE=0
-                  ${oldAttrs.preConfigure or ""}
-                '';
-              });
-            })
+                  preConfigure = ''
+                    export NIX_ENFORCE_NO_NATIVE=0
+                    ${oldAttrs.preConfigure or ""}
+                  '';
+                });
+              })
             (final: prev: {
               khal = pkgs25.khal;
             })
             claude-code.overlays.default
-            (self: super: {
-              ccacheWrapper = super.ccacheWrapper.override {
-                extraConfig = ''
-                  export CCACHE_COMPRESS=1
-                  export CCACHE_DIR="/var/cache/ccache"
-                  export CCACHE_UMASK=007
-                  export CCACHE_SLOPPINESS=random_seed
-                  if [ ! -d "$CCACHE_DIR" ]; then
-                    echo "====="
-                    echo "Directory '$CCACHE_DIR' does not exist"
-                    echo "Please create it with:"
-                    echo "  sudo mkdir -m0770 '$CCACHE_DIR'"
-                    echo "  sudo chown root:nixbld '$CCACHE_DIR'"
-                    echo "====="
-                    exit 1
-                  fi
-                  if [ ! -w "$CCACHE_DIR" ]; then
-                    echo "====="
-                    echo "Directory '$CCACHE_DIR' is not accessible for user $(whoami)"
-                    echo "Please verify its access permissions"
-                    echo "====="
-                    exit 1
-                  fi
-                '';
-              };
-            })
           ];
         }
       ];

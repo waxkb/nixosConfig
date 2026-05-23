@@ -1,4 +1,4 @@
-{ pkgs, pkgs25, zen-browser, inputs, claude-code, noctalia, ... }:
+{ pkgs, pkgs25, zen-browser, inputs, claude-code, ... }:
 
 let
   tex = (pkgs.texliveSmall.withPackages (
@@ -68,7 +68,7 @@ in
     matugenFixed
     mpv
     niri
-    noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    noctalia
     ollama
     opencode
     parted
