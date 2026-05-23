@@ -24,15 +24,16 @@
 
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell/v5";
+      # url = "github:noctalia-dev/noctalia-shell/e3ef58c181f07bab38b7670d919c55b0cac7b50b";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     llama-cpp = {
-      #url = "github:ggml-org/llama.cpp/9f26182";
-      #url = "github:ggml-org/llama.cpp?ref=refs/pull/22673/merge";
-      #url = "github:ggml-org/llama.cpp";
-      url = "github:ggml-org/llama.cpp/67b2b7f2f2d6dac7962b219168a4c7a20c7359b7";
-      #url = "github:TheTom/llama-cpp-turboquant/feature/turboquant-kv-cache";
+      # url = "github:ggml-org/llama.cpp/9f26182";
+      url = "github:ggml-org/llama.cpp?ref=refs/pull/23352/merge";
+      # url = "github:ggml-org/llama.cpp";
+      # url = "github:ggml-org/llama.cpp/67b2b7f2f2d6dac7962b219168a4c7a20c7359b7";
+      # url = "github:TheTom/llama-cpp-turboquant/feature/turboquant-kv-cache";
       flake = false;
     };
 
@@ -94,41 +95,43 @@
             (final: prev: {
               llama-cpp = (prev.llama-cpp.override {
                 cudaSupport = true;
-                blasSupport = false;
+                rocmSupport = false;
+                metalSupport = false;
+                blasSupport = true;
               }).overrideAttrs (oldAttrs: {
-                src = llama-cpp; # This refers to your flake input
-                npmDepsHash = "sha256-cV3noOyKmst9vfxyvkCNhihPgwfVGhmPPT4UMloeWZM=";
-                version = "100000";
+                src = llama-cpp;
+                npmDepsHash = "sha256-Iyg8FpcTKf2UYHuK7mA3cTAqVaLcQPcS0YCa5Qf01Gc=";
+                version = "1";
 
-                patches = [];   # Ignore patches meant for older versions
-                postPatch = ""; # Ignore the cleanup script that is failing
+                patches = [];
+                postPatch = "";
 
                 stdenv = prev.ccacheStdenv;
 
-                # 1. Use Ninja for faster build orchestration
                 nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ 
                   prev.ninja 
                   prev.ccache 
                 ];
 
                 cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
-                  "-GNinja" # Tell CMake to use Ninja
+                  "-GNinja"
                   "-DGGML_NATIVE=ON"
                   "-DCMAKE_CUDA_ARCHITECTURES=89"
-                  #"-DCMAKE_UNITY_BUILD=ON"
-                  #"-DCMAKE_UNITY_BUILD_BATCH_SIZE=32"
+                  "-DGGML_AVX=ON"
+                  "-DGGML_AVX2=ON"
+                  "-DGGML_AVX512=ON"
+                  "-DGGML_CUDA_FA_ALL_QUANTS=ON"
+                  "-DGGML_CUDA_GRAPHS=ON"
+                  # "-DCMAKE_UNITY_BUILD=ON"
+                  # "-DCMAKE_UNITY_BUILD_BATCH_SIZE=32"
                 ];
 
-                NIX_CFLAGS_COMPILE = (oldAttrs.NIX_CFLAGS_COMPILE or "") + " -fuse-ld=mold -Wl,--threads";
+                NIX_CFLAGS_COMPILE = (oldAttrs.NIX_CFLAGS_COMPILE or "") + " -march=native -mtune=native -fuse-ld=mold -Wl,--threads";
 
                 buildInputs = (oldAttrs.buildInputs or [ ]) ++ [ prev.mold ];
 
-                CCACHE_DIR = "/var/cache/ccache";
-
                 preConfigure = ''
                   export NIX_ENFORCE_NO_NATIVE=0
-                  # 3. Setup ccache directory within the build sandbox
-                  export CCACHE_DIR="/tmp/ccache" 
                   ${oldAttrs.preConfigure or ""}
                 '';
               });
@@ -137,6 +140,32 @@
               khal = pkgs25.khal;
             })
             claude-code.overlays.default
+            (self: super: {
+              ccacheWrapper = super.ccacheWrapper.override {
+                extraConfig = ''
+                  export CCACHE_COMPRESS=1
+                  export CCACHE_DIR="/var/cache/ccache"
+                  export CCACHE_UMASK=007
+                  export CCACHE_SLOPPINESS=random_seed
+                  if [ ! -d "$CCACHE_DIR" ]; then
+                    echo "====="
+                    echo "Directory '$CCACHE_DIR' does not exist"
+                    echo "Please create it with:"
+                    echo "  sudo mkdir -m0770 '$CCACHE_DIR'"
+                    echo "  sudo chown root:nixbld '$CCACHE_DIR'"
+                    echo "====="
+                    exit 1
+                  fi
+                  if [ ! -w "$CCACHE_DIR" ]; then
+                    echo "====="
+                    echo "Directory '$CCACHE_DIR' is not accessible for user $(whoami)"
+                    echo "Please verify its access permissions"
+                    echo "====="
+                    exit 1
+                  fi
+                '';
+              };
+            })
           ];
         }
       ];

@@ -30,6 +30,15 @@ in
     };
   };
 
+  nix.settings = {
+    extra-sandbox-paths = [ config.programs.ccache.cacheDir ];
+  };
+
+  programs.ccache = {
+    enable = true;
+    packageNames = [ "llama-cpp" "noctalia" ];
+  };
+
   fonts = {
     packages = with pkgs; [
       nerd-fonts.jetbrains-mono
@@ -292,14 +301,6 @@ in
   #  };
   #};
 
-  nix.settings = {
-    extra-sandbox-paths = [ "/var/cache/ccache" ];
-  };
-
-  programs.ccache = {
-    enable = true;
-    cacheDir = "/var/cache/ccache";
-  };
 
   programs.zsh = {
     enable = true;
@@ -383,8 +384,6 @@ in
   boot.initrd.availableKernelModules = [
       "nvidia_drm" "nvidia_modeset" "nvidia" "nvidia_uvm"
   ];
-
-  nixpkgs.config.cudaSupport = true;
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;

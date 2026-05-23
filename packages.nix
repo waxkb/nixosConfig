@@ -39,7 +39,6 @@ in
     bibata-cursors
     broot
     btop
-    cargo
     cliphist
     codex
     cmake
@@ -47,14 +46,12 @@ in
     efibootmgr
     fastfetch
     fd
-    ffmpeg
     foot
     fzf
     gcc
     git
     gita
     gnumake
-    google-chrome
     gptfdisk
     hyperfine
     hyprlock
@@ -63,7 +60,6 @@ in
     infisical
     iwd
     jq
-    kitty
     libffi
     libnotify
     libxkbcommon
@@ -71,18 +67,14 @@ in
     lsof
     matugenFixed
     mpv
-    neovim
     niri
     noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-    nodejs
-    openclaw
-    ollama-cuda
+    ollama
     opencode
     parted
     pavucontrol
     pkg-config
     playerctl
-    podman-compose
     pulseaudio
     libsForQt5.qtgraphicaleffects
     libsForQt5.qtmultimedia
@@ -92,24 +84,19 @@ in
     pkgs.kdePackages.qtvirtualkeyboard
     ratty
     ripgrep
-    rustc
-    (pkgs.callPackage ./skim.nix { })
     starship
     stress-ng
     stow
-    television
     tex
     tofi
     tree
     unzip
     uv
-    ventoy-full
     vicinae
     wev
     wget
     wl-clipboard
     xwayland-satellite
-    yazi
     zathura
     zathuraPkgs.zathura_pdf_poppler
     zen-browser.packages.${pkgs.system}.default
