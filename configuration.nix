@@ -273,6 +273,10 @@ in
   fonts = {
     packages = with pkgs; [
       nerd-fonts.jetbrains-mono
+      nerd-fonts.geist-mono
+      nerd-fonts.iosevka
+      maple-mono.NF-unhinted
+      commit-mono
       material-symbols
       inter
       noto-fonts
@@ -281,24 +285,25 @@ in
       enable = true;
       antialias = true;
       hinting = {
-        enable = false;
-        style = "none";
+        enable = true;
+        autohint = false;
+        style = "slight";
       };
       subpixel = {
-        rgba = "none";
         lcdfilter = "none";
+        rgba = "none";
       };
       defaultFonts = {
         serif = [ "Noto Serif" ];
         sansSerif = [ "Inter" ];
-        monospace = [ "JetBrainsMono Nerd Font Mono" ];
+        monospace = [ "JetBrainsMono NFM" ];
       };
     };
     fontDir.enable = true;
   };
 
   environment.variables = {
-    FREETYPE_PROPERTIES = "truetype:interpreter-version=40";
+    FREETYPE_PROPERTIES="truetype:interpreter-version=40";
   };
 
   nix.settings = {

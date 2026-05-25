@@ -30,8 +30,8 @@
 
     llama-cpp = {
       # url = "github:ggml-org/llama.cpp/9f26182";
-      url = "github:ggml-org/llama.cpp?ref=refs/pull/23352/merge";
-      # url = "github:ggml-org/llama.cpp";
+      # url = "github:ggml-org/llama.cpp?ref=refs/pull/23352/merge";
+      url = "github:ggml-org/llama.cpp";
       # url = "github:ggml-org/llama.cpp/67b2b7f2f2d6dac7962b219168a4c7a20c7359b7";
       # url = "github:TheTom/llama-cpp-turboquant/feature/turboquant-kv-cache";
       flake = false;

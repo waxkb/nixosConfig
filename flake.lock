@@ -45,11 +45,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779455141,
-        "narHash": "sha256-e3u0LZbs9M4S+h6Qj/yj2Z0HJLqesjcO63lnJyNHB0Q=",
+        "lastModified": 1779663402,
+        "narHash": "sha256-Kwo5kQN6rVU0Rq+FeQdBPpIOygbF7veVy25tvmh4QW0=",
         "owner": "AvengeMedia",
         "repo": "DankMaterialShell",
-        "rev": "0b55fbcb152b80ed41ac0486e896a3b9f2c85659",
+        "rev": "6093c37b416657f48766d4a1465c8d7c3df7aa4d",
         "type": "github"
       },
       "original": {
@@ -136,16 +136,15 @@
     "llama-cpp": {
       "flake": false,
       "locked": {
-        "lastModified": 1779524864,
-        "narHash": "sha256-UDAYys3ekUf/mU4PKFrtlwf7ZnQWZj0A34klHUCdiBg=",
+        "lastModified": 1779636010,
+        "narHash": "sha256-Esm/NwItE96fwFZJ1OOMhVP3wKNZX89z+tvV8MNyY28=",
         "owner": "ggml-org",
         "repo": "llama.cpp",
-        "rev": "14002f1afb142f0c74dab02cd09776b104c576da",
+        "rev": "549b9d84330c327e6791fa812a7d60c0cf63572e",
         "type": "github"
       },
       "original": {
         "owner": "ggml-org",
-        "ref": "refs/pull/23352/merge",
         "repo": "llama.cpp",
         "type": "github"
       }
@@ -256,11 +255,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779633341,
-        "narHash": "sha256-eqNZpqzdQHA2hF2MWZ5u2vKRhH1vJpS+NoEedHZRWEg=",
+        "lastModified": 1779663683,
+        "narHash": "sha256-MBWWIxO6p1bfQZzdssPko8rYPt7diMkm31MDE6cZb1c=",
         "owner": "noctalia-dev",
         "repo": "noctalia-shell",
-        "rev": "5daaf2daeb2543b5adaf4c32a42214c9402b1aac",
+        "rev": "a387d30c8e9e50a54ba98f80fb09ccb8e5089a5f",
         "type": "github"
       },
       "original": {
@@ -339,11 +338,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1779455631,
-        "narHash": "sha256-svU6Ro4xiMxMA1KJGwQ/nfKwz3yXE/SONCw2Z1qTXHA=",
+        "lastModified": 1779649538,
+        "narHash": "sha256-k256zgHyqJ/0siFdq5y4GSwJyYKhQnW83N9K8S7OMKo=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "5bcdfcef664bf62831dcb4b947004d9c5fbf7201",
+        "rev": "e8fbde26a92a8c078fb1355c9f7c8dba5f7eb9d6",
         "type": "github"
       },
       "original": {

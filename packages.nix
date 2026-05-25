@@ -95,6 +95,7 @@ in
     unzip
     uv
     vicinae
+    wayland-bongocat
     wev
     wezterm
     wget
