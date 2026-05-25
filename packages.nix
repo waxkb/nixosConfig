@@ -71,12 +71,14 @@ in
     niri
     nnd
     noctalia
+    nodejs
     ollama
     opencode
     parted
     pavucontrol
     pkg-config
     playerctl
+    pnpm
     pulseaudio
     libsForQt5.qtgraphicaleffects
     libsForQt5.qtmultimedia

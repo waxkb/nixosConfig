@@ -189,7 +189,7 @@ in
     isNormalUser = true;
     description = "max";
     shell = pkgs.zsh;
-    extraGroups = [ "networkmanager" "wheel" "podman" ];
+    extraGroups = [ "networkmanager" "wheel" "podman" "input" ];
     packages = [];
   };
 
@@ -273,13 +273,12 @@ in
   fonts = {
     packages = with pkgs; [
       nerd-fonts.jetbrains-mono
-      nerd-fonts.geist-mono
       nerd-fonts.iosevka
       maple-mono.NF-unhinted
       commit-mono
-      material-symbols
       inter
       noto-fonts
+      material-symbols
     ];
     fontconfig = {
       enable = true;
@@ -296,7 +295,7 @@ in
       defaultFonts = {
         serif = [ "Noto Serif" ];
         sansSerif = [ "Inter" ];
-        monospace = [ "JetBrainsMono NFM" ];
+        monospace = [ "Maple Mono NF" ];
       };
     };
     fontDir.enable = true;
