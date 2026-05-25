@@ -1,23 +1,23 @@
 { config, pkgs, zen-browser, matugen, dms, sddm-themes, ... }:
 
 let
-  system = pkgs.system;
-  nier-sddm-theme = pkgs.stdenv.mkDerivation {
-    name = "nier-sddm-theme";
-    src = sddm-themes;
-    installPhase = ''
-      mkdir -p $out/share/sddm/themes
-      # Copy the specific nier folder into the output
-      cp -r ./themes/nier-automata $out/share/sddm/themes/
+system = pkgs.system;
+nier-sddm-theme = pkgs.stdenv.mkDerivation {
+  name = "nier-sddm-theme";
+  src = sddm-themes;
+  installPhase = ''
+    mkdir -p $out/share/sddm/themes
+# Copy the specific nier folder into the output
+    cp -r ./themes/nier-automata $out/share/sddm/themes/
     '';
-  };
+};
 in
 {
 
   imports = [
     ./hardware-configuration.nix
-    ./packages.nix
-    dms.nixosModules.dank-material-shell
+      ./packages.nix
+      dms.nixosModules.dank-material-shell
   ];
 
   programs.neovim = {
@@ -51,22 +51,22 @@ in
 
   nixpkgs.config.permittedInsecurePackages = [
     "ventoy-1.1.12"
-    "openclaw-2026.5.7"
+      "openclaw-2026.5.7"
   ];
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     stdenv.cc.cc
-    zlib
-    libx11
-    libxinerama
-    libxext
-    libGL
+      zlib
+      libx11
+      libxinerama
+      libxext
+      libGL
   ];
 
-    # Disable generation of documentation to bypass the Sphinx/Docutils bug
-    documentation.enable = false;
-    documentation.man.enable = false;
+# Disable generation of documentation to bypass the Sphinx/Docutils bug
+  documentation.enable = false;
+  documentation.man.enable = false;
 
   services.searx = {
     enable = true;
@@ -76,28 +76,28 @@ in
           "User-Agent" = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36";
           "Accept-Language" = "en-US,en;q=0.9";
         };
-        # Standard local port
+# Standard local port
         port = 9090;
         bind_address = "127.0.0.1";
-        # Essential: Open WebUI needs a secret key to communicate safely
+# Essential: Open WebUI needs a secret key to communicate safely
         secret_key = "a"; 
       };
       search = {
         safe_search = 0;
         autocomplete = "google";
-        # CRITICAL: Open WebUI requires JSON format to parse results
+# CRITICAL: Open WebUI requires JSON format to parse results
         formats = [ "html" "json" ];
       };
-      # Optional: Enable engines you like
+# Optional: Enable engines you like
       engines = [
-        { name = "google"; engine = "google"; shortcut = "go"; }
-        { name = "duckduckgo"; engine = "duckduckgo"; shortcut = "ddg"; }
-        { name = "reddit"; engine = "reddit"; shortcut = "re"; }
+      { name = "google"; engine = "google"; shortcut = "go"; }
+      { name = "duckduckgo"; engine = "duckduckgo"; shortcut = "ddg"; }
+      { name = "reddit"; engine = "reddit"; shortcut = "re"; }
       ];
       enabled_plugins = [
         "Hash plugin"
-        "Self_Information"
-        "Tracker_aware"
+          "Self_Information"
+          "Tracker_aware"
       ];
     };
   };
@@ -116,10 +116,10 @@ in
       pkgs.kdePackages.qtdeclarative
     ];
     package = pkgs.kdePackages.sddm.overrideAttrs (old: {
-      buildCommand = old.buildCommand + ''
+        buildCommand = old.buildCommand + ''
         ln -s $out/bin/sddm-greeter-qt6 $out/bin/sddm-greeter
-      '';
-    });
+        '';
+        });
   };
 
   services.displayManager.sddm.settings = {
@@ -142,8 +142,8 @@ in
   programs.obs-studio = {
     enable = true;
     package = (pkgs.obs-studio.override {
-      cudaSupport = true;
-    });
+        cudaSupport = true;
+        });
     plugins = with pkgs.obs-studio-plugins; [
       obs-pipewire-audio-capture
     ];
@@ -152,9 +152,9 @@ in
   programs.dank-material-shell = {
     enable = true;
     systemd = {
-        enable = true;
-        restartIfChanged = true;
-      };
+      enable = true;
+      restartIfChanged = true;
+    };
   };
 
   programs.zsh = {
@@ -218,14 +218,14 @@ in
 
   boot.kernelParams = [
     "nvidia-drm.modeset=1"
-    "nvidia-drm.fbdev=1"
-    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
-    "nvidia.NVreg_TemporaryFilePath=/var/tmp"
-    "amdgpu.enable=0"
+      "nvidia-drm.fbdev=1"
+      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+      "nvidia.NVreg_TemporaryFilePath=/var/tmp"
+      "amdgpu.enable=0"
   ];
 
   boot.initrd.availableKernelModules = [
-      "nvidia_drm" "nvidia_modeset" "nvidia" "nvidia_uvm"
+    "nvidia_drm" "nvidia_modeset" "nvidia" "nvidia_uvm"
   ];
 
   networking.hostName = "nixos";
@@ -273,12 +273,12 @@ in
   fonts = {
     packages = with pkgs; [
       nerd-fonts.jetbrains-mono
-      nerd-fonts.iosevka
-      maple-mono.NF-unhinted
-      commit-mono
-      inter
-      noto-fonts
-      material-symbols
+        nerd-fonts.iosevka
+        maple-mono.NF-unhinted
+        commit-mono
+        inter
+        noto-fonts
+        material-symbols
     ];
     fontconfig = {
       enable = true;
@@ -311,16 +311,16 @@ in
 
   system.activationScripts.ccacheCacheDir.text = ''
     mkdir -p ${config.programs.ccache.cacheDir}
-    install -d -m 0770 -o ${config.programs.ccache.owner} -g ${config.programs.ccache.group} ${config.programs.ccache.cacheDir}
-    install -d -m 0770 -o ${config.programs.ccache.owner} -g ${config.programs.ccache.group} ${config.programs.ccache.cacheDir}/tmp
-  '';
+  install -d -m 0770 -o ${config.programs.ccache.owner} -g ${config.programs.ccache.group} ${config.programs.ccache.cacheDir}
+  install -d -m 0770 -o ${config.programs.ccache.owner} -g ${config.programs.ccache.group} ${config.programs.ccache.cacheDir}/tmp
+    '';
 
   boot.kernelModules = [ "ryzen_smu" ];
   boot.extraModulePackages = [ config.boot.kernelPackages.ryzen-smu ];
 
   security.pam.loginLimits = [
-    { domain = "*"; item = "memlock"; value = "unlimited"; type = "soft"; }
-    { domain = "*"; item = "memlock"; value = "unlimited"; type = "hard"; }
+  { domain = "*"; item = "memlock"; value = "unlimited"; type = "soft"; }
+  { domain = "*"; item = "memlock"; value = "unlimited"; type = "hard"; }
   ];
 
   hardware.opengl.enable = true;

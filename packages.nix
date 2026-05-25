@@ -39,6 +39,8 @@ in
     bibata-cursors
     broot
     btop
+    clang
+    clang-tools
     cliphist
     cmake
     codex
@@ -51,6 +53,7 @@ in
     gcc
     git
     gita
+    google-java-format
     gnumake
     gptfdisk
     hyperfine
@@ -69,6 +72,7 @@ in
     matugenFixed
     mpv
     niri
+    nixfmt-rs
     nnd
     noctalia
     nodejs
@@ -88,9 +92,13 @@ in
     pkgs.kdePackages.qtvirtualkeyboard
     ratty
     ripgrep
+    ruff
+    rustfmt
+    shfmt
     starship
     stress-ng
     stow
+    stylua
     tex
     tofi
     tree
