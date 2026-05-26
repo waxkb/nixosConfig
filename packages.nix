@@ -1,18 +1,27 @@
-{ pkgs, pkgs25, zen-browser, inputs, claude-code, ... }:
+{
+  pkgs,
+  pkgs25,
+  zen-browser,
+  inputs,
+  claude-code,
+  ...
+}:
 
 let
-  tex = (pkgs.texliveSmall.withPackages (
-    ps: with ps; [
-      latexmk
-      thmtools
-      tikz-cd
-      mdframed
-      zref
-      needspace
-      mhchem
-      siunitx
-    ]
-  ));
+  tex = (
+    pkgs.texliveSmall.withPackages (
+      ps: with ps; [
+        latexmk
+        thmtools
+        tikz-cd
+        mdframed
+        zref
+        needspace
+        mhchem
+        siunitx
+      ]
+    )
+  );
   matugenFixed = pkgs.writeShellScriptBin "matugen" ''
     #!/usr/bin/env bash
 
@@ -69,6 +78,7 @@ in
     libxkbcommon
     llama-cpp
     lsof
+    matcha
     matugenFixed
     mpv
     niri
