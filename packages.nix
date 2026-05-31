@@ -113,6 +113,7 @@ in
     tex
     tofi
     tree
+    tree-sitter
     unzip
     uv
     vicinae
