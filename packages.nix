@@ -43,6 +43,7 @@ in
 {
   environment.systemPackages = with pkgs; [
     activate-linux
+    astyle
     inputs.areofyl-fetch.packages.${pkgs.system}.default
     bat
     bibata-cursors
