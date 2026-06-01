@@ -166,17 +166,17 @@ in
     nix-direnv.enable = true;
   };
 
-  programs.obs-studio = {
-    enable = true;
-    package = (
-      pkgs.obs-studio.override {
-        cudaSupport = true;
-      }
-    );
-    plugins = with pkgs.obs-studio-plugins; [
-      obs-pipewire-audio-capture
-    ];
-  };
+  # programs.obs-studio = {
+  #   enable = true;
+  #   package = (
+  #     pkgs.obs-studio.override {
+  #       cudaSupport = true;
+  #     }
+  #   );
+  #   plugins = with pkgs.obs-studio-plugins; [
+  #     obs-pipewire-audio-capture
+  #   ];
+  # };
 
   programs.dank-material-shell = {
     enable = true;

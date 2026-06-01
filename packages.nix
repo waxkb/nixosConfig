@@ -49,6 +49,7 @@ in
     bibata-cursors
     broot
     btop
+    cargo
     clang
     clang-tools
     cliphist
@@ -79,6 +80,7 @@ in
     libxkbcommon
     llama-cpp
     lsof
+    lua5_1
     matcha
     matugenFixed
     mpv
@@ -104,6 +106,7 @@ in
     ratty
     ripgrep
     ruff
+    rustc
     rustfmt
     shfmt
     starship
