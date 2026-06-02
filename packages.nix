@@ -126,6 +126,7 @@ in
     wget
     wl-clipboard
     xwayland-satellite
+    yazi
     zathura
     zathuraPkgs.zathura_pdf_poppler
     zen-browser.packages.${pkgs.system}.default
