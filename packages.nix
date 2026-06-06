@@ -57,7 +57,6 @@ in
     codex
     curl
     efibootmgr
-    fastfetch
     fd
     foot
     fzf
@@ -83,6 +82,7 @@ in
     lua5_1
     matcha
     matugenFixed
+    microfetch
     mpv
     niri
     nixfmt-rs
