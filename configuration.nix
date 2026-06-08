@@ -60,11 +60,6 @@ in
 
   programs.kdeconnect.enable = true;
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "ventoy-1.1.12"
-    "openclaw-2026.5.7"
-  ];
-
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     stdenv.cc.cc
@@ -79,55 +74,55 @@ in
   documentation.enable = false;
   documentation.man.enable = false;
 
-  services.searx = {
-    enable = true;
-    settings = {
-      server = {
-        default_http_headers = {
-          "User-Agent" =
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36";
-          "Accept-Language" = "en-US,en;q=0.9";
-        };
-        # Standard local port
-        port = 9090;
-        bind_address = "127.0.0.1";
-        # Essential: Open WebUI needs a secret key to communicate safely
-        secret_key = "a";
-      };
-      search = {
-        safe_search = 0;
-        autocomplete = "google";
-        # CRITICAL: Open WebUI requires JSON format to parse results
-        formats = [
-          "html"
-          "json"
-        ];
-      };
-      # Optional: Enable engines you like
-      engines = [
-        {
-          name = "google";
-          engine = "google";
-          shortcut = "go";
-        }
-        {
-          name = "duckduckgo";
-          engine = "duckduckgo";
-          shortcut = "ddg";
-        }
-        {
-          name = "reddit";
-          engine = "reddit";
-          shortcut = "re";
-        }
-      ];
-      enabled_plugins = [
-        "Hash plugin"
-        "Self_Information"
-        "Tracker_aware"
-      ];
-    };
-  };
+  # services.searx = {
+  #   enable = true;
+  #   settings = {
+  #     server = {
+  #       default_http_headers = {
+  #         "User-Agent" =
+  #           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36";
+  #         "Accept-Language" = "en-US,en;q=0.9";
+  #       };
+  #       # Standard local port
+  #       port = 9090;
+  #       bind_address = "127.0.0.1";
+  #       # Essential: Open WebUI needs a secret key to communicate safely
+  #       secret_key = "a";
+  #     };
+  #     search = {
+  #       safe_search = 0;
+  #       autocomplete = "google";
+  #       # CRITICAL: Open WebUI requires JSON format to parse results
+  #       formats = [
+  #         "html"
+  #         "json"
+  #       ];
+  #     };
+  #     # Optional: Enable engines you like
+  #     engines = [
+  #       {
+  #         name = "google";
+  #         engine = "google";
+  #         shortcut = "go";
+  #       }
+  #       {
+  #         name = "duckduckgo";
+  #         engine = "duckduckgo";
+  #         shortcut = "ddg";
+  #       }
+  #       {
+  #         name = "reddit";
+  #         engine = "reddit";
+  #         shortcut = "re";
+  #       }
+  #     ];
+  #     enabled_plugins = [
+  #       "Hash plugin"
+  #       "Self_Information"
+  #       "Tracker_aware"
+  #     ];
+  #   };
+  # };
 
   services.displayManager.sddm = {
     enable = true;
@@ -318,6 +313,7 @@ in
       inter
       noto-fonts
       material-symbols
+      corefonts
     ];
     fontconfig = {
       enable = true;

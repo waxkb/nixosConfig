@@ -15,10 +15,13 @@ let
         thmtools
         tikz-cd
         mdframed
+        newtx
         zref
         needspace
         mhchem
         siunitx
+        latexindent
+        fancyhdr
       ]
     )
   );
@@ -131,5 +134,10 @@ in
     zathuraPkgs.zathura_pdf_poppler
     zen-browser.packages.${pkgs.system}.default
     zsh
+    # Neovim lsp packages
+    bash-language-server
+    lua-language-server
+    ty
+    rust-analyzer
   ];
 }
