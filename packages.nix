@@ -22,6 +22,12 @@ let
         siunitx
         latexindent
         fancyhdr
+        biblatex
+        biblatex-chicago
+        biber
+        csquotes
+        babel
+        xstring
       ]
     )
   );
