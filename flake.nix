@@ -10,6 +10,8 @@
 
     nixpkgs-2511.url = "github:NixOS/nixpkgs/nixos-25.11";
 
+    nixos-core.url = "github:manic-systems/nixos-core";
+
     ncro.url = "github:manic-systems/ncro";
 
     zen-browser = {
@@ -62,6 +64,7 @@
       claude-code,
       areofyl-fetch,
       ncro,
+      nixos-core,
       ...
     }:
     let
@@ -85,6 +88,7 @@
         inherit system;
 
         modules = [
+          nixos-core.nixosModules.default
           inputs.dms.nixosModules.dank-material-shell
           inputs.ncro.nixosModules.default
           ./configuration.nix

@@ -26,6 +26,8 @@ in
 
   # nix.package = pkgs.lixPackageSets.git.lix;
 
+  system.nixos-core.enable = true;
+
   services.ncro = {
     enable = true;
     settings = {
@@ -37,6 +39,11 @@ in
           url = "https://cache.nixos.org";
           priority = 10;
           public_key = "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=";
+        }
+        {
+          url = "https://nix-community.cachix.org";
+          priority = 20;
+          public_key = "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
         }
       ];
     };
