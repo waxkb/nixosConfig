@@ -285,29 +285,19 @@ in
     "amdgpu.enable=0"
   ];
 
-  boot.initrd.availableKernelModules = [
-    "nvidia_drm"
-    "nvidia_modeset"
-    "nvidia"
-    "nvidia_uvm"
-  ];
-
   boot.initrd.systemd.enable = true;
 
   systemd.services.NetworkManager-wait-online.enable = false; # Doesn't wait to connect to internet before booting
 
   boot.initrd.includeDefaultModules = false;
 
-  # boot.initrd.availableKernelModules = [
-  #   "nvme"
-  #   "xhci_pci"
-  #   "ahci"
-  #   "usbhid"
-  #   "usb_storage"
-  #   "sd_mod"
-  # ];
-
-  boot.initrd.availableKernelModules = lib.mkAfter [
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "ahci"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
     "nvidia"
     "nvidia_modeset"
     "nvidia_drm"
