@@ -5,6 +5,7 @@
   matugen,
   dms,
   sddm-themes,
+  ncro,
   ...
 }:
 
@@ -26,7 +27,28 @@ in
     ./hardware-configuration.nix
     ./packages.nix
     dms.nixosModules.dank-material-shell
+    ncro.nixosModules.default
   ];
+
+  # nix.package = pkgs.lixPackageSets.git.lix;
+
+  services.ncro = {
+    enable = true;
+    settings = {
+      server = {
+        listen = ":8081";
+      };
+      upstreams = [
+        {
+          url = "https://cache.nixos.org";
+          priority = 10;
+          public_key = "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=";
+        }
+      ];
+    };
+  };
+
+  nix.settings.substituters = [ "http://localhost:8081" ];
 
   programs.neovim = {
     enable = true;
@@ -37,7 +59,7 @@ in
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/home/user/my-nixos-config"; # sets NH_OS_FLAKE variable for you
+    flake = "/home/max/nixos"; # sets NH_OS_FLAKE variable for you
   };
 
   programs.ccache = {

@@ -4,6 +4,7 @@
   zen-browser,
   inputs,
   claude-code,
+  ncro,
   ...
 }:
 
@@ -93,6 +94,7 @@ in
     matugenFixed
     microfetch
     mpv
+    inputs.ncro.packages.${pkgs.system}.ncro
     niri
     nixfmt-rs
     nnd
