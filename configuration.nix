@@ -292,6 +292,21 @@ in
     "nvidia_uvm"
   ];
 
+  boot.initrd.systemd.enable = true;
+
+  systemd.services.NetworkManager-wait-online.enable = false; # Doesn't wait to connect to internet before booting
+
+  boot.initrd.includeDefaultModules = false;
+
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "ahci"
+    "usbhid"
+    "usb_storage"
+    "sd_mod"
+  ]; # Critical: make sure this is correct for other devices
+
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
