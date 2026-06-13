@@ -1,10 +1,6 @@
 {
   pkgs,
-  pkgs25,
-  zen-browser,
   inputs,
-  claude-code,
-  ncro,
   ...
 }:
 
@@ -140,7 +136,7 @@ in
     yazi
     zathura
     zathuraPkgs.zathura_pdf_poppler
-    zen-browser.packages.${pkgs.system}.default
+    inputs.zen-browser.packages.${pkgs.system}.default
     zsh
     # Neovim lsp packages
     bash-language-server

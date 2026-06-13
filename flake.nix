@@ -85,6 +85,8 @@
         inherit system;
 
         modules = [
+          inputs.dms.nixosModules.dank-material-shell
+          inputs.ncro.nixosModules.default
           ./configuration.nix
           ./packages.nix
           home-manager.nixosModules.home-manager
@@ -172,13 +174,7 @@
         ];
 
         specialArgs = {
-          inherit inputs pkgs25 areofyl-fetch;
-          zen-browser = zen-browser;
-          matugen = matugen;
-          dms = dms;
-          noctalia = noctalia;
-          sddm-themes = sddm-themes;
-          ncro = ncro;
+          inherit inputs;
         };
       };
     };

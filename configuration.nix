@@ -1,11 +1,7 @@
 {
   config,
   pkgs,
-  zen-browser,
-  matugen,
-  dms,
-  sddm-themes,
-  ncro,
+  inputs,
   ...
 }:
 
@@ -13,7 +9,7 @@ let
   system = pkgs.system;
   nier-sddm-theme = pkgs.stdenv.mkDerivation {
     name = "nier-sddm-theme";
-    src = sddm-themes;
+    src = inputs.sddm-themes;
     installPhase = ''
           mkdir -p $out/share/sddm/themes
       # Copy the specific nier folder into the output
@@ -26,8 +22,6 @@ in
   imports = [
     ./hardware-configuration.nix
     ./packages.nix
-    dms.nixosModules.dank-material-shell
-    ncro.nixosModules.default
   ];
 
   # nix.package = pkgs.lixPackageSets.git.lix;
