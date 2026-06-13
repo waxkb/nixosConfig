@@ -298,14 +298,23 @@ in
 
   boot.initrd.includeDefaultModules = false;
 
-  boot.initrd.availableKernelModules = [
-    "nvme"
-    "xhci_pci"
-    "ahci"
-    "usbhid"
-    "usb_storage"
-    "sd_mod"
-  ]; # Critical: make sure this is correct for other devices
+  # boot.initrd.availableKernelModules = [
+  #   "nvme"
+  #   "xhci_pci"
+  #   "ahci"
+  #   "usbhid"
+  #   "usb_storage"
+  #   "sd_mod"
+  # ];
+
+  boot.initrd.availableKernelModules = lib.mkAfter [
+    "nvidia"
+    "nvidia_modeset"
+    "nvidia_drm"
+    "nvidia_uvm"
+  ];
+
+  systemd.services.systemd-rfkill.enable = false;
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
