@@ -7,15 +7,15 @@
 
 let
   system = pkgs.system;
-  nier-sddm-theme = pkgs.stdenv.mkDerivation {
-    name = "nier-sddm-theme";
-    src = inputs.sddm-themes;
-    installPhase = ''
-          mkdir -p $out/share/sddm/themes
-      # Copy the specific nier folder into the output
-          cp -r ./themes/nier-automata $out/share/sddm/themes/
-    '';
-  };
+  # nier-sddm-theme = pkgs.stdenv.mkDerivation {
+  #   name = "nier-sddm-theme";
+  #   src = inputs.sddm-themes;
+  #   installPhase = ''
+  #         mkdir -p $out/share/sddm/themes
+  #     # Copy the specific nier folder into the output
+  #         cp -r ./themes/nier-automata $out/share/sddm/themes/
+  #   '';
+  # };
 in
 {
 
@@ -84,10 +84,6 @@ in
     18790
   ];
 
-  environment.systemPackages = [
-    nier-sddm-theme
-  ];
-
   programs.kdeconnect.enable = true;
 
   programs.nix-ld.enable = true;
@@ -154,34 +150,46 @@ in
   #   };
   # };
 
-  services.displayManager.sddm = {
-    enable = true;
-    theme = "nier-automata";
-    wayland.enable = false;
-    extraPackages = [
-      nier-sddm-theme
-      pkgs.kdePackages.qt5compat
-      pkgs.kdePackages.qtshadertools
-      pkgs.kdePackages.qtsvg
-      pkgs.kdePackages.qtmultimedia
-      pkgs.kdePackages.qtvirtualkeyboard
-      pkgs.kdePackages.qtdeclarative
-    ];
-    package = pkgs.kdePackages.sddm.overrideAttrs (old: {
-      buildCommand = old.buildCommand + ''
-        ln -s $out/bin/sddm-greeter-qt6 $out/bin/sddm-greeter
-      '';
-    });
-  };
+  # services.displayManager.sddm = {
+  #   enable = true;
+  #   theme = "nier-automata";
+  #   wayland.enable = false;
+  #   extraPackages = [
+  #     nier-sddm-theme
+  #     pkgs.kdePackages.qt5compat
+  #     pkgs.kdePackages.qtshadertools
+  #     pkgs.kdePackages.qtsvg
+  #     pkgs.kdePackages.qtmultimedia
+  #     pkgs.kdePackages.qtvirtualkeyboard
+  #     pkgs.kdePackages.qtdeclarative
+  #   ];
+  #   package = pkgs.kdePackages.sddm.overrideAttrs (old: {
+  #     buildRequest = old.buildCommand + ''
+  #       ln -s $out/bin/sddm-greeter-qt6 $out/bin/sddm-greeter
+  #     '';
+  #   });
+  # };
 
-  services.displayManager.sddm.settings = {
-    General = {
-      DisplayServer = "x11";
-      InputMethod = "";
-    };
-    Theme = {
-      ThemeDir = "/run/current-system/sw/share/sddm/themes";
-      Current = "nier-automata";
+  # services.displayManager.sddm.settings = {
+  #   General = {
+  #     DisplayServer = "x11";
+  #     InputMethod = "";
+  #   };
+  #   Theme = {
+  #     ThemeDir = "/run/current-system/sw/share/sddm/themes";
+  #     Current = "nier-automata";
+  #   };
+  # };
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${
+          inputs.tuigreet.packages.${system}.tuigreet
+        }/bin/tuigreet --cmd niri-session --remember --remember-session";
+        user = "greeter";
+      };
     };
   };
 
@@ -283,11 +291,19 @@ in
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
     "amdgpu.enable=0"
+    "8250.nr_uarts=0"
+    # "quiet"
+    # "loglevel=3"
+    # "systemd.show_status=auto"
+    # "rd.udev.log_level=3"
+    # "rd.systemd.show_status=false"
   ];
 
   boot.initrd.systemd.enable = true;
 
-  systemd.services.NetworkManager-wait-online.enable = false; # Doesn't wait to connect to internet before booting
+  # systemd.services.NetworkManager-wait-online.enable = false; # Doesn't wait to connect to internet before booting
+
+  # systemd.services.systemd-rfkill.enable = false;
 
   boot.initrd.includeDefaultModules = false;
 
@@ -298,13 +314,7 @@ in
     "usbhid"
     "usb_storage"
     "sd_mod"
-    "nvidia"
-    "nvidia_modeset"
-    "nvidia_drm"
-    "nvidia_uvm"
   ];
-
-  systemd.services.systemd-rfkill.enable = false;
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;

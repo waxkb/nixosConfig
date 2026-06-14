@@ -40,10 +40,12 @@
       flake = false;
     };
 
-    sddm-themes = {
-      url = "git+ssh://git@github.com/waxkb/sddm-themes.git";
-      flake = false;
-    };
+    # sddm-themes = {
+    #   url = "git+ssh://git@github.com/waxkb/sddm-themes.git";
+    #   flake = false;
+    # };
+
+    tuigreet.url = "github:NotAShelf/tuigreet";
 
     claude-code.url = "github:sadjow/claude-code-nix";
 
@@ -59,7 +61,8 @@
       dms,
       noctalia,
       # llama-cpp,
-      sddm-themes,
+      # sddm-themes,
+      tuigreet,
       home-manager,
       claude-code,
       areofyl-fetch,
