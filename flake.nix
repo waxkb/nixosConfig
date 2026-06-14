@@ -4,9 +4,9 @@
 
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    home-manager.url = "github:nix-community/home-manager";
+    # home-manager.url = "github:nix-community/home-manager";
 
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    # home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     nixpkgs-2511.url = "github:NixOS/nixpkgs/nixos-25.11";
 
@@ -28,17 +28,16 @@
 
     noctalia = {
       url = "github:noctalia-dev/noctalia";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    llama-cpp = {
-      # url = "github:ggml-org/llama.cpp/9f26182";
-      # url = "github:ggml-org/llama.cpp?ref=refs/pull/23352/merge";
-      url = "github:ggml-org/llama.cpp";
-      # url = "github:ggml-org/llama.cpp/67b2b7f2f2d6dac7962b219168a4c7a20c7359b7";
-      # url = "github:TheTom/llama-cpp-turboquant/feature/turboquant-kv-cache";
-      flake = false;
-    };
+    # llama-cpp = {
+    #   # url = "github:ggml-org/llama.cpp/9f26182";
+    #   # url = "github:ggml-org/llama.cpp?ref=refs/pull/23352/merge";
+    #   url = "github:ggml-org/llama.cpp";
+    #   # url = "github:ggml-org/llama.cpp/67b2b7f2f2d6dac7962b219168a4c7a20c7359b7";
+    #   # url = "github:TheTom/llama-cpp-turboquant/feature/turboquant-kv-cache";
+    #   flake = false;
+    # };
 
     # sddm-themes = {
     #   url = "git+ssh://git@github.com/waxkb/sddm-themes.git";
@@ -96,12 +95,12 @@
           inputs.ncro.nixosModules.default
           ./configuration.nix
           ./packages.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.max = ./home.nix;
-          }
+          # home-manager.nixosModules.home-manager
+          # {
+          #   home-manager.useGlobalPkgs = true;
+          #   home-manager.useUserPackages = true;
+          #   home-manager.users.max = ./home.nix;
+          # }
           {
             nixpkgs.overlays = [
               # (final: prev: {

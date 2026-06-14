@@ -55,21 +55,19 @@ in
     bibata-cursors
     broot
     btop
-    cargo
     clang
     clang-tools
-    cliphist
+    claude-code
     cmake
     codex
     curl
+    dix
     efibootmgr
     fd
-    foot
     fzf
     gcc
     git
     gita
-    google-java-format
     gnumake
     gptfdisk
     hyperfine
@@ -79,21 +77,18 @@ in
     infisical
     iwd
     jq
-    kitty
     libffi
     libnotify
     libxkbcommon
-    llama-cpp
+    # llama-cpp
     lsof
     lua5_1
-    matcha
     matugenFixed
     microfetch
     mpv
     inputs.ncro.packages.${pkgs.system}.ncro
     niri
     nixfmt-rs
-    nnd
     noctalia
     nodejs
     ollama
@@ -104,16 +99,15 @@ in
     playerctl
     pnpm
     pulseaudio
-    libsForQt5.qtgraphicaleffects
-    libsForQt5.qtmultimedia
-    libsForQt5.qtquickcontrols
-    libsForQt5.qtquickcontrols2
-    libsForQt5.qtsvg
-    pkgs.kdePackages.qtvirtualkeyboard
+    # libsForQt5.qtgraphicaleffects
+    # libsForQt5.qtmultimedia
+    # libsForQt5.qtquickcontrols
+    # libsForQt5.qtquickcontrols2
+    # libsForQt5.qtsvg
+    # pkgs.kdePackages.qtvirtualkeyboard
     ratty
     ripgrep
     ruff
-    rustc
     rustfmt
     shfmt
     starship
@@ -126,7 +120,6 @@ in
     tree-sitter
     unzip
     uv
-    vicinae
     wayland-bongocat
     wev
     wezterm

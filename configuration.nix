@@ -45,6 +45,16 @@ in
           priority = 20;
           public_key = "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=";
         }
+        {
+          url = "https://claude-code.cachix.org";
+          priority = 5;
+          public_key = "claude-code.cachix.org-1:YeXf2aNu7UTX8Vwrze0za1WEDS+4DuI2kVeWEE4fsRk=";
+        }
+        {
+          url = "https://noctalia.cachix.org";
+          priority = 1;
+          public_key = "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=";
+        }
       ];
     };
   };
@@ -213,10 +223,6 @@ in
 
   programs.dank-material-shell = {
     enable = true;
-    systemd = {
-      enable = true;
-      restartIfChanged = true;
-    };
   };
 
   programs.zsh = {
@@ -236,10 +242,10 @@ in
 
   system.stateVersion = "25.11";
 
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.limine.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 0;
-  boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.timeout = 1;
+  boot.loader.systemd-boot.configurationLimit = null;
 
   boot.loader.grub = {
     enable = false;
@@ -292,18 +298,24 @@ in
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
     "amdgpu.enable=0"
     "8250.nr_uarts=0"
-    # "quiet"
-    # "loglevel=3"
-    # "systemd.show_status=auto"
-    # "rd.udev.log_level=3"
-    # "rd.systemd.show_status=false"
+    "quiet"
+    "loglevel=3"
+    "systemd.show_status=auto"
+    "rd.udev.log_level=3"
+    "rd.systemd.show_status=false"
   ];
+
+  boot.consoleLogLevel = 0;
+
+  systemd.services.systemd-journal-flush.enable = false;
 
   boot.initrd.systemd.enable = true;
 
-  # systemd.services.NetworkManager-wait-online.enable = false; # Doesn't wait to connect to internet before booting
+  systemd.services.NetworkManager-wait-online.enable = false; # Doesn't wait to connect to internet before booting
 
   # systemd.services.systemd-rfkill.enable = false;
+
+  systemd.services.systemd-udev-settle.enable = false;
 
   boot.initrd.includeDefaultModules = false;
 
@@ -314,6 +326,13 @@ in
     "usbhid"
     "usb_storage"
     "sd_mod"
+  ];
+
+  boot.initrd.kernelModules = [
+    "nvidia"
+    "nvidia_modeset"
+    "nvidia_uvm"
+    "nvidia_drm"
   ];
 
   networking.hostName = "nixos";
@@ -348,7 +367,7 @@ in
 
   hardware.bluetooth = {
     enable = true;
-    powerOnBoot = true;
+    powerOnBoot = false;
     settings = {
       General = {
         Experimental = true;
@@ -403,9 +422,6 @@ in
     install -d -m 0770 -o ${config.programs.ccache.owner} -g ${config.programs.ccache.group} ${config.programs.ccache.cacheDir}
     install -d -m 0770 -o ${config.programs.ccache.owner} -g ${config.programs.ccache.group} ${config.programs.ccache.cacheDir}/tmp
   '';
-
-  boot.kernelModules = [ "ryzen_smu" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.ryzen-smu ];
 
   security.pam.loginLimits = [
     {
