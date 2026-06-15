@@ -243,13 +243,20 @@ in
 
   system.stateVersion = "25.11";
 
-  boot.loader.limine.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.timeout = 0;
-  boot.loader.systemd-boot.configurationLimit = null;
 
-  boot.loader.grub = {
+  boot.loader.limine = {
     enable = false;
+    maxGenerations = null;
+    extraConfig = ''
+      quiet: yes
+    '';
+  };
+
+  boot.loader.systemd-boot = {
+    enable = true;
+    configurationLimit = null;
   };
 
   nix.settings.experimental-features = [
@@ -339,7 +346,8 @@ in
   boot.initrd.compressor = pkgs: "${pkgs.lz4.out}/bin/lz4";
   boot.initrd.compressorArgs = [
     "-l"
-    "-9"
+    "--best"
+    "--favor-decSpeed"
   ];
 
   boot.kernelPackages = pkgs.linuxPackagesFor (
