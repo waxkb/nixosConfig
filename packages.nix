@@ -136,5 +136,10 @@ in
     lua-language-server
     ty
     rust-analyzer
+    # Lz4 initrd confirmation stuff
+    dracut
+    file
+    tinyxxd
+    lz4
   ];
 }

@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   inputs,
   ...
@@ -244,7 +245,7 @@ in
 
   boot.loader.limine.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 1;
+  boot.loader.timeout = 0;
   boot.loader.systemd-boot.configurationLimit = null;
 
   boot.loader.grub = {
@@ -269,8 +270,8 @@ in
     packages = [ ];
   };
 
-  services.power-profiles-daemon.enable = true;
-  services.upower.enable = true;
+  services.power-profiles-daemon.enable = false;
+  services.upower.enable = false;
 
   xdg.portal = {
     enable = true;
@@ -335,6 +336,21 @@ in
     "nvidia_drm"
   ];
 
+  boot.initrd.compressor = pkgs: "${pkgs.lz4.out}/bin/lz4";
+  boot.initrd.compressorArgs = [
+    "-l"
+    "-9"
+  ];
+
+  boot.kernelPackages = pkgs.linuxPackagesFor (
+    (pkgs.linux.override {
+      stdenv = pkgs.ccacheStdenv;
+    }).overrideAttrs
+      (old: {
+        nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.lz4 ];
+      })
+  );
+
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
@@ -366,7 +382,7 @@ in
   };
 
   hardware.bluetooth = {
-    enable = true;
+    enable = false;
     powerOnBoot = false;
     settings = {
       General = {
@@ -375,7 +391,7 @@ in
     };
   };
 
-  services.blueman.enable = true;
+  services.blueman.enable = false;
 
   fonts = {
     packages = with pkgs; [
