@@ -90,11 +90,6 @@ in
     };
   };
 
-  networking.firewall.allowedTCPPorts = [
-    18789
-    18790
-  ];
-
   programs.kdeconnect.enable = true;
 
   programs.nix-ld.enable = true;
@@ -306,12 +301,32 @@ in
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
     "amdgpu.enable=0"
     "8250.nr_uarts=0"
+    "nvme_core.default_ps_max_latency_us=0"
+    "pcie_aspm=off"
     "quiet"
     "loglevel=3"
     "systemd.show_status=auto"
     "rd.udev.log_level=3"
     "rd.systemd.show_status=false"
   ];
+
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "usbhid"
+  ];
+  boot.initrd.includeDefaultModules = false;
+
+  # Don't load nvidia in boot.kernelModules — let greetd trigger it async
+  boot.kernelModules = lib.mkForce [ "kvm-amd" ];
+
+  # Load nvidia in background so greetd (TUI on efifb) starts immediately
+  systemd.services.greetd.preStart = ''
+    (${pkgs.kmod}/bin/modprobe nvidia && \
+     ${pkgs.kmod}/bin/modprobe nvidia_modeset && \
+     ${pkgs.kmod}/bin/modprobe nvidia_uvm && \
+     ${pkgs.kmod}/bin/modprobe nvidia_drm) &
+  '';
 
   boot.consoleLogLevel = 0;
 
@@ -325,23 +340,12 @@ in
 
   systemd.services.systemd-udev-settle.enable = false;
 
-  boot.initrd.includeDefaultModules = false;
-
-  boot.initrd.availableKernelModules = [
-    "nvme"
-    "xhci_pci"
-    "ahci"
-    "usbhid"
-    "usb_storage"
-    "sd_mod"
-  ];
-
-  boot.initrd.kernelModules = [
-    "nvidia"
-    "nvidia_modeset"
-    "nvidia_uvm"
-    "nvidia_drm"
-  ];
+  # boot.initrd.kernelModules = [
+  #   "nvidia"
+  #   "nvidia_modeset"
+  #   "nvidia_uvm"
+  #   "nvidia_drm"
+  # ];
 
   boot.initrd.compressor = pkgs: "${pkgs.lz4.out}/bin/lz4";
   boot.initrd.compressorArgs = [

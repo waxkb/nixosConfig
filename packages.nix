@@ -55,6 +55,7 @@ in
     bibata-cursors
     broot
     btop
+    cargo
     clang
     clang-tools
     claude-code
@@ -64,6 +65,7 @@ in
     dix
     efibootmgr
     fd
+    foot
     fzf
     gcc
     git
@@ -108,6 +110,7 @@ in
     ratty
     ripgrep
     ruff
+    rustc
     rustfmt
     shfmt
     starship
@@ -118,6 +121,7 @@ in
     tofi
     tree
     tree-sitter
+    udisks
     unzip
     uv
     wayland-bongocat
