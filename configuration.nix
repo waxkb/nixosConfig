@@ -90,7 +90,7 @@ in
     };
   };
 
-  programs.kdeconnect.enable = true;
+  programs.kdeconnect.enable = false;
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
@@ -230,7 +230,7 @@ in
   programs.niri.enable = true;
 
   services.xserver = {
-    enable = true;
+    enable = false;
     videoDrivers = [ "nvidia" ];
   };
 
