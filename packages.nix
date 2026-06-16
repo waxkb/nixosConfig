@@ -65,6 +65,7 @@ in
     dix
     efibootmgr
     fd
+    file-roller
     foot
     fzf
     gcc
