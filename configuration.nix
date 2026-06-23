@@ -140,7 +140,7 @@ in
   programs.niri.enable = true;
 
   services.xserver = {
-    enable = false;
+    enable = true;
     videoDrivers = [ "nvidia" ];
   };
 
@@ -149,7 +149,7 @@ in
   system.stateVersion = "25.11";
 
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 0;
+  boot.loader.timeout = 1;
 
   boot.loader.limine = {
     enable = false;
@@ -186,7 +186,7 @@ in
   services.upower.enable = false;
 
   xdg.portal = {
-    enable = false;
+    enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 

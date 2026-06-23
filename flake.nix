@@ -43,8 +43,6 @@
 
     claude-code.url = "github:sadjow/claude-code-nix";
 
-    areofyl-fetch.url = "github:areofyl/fetch";
-
   };
   outputs =
     inputs@{
@@ -58,7 +56,6 @@
       tuigreet,
       home-manager,
       claude-code,
-      areofyl-fetch,
       ncro,
       nixos-core,
       ...

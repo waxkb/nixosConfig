@@ -50,7 +50,6 @@ in
   environment.systemPackages = with pkgs; [
     activate-linux
     astyle
-    inputs.areofyl-fetch.packages.${pkgs.system}.default
     bat
     bibata-cursors
     broot
@@ -65,7 +64,6 @@ in
     dix
     efibootmgr
     fd
-    file-roller
     foot
     fzf
     gcc
@@ -76,25 +74,20 @@ in
     hyperfine
     hyprlock
     hyprpicker
-    imagemagick
     infisical
     iwd
     jq
     libffi
     libnotify
     libxkbcommon
-    # llama-cpp
     lsof
-    lua5_1
     matugenFixed
     microfetch
-    mpv
     inputs.ncro.packages.${pkgs.system}.ncro
     niri
     nixfmt-rs
     noctalia
     nodejs
-    ollama
     opencode
     parted
     pavucontrol
@@ -102,12 +95,6 @@ in
     playerctl
     pnpm
     pulseaudio
-    # libsForQt5.qtgraphicaleffects
-    # libsForQt5.qtmultimedia
-    # libsForQt5.qtquickcontrols
-    # libsForQt5.qtquickcontrols2
-    # libsForQt5.qtsvg
-    # pkgs.kdePackages.qtvirtualkeyboard
     ratty
     ripgrep
     ruff
@@ -115,7 +102,6 @@ in
     rustfmt
     shfmt
     starship
-    stress-ng
     stow
     stylua
     tex
@@ -127,7 +113,6 @@ in
     uv
     wayland-bongocat
     wev
-    wezterm
     wget
     wl-clipboard
     xwayland-satellite
