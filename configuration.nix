@@ -245,7 +245,7 @@ in
   ];
 
   boot.kernelPackages = pkgs.linuxPackagesFor (
-    (pkgs.linux.override {
+    (pkgs.linux_testing.override {
       stdenv = pkgs.ccacheStdenv;
     }).overrideAttrs
       (old: {
@@ -336,9 +336,14 @@ in
   };
 
   system.activationScripts.ccacheCacheDir.text = ''
-      mkdir -p ${config.programs.ccache.cacheDir}
-    install -d -m 0770 -o ${config.programs.ccache.owner} -g ${config.programs.ccache.group} ${config.programs.ccache.cacheDir}
-    install -d -m 0770 -o ${config.programs.ccache.owner} -g ${config.programs.ccache.group} ${config.programs.ccache.cacheDir}/tmp
+          mkdir -p ${config.programs.ccache.cacheDir}
+        install -d -m 0770 -o ${config.programs.ccache.owner} -g ${config.programs.ccache.group} ${config.programs.ccache.cacheDir}
+        install -d -m 0770 -o ${config.programs.ccache.owner} -g ${config.programs.ccache.group} ${config.programs.ccache.cacheDir}/tmp
+        cat > ${config.programs.ccache.cacheDir}/ccache.conf <<'EOF'
+    max_size = 15GiB
+    EOF
+        chown ${config.programs.ccache.owner}:${config.programs.ccache.group} ${config.programs.ccache.cacheDir}/ccache.conf
+        chmod 0640 ${config.programs.ccache.cacheDir}/ccache.conf
   '';
 
   security.pam.loginLimits = [
