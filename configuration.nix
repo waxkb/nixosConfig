@@ -235,16 +235,7 @@ in
 
   systemd.services.NetworkManager-wait-online.enable = false; # Doesn't wait to connect to internet before booting
 
-  # systemd.services.systemd-rfkill.enable = false;
-
   systemd.services.systemd-udev-settle.enable = false;
-
-  # boot.initrd.kernelModules = [
-  #   "nvidia"
-  #   "nvidia_modeset"
-  #   "nvidia_uvm"
-  #   "nvidia_drm"
-  # ];
 
   boot.initrd.compressor = pkgs: "${pkgs.lz4.out}/bin/lz4";
   boot.initrd.compressorArgs = [
@@ -365,7 +356,6 @@ in
     }
   ];
 
-  # hardware.opengl.enable = true;
   hardware.graphics.enable = true;
 
   services.envfs.enable = true;

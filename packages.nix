@@ -63,6 +63,7 @@ in
     curl
     efibootmgr
     fd
+    fio
     foot
     fzf
     gcc
