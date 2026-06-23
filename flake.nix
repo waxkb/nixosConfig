@@ -8,7 +8,7 @@
 
     # home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nixpkgs-2511.url = "github:NixOS/nixpkgs/nixos-25.11";
+    # nixpkgs-2511.url = "github:NixOS/nixpkgs/nixos-25.11";
 
     nixos-core.url = "github:manic-systems/nixos-core";
 
@@ -69,10 +69,10 @@
         config.allowUnfree = true;
       };
 
-      pkgs25 = import inputs.nixpkgs-2511 {
-        inherit system;
-        config.allowUnfree = true;
-      };
+      # pkgs25 = import inputs.nixpkgs-2511 {
+      #   inherit system;
+      #   config.allowUnfree = true;
+      # };
 
     in
     {
@@ -162,9 +162,9 @@
               #         });
               #   }
               # )
-              (final: prev: {
-                khal = pkgs25.khal;
-              })
+              # (final: prev: {
+              #   khal = pkgs25.khal;
+              # })
               claude-code.overlays.default
             ];
           }

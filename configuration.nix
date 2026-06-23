@@ -200,7 +200,7 @@ in
     modesetting.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
-    open = false;
+    open = true;
     nvidiaSettings = true;
   };
 
@@ -226,17 +226,6 @@ in
     "usbhid"
   ];
   boot.initrd.includeDefaultModules = false;
-
-  # Don't load nvidia in boot.kernelModules — let greetd trigger it async
-  boot.kernelModules = lib.mkForce [ "kvm-amd" ];
-
-  # Load nvidia in background so greetd (TUI on efifb) starts immediately
-  systemd.services.greetd.preStart = ''
-    (${pkgs.kmod}/bin/modprobe nvidia && \
-     ${pkgs.kmod}/bin/modprobe nvidia_modeset && \
-     ${pkgs.kmod}/bin/modprobe nvidia_uvm && \
-     ${pkgs.kmod}/bin/modprobe nvidia_drm) &
-  '';
 
   boot.consoleLogLevel = 0;
 
@@ -376,7 +365,7 @@ in
     }
   ];
 
-  hardware.opengl.enable = true;
+  # hardware.opengl.enable = true;
   hardware.graphics.enable = true;
 
   services.envfs.enable = true;

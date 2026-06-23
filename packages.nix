@@ -61,7 +61,6 @@ in
     cmake
     codex
     curl
-    dix
     efibootmgr
     fd
     foot
@@ -77,9 +76,7 @@ in
     infisical
     iwd
     jq
-    libffi
     libnotify
-    libxkbcommon
     lsof
     matugenFixed
     microfetch
@@ -87,15 +84,12 @@ in
     niri
     nixfmt-rs
     noctalia
-    nodejs
     opencode
     parted
     pavucontrol
     pkg-config
     playerctl
-    pnpm
     pulseaudio
-    ratty
     ripgrep
     ruff
     rustc
@@ -112,7 +106,6 @@ in
     unzip
     uv
     wayland-bongocat
-    wev
     wget
     wl-clipboard
     xwayland-satellite
