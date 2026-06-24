@@ -20,6 +20,14 @@ in
 
   system.nixos-core.enable = true;
 
+  fileSystems."/" = {
+    device = "/dev/disk/by-label/nixos"; # Or use /dev/disk/by-uuid/<uuid> later
+    fsType = "bcachefs";
+    options = [ "compression=lz4" ]; # Optional: recommended for optimal performance/space
+  };
+
+  boot.supportedFilesystems = [ "bcachefs" ];
+
   services.ncro = {
     enable = true;
     settings = {
