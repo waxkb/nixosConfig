@@ -49,26 +49,22 @@ in
 {
   environment.systemPackages = with pkgs; [
     activate-linux
-    astyle
     bat
     bibata-cursors
     vimPlugins.blink-cmp
-    broot
+    # broot
     btop
-    clang-tools
-    claude-code
-    cmake
+    # claude-code
     codex
     curl
     efibootmgr
     fd
-    fio
+    # fio
     foot
     fzf
-    gcc
     git
     gita
-    gnumake
+    # gnumake
     gptfdisk
     hyperfine
     hyprlock
@@ -77,12 +73,11 @@ in
     iwd
     jq
     libnotify
-    lsof
+    # lsof
     matugenFixed
     microfetch
     inputs.ncro.packages.${pkgs.system}.ncro
     niri
-    nixfmt-rs
     noctalia
     opencode
     parted
@@ -91,20 +86,16 @@ in
     playerctl
     pulseaudio
     ripgrep
-    ruff
-    rustfmt
-    shfmt
     starship
     stow
-    stylua
-    tex
+    # tex
     tofi
     tree
     tree-sitter
     udisks
     unzip
-    uv
-    wayland-bongocat
+    # uv
+    # wayland-bongocat
     wget
     wl-clipboard
     xwayland-satellite
@@ -113,15 +104,29 @@ in
     zathuraPkgs.zathura_pdf_poppler
     inputs.zen-browser.packages.${pkgs.system}.default
     zsh
-    # Neovim lsp packages
+
+    # ---Neovim formatters---
+
+    # astyle
+    # clang-tools
+    nixfmt-rs
+    # ruff
+    # rustfmt
+    shfmt
+    stylua
+
+    # ---Neovim lsp packages---
+
     bash-language-server
     lua-language-server
-    ty
-    rust-analyzer
-    # Lz4 initrd confirmation stuff
-    dracut
+    # ty
+    # rust-analyzer
+
+    # ---Lz4 initrd confirmation stuff---
+
+    # dracut
     file
-    tinyxxd
+    # tinyxxd
     lz4
   ];
 }

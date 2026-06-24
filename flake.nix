@@ -8,8 +8,6 @@
 
     # home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    # nixpkgs-2511.url = "github:NixOS/nixpkgs/nixos-25.11";
-
     nixos-core.url = "github:manic-systems/nixos-core";
 
     ncro.url = "github:manic-systems/ncro";
@@ -21,10 +19,10 @@
 
     matugen.url = "github:InioX/Matugen";
 
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # dms = {
+    #   url = "github:AvengeMedia/DankMaterialShell";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     noctalia = {
       url = "github:noctalia-dev/noctalia";
@@ -41,7 +39,7 @@
 
     tuigreet.url = "github:NotAShelf/tuigreet";
 
-    claude-code.url = "github:sadjow/claude-code-nix";
+    # claude-code.url = "github:sadjow/claude-code-nix";
 
   };
   outputs =
@@ -50,12 +48,12 @@
       nixpkgs,
       zen-browser,
       matugen,
-      dms,
+      # dms,
       noctalia,
       # llama-cpp,
       tuigreet,
       home-manager,
-      claude-code,
+      # claude-code,
       ncro,
       nixos-core,
       ...
@@ -82,7 +80,7 @@
 
         modules = [
           nixos-core.nixosModules.default
-          inputs.dms.nixosModules.dank-material-shell
+          # inputs.dms.nixosModules.dank-material-shell
           inputs.ncro.nixosModules.default
           ./configuration.nix
           ./packages.nix
@@ -162,10 +160,7 @@
               #         });
               #   }
               # )
-              # (final: prev: {
-              #   khal = pkgs25.khal;
-              # })
-              claude-code.overlays.default
+              # claude-code.overlays.default
             ];
           }
         ];

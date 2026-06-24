@@ -127,9 +127,9 @@ in
   #   ];
   # };
 
-  programs.dank-material-shell = {
-    enable = true;
-  };
+  # programs.dank-material-shell = {
+  #   enable = true;
+  # };
 
   programs.zsh = {
     enable = true;
