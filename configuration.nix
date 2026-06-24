@@ -26,6 +26,12 @@ in
     options = [ "compression=lz4" ]; # Optional: recommended for optimal performance/space
   };
 
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-label/boot";
+    fsType = "vfat";
+    options = [ "fmask=0077" "dmask=0077" ];
+  };
+
   boot.supportedFilesystems = [ "bcachefs" ];
 
   services.ncro = {
