@@ -52,10 +52,9 @@ in
     astyle
     bat
     bibata-cursors
+    vimPlugins.blink-cmp
     broot
     btop
-    cargo
-    clang
     clang-tools
     claude-code
     cmake
@@ -93,7 +92,6 @@ in
     pulseaudio
     ripgrep
     ruff
-    rustc
     rustfmt
     shfmt
     starship

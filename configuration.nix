@@ -194,6 +194,8 @@ in
     WLR_NO_HARDWARE_CURSORS = "1";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     NIXOS_OZONE_WL = "1";
+    BLINK_CMP_DIR = "${pkgs.vimPlugins.blink-cmp}";
+    FRIENDLY_SNIPPETS_DIR = "${pkgs.vimPlugins.friendly-snippets}";
   };
 
   hardware.nvidia = {
@@ -237,21 +239,7 @@ in
 
   systemd.services.systemd-udev-settle.enable = false;
 
-  boot.initrd.compressor = pkgs: "${pkgs.lz4.out}/bin/lz4";
-  boot.initrd.compressorArgs = [
-    "-l"
-    "--best"
-    "--favor-decSpeed"
-  ];
-
-  boot.kernelPackages = pkgs.linuxPackagesFor (
-    (pkgs.linux_testing.override {
-      stdenv = pkgs.ccacheStdenv;
-    }).overrideAttrs
-      (old: {
-        nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkgs.lz4 ];
-      })
-  );
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
