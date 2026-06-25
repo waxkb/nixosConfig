@@ -19,10 +19,10 @@
 
     matugen.url = "github:InioX/Matugen";
 
-    # dms = {
-    #   url = "github:AvengeMedia/DankMaterialShell";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     noctalia = {
       url = "github:noctalia-dev/noctalia";
@@ -48,7 +48,7 @@
       nixpkgs,
       zen-browser,
       matugen,
-      # dms,
+      dms,
       noctalia,
       # llama-cpp,
       tuigreet,
@@ -80,7 +80,7 @@
 
         modules = [
           nixos-core.nixosModules.default
-          # inputs.dms.nixosModules.dank-material-shell
+          inputs.dms.nixosModules.dank-material-shell
           inputs.ncro.nixosModules.default
           ./configuration.nix
           ./packages.nix

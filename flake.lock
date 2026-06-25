@@ -15,6 +15,43 @@
         "type": "github"
       }
     },
+    "dms": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1782325325,
+        "narHash": "sha256-ScNl39CCw+vnX0lTY/nL/8q2LKOG9BKVE1UK5dKaX2w=",
+        "owner": "AvengeMedia",
+        "repo": "DankMaterialShell",
+        "rev": "2fc3b8ee4ab166e61582da09272f79bff2fd9f97",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AvengeMedia",
+        "repo": "DankMaterialShell",
+        "type": "github"
+      }
+    },
+    "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767039857,
+        "narHash": "sha256-vNpUSpF5Nuw8xvDLj2KCwwksIbjua2LZCqhV1LNRDns=",
+        "owner": "NixOS",
+        "repo": "flake-compat",
+        "rev": "5edf11c44bc78a0d334f6334cdaf7d60d732daab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -77,11 +114,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1782140697,
-        "narHash": "sha256-/pGHjiMvsgOzHrOdEO2lwHM9heR8x1e/YMuCVlq/n60=",
+        "lastModified": 1782302203,
+        "narHash": "sha256-ftzqz/MsXiCsbX2Mwh73e4x4jzI0/h2uwDHPT3kmVl0=",
         "owner": "manic-systems",
         "repo": "ncro",
-        "rev": "1763e54ba26f9268cbb76862848030fe9cebd9a3",
+        "rev": "13153c506ae2e5ea0d072f1d0af0d923aefdf2e8",
         "type": "github"
       },
       "original": {
@@ -219,11 +256,11 @@
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1782267216,
-        "narHash": "sha256-9T73SmHbFZvq+OYHFfRa0yIE9e6vdNsCxDgadbumkPQ=",
+        "lastModified": 1782338865,
+        "narHash": "sha256-4g43I3N0xjNIMXAgExyE0Van+ums5sKaWvGom7u4DaE=",
         "owner": "noctalia-dev",
         "repo": "noctalia",
-        "rev": "e1b6cb3386e4eb4c334dbae09555a07d240d0190",
+        "rev": "ec882e2de2f21776afbfb9ef1882696d3f834213",
         "type": "github"
       },
       "original": {
@@ -234,6 +271,7 @@
     },
     "root": {
       "inputs": {
+        "dms": "dms",
         "home-manager": "home-manager",
         "matugen": "matugen",
         "ncro": "ncro",

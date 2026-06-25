@@ -57,9 +57,10 @@ in
     # claude-code
     codex
     curl
+    e2fsprogs
     efibootmgr
     fd
-    # fio
+    fio
     foot
     fzf
     git
@@ -79,6 +80,7 @@ in
     inputs.ncro.packages.${pkgs.system}.ncro
     niri
     noctalia
+    # noctalia-shell
     opencode
     parted
     pavucontrol

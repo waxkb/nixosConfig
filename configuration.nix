@@ -20,16 +20,22 @@ in
 
   system.nixos-core.enable = true;
 
-  fileSystems."/" = {
+  fileSystems."/" = lib.mkForce {
     device = "/dev/disk/by-label/nixos"; # Or use /dev/disk/by-uuid/<uuid> later
     fsType = "bcachefs";
-    options = [ "compression=lz4" ]; # Optional: recommended for optimal performance/space
+    options = [
+      "compression=none"
+      "background_compression=lz4:15"
+    ]; # Optional: recommended for optimal performance/space
   };
 
-  fileSystems."/boot" = {
+  fileSystems."/boot" = lib.mkForce {
     device = "/dev/disk/by-label/boot";
     fsType = "vfat";
-    options = [ "fmask=0077" "dmask=0077" ];
+    options = [
+      "fmask=0077"
+      "dmask=0077"
+    ];
   };
 
   boot.supportedFilesystems = [ "bcachefs" ];
@@ -141,9 +147,9 @@ in
   #   ];
   # };
 
-  # programs.dank-material-shell = {
-  #   enable = true;
-  # };
+  programs.dank-material-shell = {
+    enable = true;
+  };
 
   programs.zsh = {
     enable = true;
