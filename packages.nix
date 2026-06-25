@@ -80,6 +80,7 @@ in
     inputs.ncro.packages.${pkgs.system}.ncro
     niri
     noctalia
+    nvme-cli
     # noctalia-shell
     opencode
     parted

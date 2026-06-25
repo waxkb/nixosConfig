@@ -23,10 +23,10 @@ in
   fileSystems."/" = lib.mkForce {
     device = "/dev/disk/by-label/nixos"; # Or use /dev/disk/by-uuid/<uuid> later
     fsType = "bcachefs";
-    options = [
-      "compression=none"
-      "background_compression=lz4:15"
-    ]; # Optional: recommended for optimal performance/space
+    # options = [
+    #   "compression=none"
+    #   "background_compression=lz4"
+    # ];
   };
 
   fileSystems."/boot" = lib.mkForce {
