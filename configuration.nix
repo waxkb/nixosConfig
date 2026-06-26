@@ -40,6 +40,18 @@ in
 
   boot.supportedFilesystems = [ "bcachefs" ];
 
+  # services.flatpak.enable = true;
+  # services.flatpak.packages = [
+  #   rec {
+  #     appId = "chat.commet.commetapp.flatpak";
+  #     sha256 = "sha256:0839b465a4c6769d7638627d5d96b5bf90663f3b89dc885443b3207ae521c667";
+  #     bundle = "${pkgs.fetchurl {
+  #       url = "https://github.com/commetchat/commet/releases/download/v0.4.2+hotfix.2/chat.commet.commetapp.flatpak";
+  #       inherit sha256;
+  #     }}";
+  #   }
+  # ];
+
   services.ncro = {
     enable = true;
     settings = {
@@ -302,6 +314,10 @@ in
   };
 
   services.blueman.enable = false;
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "olm-3.2.16"
+  ];
 
   fonts = {
     packages = with pkgs; [

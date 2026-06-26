@@ -60,6 +60,7 @@ in
     e2fsprogs
     efibootmgr
     fd
+    file
     fio
     foot
     fzf
@@ -67,6 +68,7 @@ in
     gita
     # gnumake
     gptfdisk
+    halloy
     hyperfine
     hyprlock
     hyprpicker
@@ -75,9 +77,11 @@ in
     jq
     libnotify
     # lsof
+    lz4
     matugenFixed
     microfetch
     inputs.ncro.packages.${pkgs.system}.ncro
+    neo
     niri
     noctalia
     nvme-cli
@@ -125,11 +129,12 @@ in
     # ty
     # rust-analyzer
 
-    # ---Lz4 initrd confirmation stuff---
-
-    # dracut
-    file
-    # tinyxxd
-    lz4
+    # ---Matrix clients---
+    # cinny-desktop
+    # cinny
+    # element-desktop
+    # element-web
+    # gomuks
+    # gomuks-web
   ];
 }

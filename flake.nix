@@ -39,6 +39,8 @@
 
     tuigreet.url = "github:NotAShelf/tuigreet";
 
+    # nix-flatpak.url = "github:gmodena/nix-flatpak";
+
     # claude-code.url = "github:sadjow/claude-code-nix";
 
   };
@@ -56,6 +58,7 @@
       # claude-code,
       ncro,
       nixos-core,
+      # nix-flatpak,
       ...
     }:
     let
@@ -82,6 +85,7 @@
           nixos-core.nixosModules.default
           inputs.dms.nixosModules.dank-material-shell
           inputs.ncro.nixosModules.default
+          # inputs.nix-flatpak.nixosModules.nix-flatpak
           ./configuration.nix
           ./packages.nix
           # home-manager.nixosModules.home-manager
