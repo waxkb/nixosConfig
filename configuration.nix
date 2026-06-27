@@ -21,12 +21,8 @@ in
   system.nixos-core.enable = true;
 
   fileSystems."/" = lib.mkForce {
-    device = "/dev/disk/by-label/nixos"; # Or use /dev/disk/by-uuid/<uuid> later
+    device = "/dev/disk/by-label/nixos";
     fsType = "bcachefs";
-    # options = [
-    #   "compression=none"
-    #   "background_compression=lz4"
-    # ];
   };
 
   fileSystems."/boot" = lib.mkForce {
@@ -39,18 +35,6 @@ in
   };
 
   boot.supportedFilesystems = [ "bcachefs" ];
-
-  # services.flatpak.enable = true;
-  # services.flatpak.packages = [
-  #   rec {
-  #     appId = "chat.commet.commetapp.flatpak";
-  #     sha256 = "sha256:0839b465a4c6769d7638627d5d96b5bf90663f3b89dc885443b3207ae521c667";
-  #     bundle = "${pkgs.fetchurl {
-  #       url = "https://github.com/commetchat/commet/releases/download/v0.4.2+hotfix.2/chat.commet.commetapp.flatpak";
-  #       inherit sha256;
-  #     }}";
-  #   }
-  # ];
 
   services.ncro = {
     enable = true;
@@ -94,7 +78,7 @@ in
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
-    flake = "/home/max/nixos"; # sets NH_OS_FLAKE variable for you
+    flake = "/home/max/nixos"; # sets NH_OS_FLAKE variable
   };
 
   programs.ccache = {
@@ -125,7 +109,6 @@ in
     libGL
   ];
 
-  # Disable generation of documentation to bypass the Sphinx/Docutils bug
   documentation.enable = false;
   documentation.man.enable = false;
 
