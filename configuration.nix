@@ -271,7 +271,7 @@ in
 
   systemd.services.systemd-udev-settle.enable = false;
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_7_0;
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
@@ -402,5 +402,3 @@ in
     wireplumber.enable = true;
   };
 }
-
-# Foolish olivia
