@@ -43,6 +43,8 @@
 
     # claude-code.url = "github:sadjow/claude-code-nix";
 
+    glide.url = "github:glide-browser/glide.nix";
+
   };
   outputs =
     inputs@{
@@ -59,6 +61,7 @@
       ncro,
       nixos-core,
       # nix-flatpak,
+      glide,
       ...
     }:
     let

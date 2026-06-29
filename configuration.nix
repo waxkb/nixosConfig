@@ -254,7 +254,7 @@ in
 
   systemd.services.systemd-udev-settle.enable = false;
 
-  boot.kernelPackages = pkgs.linuxPackages_7_0;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
