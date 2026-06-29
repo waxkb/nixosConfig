@@ -43,7 +43,11 @@
 
     # claude-code.url = "github:sadjow/claude-code-nix";
 
-    glide.url = "github:glide-browser/glide.nix";
+    glide = {
+      url = "github:glide-browser/glide.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
 
   };
   outputs =
@@ -56,7 +60,7 @@
       noctalia,
       # llama-cpp,
       tuigreet,
-      home-manager,
+      # home-manager,
       # claude-code,
       ncro,
       nixos-core,

@@ -381,7 +381,7 @@ in
     audio.enable = true;
     pulse.enable = true;
     alsa.enable = true;
-    alsa.support32Bit = true;
+    alsa.support32Bit = false;
     wireplumber.enable = true;
   };
 }
