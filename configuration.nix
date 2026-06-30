@@ -34,6 +34,18 @@ in
     ];
   };
 
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 16 * 1024; # 16 GiB
+    }
+  ];
+
+  boot.zswap = {
+    enable = true;
+    compressor = "lz4";
+  };
+
   boot.supportedFilesystems = [ "bcachefs" ];
 
   services.ncro = {
@@ -164,11 +176,6 @@ in
 
   programs.niri.enable = true;
 
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "nvidia" ];
-  };
-
   systemd.services."getty@tty1".enable = false;
 
   system.stateVersion = "25.11";
@@ -212,7 +219,10 @@ in
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
+    ];
     config.common.default = "*";
   };
 
@@ -241,8 +251,6 @@ in
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
     "amdgpu.enable=0"
     "8250.nr_uarts=0"
-    "nvme_core.default_ps_max_latency_us=0"
-    "pcie_aspm=off"
     "quiet"
     "loglevel=3"
     "systemd.show_status=auto"
@@ -287,10 +295,16 @@ in
     LC_TIME = "en_US.UTF-8";
   };
 
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+  services.xserver = {
+    enable = true;
+    videoDrivers = [ "nvidia" ];
+    xkb = {
+      layout = "us";
+      variant = "";
+    };
   };
+
+  services.desktopManager.gnome.enable = false;
 
   nixpkgs.config = {
     allowUnfree = true;

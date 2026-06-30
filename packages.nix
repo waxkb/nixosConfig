@@ -116,6 +116,7 @@ in
     zathura
     zathuraPkgs.zathura_pdf_poppler
     inputs.zen-browser.packages.${pkgs.system}.default
+    zoom-us
     zsh
 
     # ---Neovim formatters---
