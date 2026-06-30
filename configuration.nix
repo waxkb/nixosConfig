@@ -60,8 +60,13 @@ in
         }
         {
           url = "https://noctalia.cachix.org";
-          priority = 1;
+          priority = 5;
           public_key = "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4=";
+        }
+        {
+          url = "https://sss.cachix.org";
+          priority = 5;
+          public_key = "sss.cachix.org-1:YI2JMG95LEu62PC7VMz75N7bypEdUz9Z/Il1hkGH4AA=";
         }
       ];
     };
@@ -87,6 +92,11 @@ in
     group = "nixbld";
     packageNames = [ "noctalia" ];
   };
+
+  # programs.sss = {
+  #   enable = true;
+  #   code = true;
+  # };
 
   virtualisation = {
     containers.enable = true;
@@ -203,6 +213,7 @@ in
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    config.common.default = "*";
   };
 
   environment.sessionVariables = {
@@ -211,6 +222,8 @@ in
     NIXOS_OZONE_WL = "1";
     BLINK_CMP_DIR = "${pkgs.vimPlugins.blink-cmp}";
     FRIENDLY_SNIPPETS_DIR = "${pkgs.vimPlugins.friendly-snippets}";
+    GTK_THEME = "Adwaita:dark";
+    GTK_COLOR_SCHEME = "prefer-dark";
   };
 
   hardware.nvidia = {
@@ -254,7 +267,7 @@ in
 
   systemd.services.systemd-udev-settle.enable = false;
 
-  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;

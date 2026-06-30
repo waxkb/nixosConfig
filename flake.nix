@@ -2,7 +2,8 @@
   description = "saldkjf";
   inputs = {
 
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/567a49d1913ce81ac6e9582e3553dd90a955875f";
 
     # home-manager.url = "github:nix-community/home-manager";
 
@@ -17,7 +18,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    matugen.url = "github:InioX/Matugen";
+    matugen = {
+      url = "github:InioX/Matugen";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     dms = {
       url = "github:AvengeMedia/DankMaterialShell";
@@ -26,6 +30,7 @@
 
     noctalia = {
       url = "github:noctalia-dev/noctalia";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # llama-cpp = {
@@ -37,7 +42,10 @@
     #   flake = false;
     # };
 
-    tuigreet.url = "github:NotAShelf/tuigreet";
+    tuigreet = {
+      url = "github:NotAShelf/tuigreet";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # nix-flatpak.url = "github:gmodena/nix-flatpak";
 
@@ -46,8 +54,9 @@
     glide = {
       url = "github:glide-browser/glide.nix";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
     };
+
+    # sss.url = "github:SergioRibera/sss";
 
   };
   outputs =
@@ -66,6 +75,7 @@
       nixos-core,
       # nix-flatpak,
       glide,
+      # sss,
       ...
     }:
     let
@@ -101,6 +111,7 @@
           #   home-manager.useUserPackages = true;
           #   home-manager.users.max = ./home.nix;
           # }
+          # sss.nixosModules.default
           {
             nixpkgs.overlays = [
               # (final: prev: {
